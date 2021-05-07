@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BotDLL
 {
@@ -15,7 +16,16 @@ namespace BotDLL
 
         public static Connections GetConnections()
         {
-            return CSV_Connections.ReadAll();
+            try
+            {
+                return CSV_Connections.ReadAll();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler aufgetreten: " + ex.Message, "Error");
+                throw ex;
+            }
         }
     }
 }
