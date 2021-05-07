@@ -1,0 +1,19 @@
+﻿<Window x:Class="Listforge_Control_panel.AddServerDlg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Listforge_Control_panel"
+        mc:Ignorable="d"
+        Title="AddServerDlg" Height="120" Width="350">
+    <Window.Resources>
+        <local:AddServerViewModel x:Key="addmodel"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource addmodel}" Background="#AF000000">
+        <ComboBox ItemsSource="{Binding LstGame}" SelectedItem="{Binding API_URL.Game}" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="btSave" Click="btSave_Click" Content="Save" HorizontalAlignment="Left" Margin="257,41,0,0" VerticalAlignment="Top" Width="75" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="65,10,0,0" TextWrapping="Wrap" Text="{Binding API_URL.Key}" VerticalAlignment="Top" Width="267" VerticalContentAlignment="Center"/>
+        <Label Content="API Key" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+    </Grid>
+</Window>

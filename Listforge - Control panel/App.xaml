@@ -1,0 +1,9 @@
+﻿<Application x:Class="Listforge_Control_panel.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Listforge_Control_panel"
+             StartupUri="View\MainWindow.xaml">
+    <Application.Resources>
+        <local:MainViewModel x:Key="mvmodel" />
+    </Application.Resources>
+</Application>

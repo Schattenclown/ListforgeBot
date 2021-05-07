@@ -1,0 +1,266 @@
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe.config
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.pdb
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csprojAssemblyReference.cache
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\App.g.cs
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.cache
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.lref
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.g.resources
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.GenerateResource.cache
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CoreCompileInputs.cache
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.exe
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.pdb
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge_Control_panel.Properties.Resources.resources
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\GeneratedInternalTypeHelper.g.cs
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\App.baml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\MainWindow.g.cs
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\MainWindow.baml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\BouncyCastle.Crypto.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\MySql.Data.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Renci.SshNet.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Buffers.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Memory.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Ubiety.Dns.Core.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Zstandard.Net.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.pdb
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\MySql.Data.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\Renci.SshNet.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Buffers.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Memory.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CopyComplete
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csprojAssemblyReference.cache
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\MainWindow.g.cs
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\WebBrowser.g.cs
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\App.g.cs
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\GeneratedInternalTypeHelper.g.cs
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.cache
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.lref
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\MainWindow.baml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\WebBrowser.baml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.exe
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.pdb
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe.config
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.pdb
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\BouncyCastle.Crypto.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\MySql.Data.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Renci.SshNet.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Buffers.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Memory.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Ubiety.Dns.Core.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Zstandard.Net.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.pdb
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\MySql.Data.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Renci.SshNet.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Buffers.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Memory.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\App.baml
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.g.resources
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge_Control_panel.Properties.Resources.resources
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.GenerateResource.cache
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CoreCompileInputs.cache
+\\windows-base\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CopyComplete
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Newtonsoft.Json.dll
+\\windows-base\Listforge - Control panel\Listforge - Control panel\bin\Debug\Newtonsoft.Json.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csprojAssemblyReference.cache
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\MainWindow.g.cs
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\App.g.cs
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.cache
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.lref
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.exe
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.pdb
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe.config
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Listforge - Control panel.pdb
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\BouncyCastle.Crypto.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\MySql.Data.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Newtonsoft.Json.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Renci.SshNet.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Buffers.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Memory.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Ubiety.Dns.Core.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Zstandard.Net.dll
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.pdb
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Google.Protobuf.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\MySql.Data.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Newtonsoft.Json.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\Renci.SshNet.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Buffers.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Memory.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\App.baml
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\MainWindow.baml
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.g.resources
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge_Control_panel.Properties.Resources.resources
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.GenerateResource.cache
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CoreCompileInputs.cache
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CopyComplete
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\AddServerDlg.g.cs
+D:\repos\Listforge - Control panel\Listforge - Control panel\obj\Debug\View\AddServerDlg.baml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe.config
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Listforge - Control panel.pdb
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Google.Protobuf.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\MySql.Data.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Newtonsoft.Json.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Renci.SshNet.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Buffers.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Memory.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Zstandard.Net.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Google.Protobuf.pdb
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Google.Protobuf.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\MySql.Data.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Newtonsoft.Json.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Renci.SshNet.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Buffers.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Memory.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csprojAssemblyReference.cache
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\View\AddServerDlg.g.cs
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\View\MainWindow.g.cs
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\App.g.cs
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.cache
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.lref
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\App.baml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\View\AddServerDlg.baml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\View\MainWindow.baml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.g.resources
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge_Control_panel.Properties.Resources.resources
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.GenerateResource.cache
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CoreCompileInputs.cache
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CopyComplete
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.exe
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.pdb
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.exe.config
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\BotDLL.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.WebSocket.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.Core.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.Rest.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Telegram.Bot.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Collections.Immutable.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Linq.Async.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\BotDLL.pdb
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\BotDLL.dll.config
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.WebSocket.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.Core.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.Rest.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Telegram.Bot.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Collections.Immutable.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Linq.Async.xml
+C:\Users\friedlt\Desktop\ListforgeBot\Listforge - Control panel\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe.config
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Listforge - Control panel.exe
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Listforge - Control panel.pdb
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\BotDLL.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Google.Protobuf.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\MySql.Data.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Renci.SshNet.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Buffers.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Memory.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Zstandard.Net.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.WebSocket.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.Core.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.Rest.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Telegram.Bot.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Collections.Immutable.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Linq.Async.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\BotDLL.pdb
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\BotDLL.dll.config
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Google.Protobuf.pdb
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Google.Protobuf.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\MySql.Data.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Renci.SshNet.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Buffers.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Memory.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.WebSocket.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.Core.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Discord.Net.Rest.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Telegram.Bot.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Collections.Immutable.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Linq.Async.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.exe.config
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\View\AddServerDlg.g.cs
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\View\MainWindow.g.cs
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\App.g.cs
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.cache
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel_MarkupCompile.lref
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\App.baml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\View\AddServerDlg.baml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\View\MainWindow.baml
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.g.resources
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge_Control_panel.Properties.Resources.resources
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.GenerateResource.cache
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CopyComplete
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.exe
+C:\Users\Administrator\Desktop\ListforgeBot V4.0\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.pdb

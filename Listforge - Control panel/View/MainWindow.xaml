@@ -1,0 +1,58 @@
+﻿<Window DataContext="{StaticResource mvmodel}" x:Class="Listforge_Control_panel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Listforge_Control_panel"
+        mc:Ignorable="d"
+        Title="Listforge - Control panel " Loaded="Window_Loaded" Height="500" Width="777" MinWidth="777" MinHeight="500" WindowStartupLocation="CenterScreen" BorderBrush="Black">
+    <Window.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisConv"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource mvmodel}" Background="#E5000000">
+        <DataGrid x:Name="lbServerAPI" ItemsSource="{Binding LstAPI_URL}" SelectedItem="{Binding SelAPI_URL}" Margin="10,10,10,0" VerticalAlignment="Top" Height="200" AutoGenerateColumns="False" CanUserAddRows="False" BorderBrush="Black" Foreground="Black" RowBackground="#33000000" AlternatingRowBackground="#7F000000" HeadersVisibility="Column" AutomationProperties.IsRowHeader="True" IsReadOnly="True" FontSize="14" Background="{x:Null}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding URLID}" Header="DB"/>
+                <DataGridTextColumn Binding="{Binding Info.Id}" Header="Server"/>
+                <DataGridTextColumn Binding="{Binding Info.Name}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Info.Address}" Header="Address"/>
+                <DataGridTextColumn Binding="{Binding Info.Port}" Header="Port"/>
+                <DataGridTextColumn Binding="{Binding Info.Is_online}" Header="Online"/>
+                <DataGridTextColumn Binding="{Binding Info.Players}" Header="Player"/>
+                <DataGridTextColumn x:Name="Key" Binding="{Binding Key}" Header="API KEY" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Info.QC_StatUri}" Header="QuickChart" Width="250"/>
+            </DataGrid.Columns>
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Info.Is_online}" Value="True">
+                            <Setter Property="Foreground" Value="Green"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Info.Is_online}" Value="False">
+                            <Setter Property="Foreground" Value="Red"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+
+        <Button x:Name="btWeb" Click="btWeb_Click" Content="{Binding SelAPI_URL.Info.LF_Uri}" Margin="190,215,10,0" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Background="#AF000000" BorderBrush="{x:Null}" Foreground="#AF00FF00"/>
+        <Button x:Name="btWebStat" Click="btWebStat_Click" Content="{Binding SelAPI_URL.Info.LF_StatUri}" Margin="190,245,10,0" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Background="#AF000000" BorderBrush="{x:Null}" Foreground="#AF00FF00"/>
+        <Button x:Name="btWebStatQC" Click="btWebStatQC_Click" Content="{Binding SelAPI_URL.Info.QC_StatUri}" Margin="190,275,10,0" VerticalAlignment="Top" Height="34" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Background="#AF000000" BorderBrush="{x:Null}" Foreground="#AF00FF00"/>
+        <Label Content="Open Listforge Mainpage" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top" Height="30" Width="175" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="#AF00FF00"/>
+        <Label Content="Open Listforge Statistics" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Height="30" Width="175" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="#AF00FF00"/>
+        <Label Content="Open QuickCharts Statistics" HorizontalAlignment="Left" Margin="10,275,0,0" VerticalAlignment="Top" Height="34" Width="175" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="#AF00FF00"/>
+        <Button x:Name="btAddServer" Click="btAddServer_Click" Content="Add Server" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="btDelServer" Click="btDelServer_Click" Content="Del Server" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="btRefresh" Content="R" Click="btRefresh_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="297,0,300,10" Width="20" Height="20"/>
+        <CheckBox x:Name="cbHideKeys" Content="Hide API Keys" Margin="106,359,418,10" Checked="cbHideKeys_Checked" Unchecked="cbHideKeys_Unchecked" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14"/>
+        <CheckBox x:Name="cbHideKeys_Copy" Content="Hide API Keys" Margin="485,0,179,11" Checked="cbHideKeys_Copy_Checked" Unchecked="cbHideKeys_Copy_Unchecked" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14"/>
+    </Grid>
+</Window>
