@@ -9,13 +9,17 @@ namespace BotDLL
 {
     public class CSV_LF_ServerInfo
     {
+        private static string _compare;
+        private static Uri _path;
         public static void WriteAll(string compare, List<LF_ServerInfo> lst)
         {
+            _compare = compare;
+            _path = new Uri($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}/ListforgeBot/{_compare}.csv");
             while (true)
             {
                 try
                 {
-                    StreamWriter sw = new StreamWriter($"{compare}.csv", false);
+                    StreamWriter sw = new StreamWriter(_path.LocalPath, false);
                     foreach (var item in lst)
                     {
                         sw.WriteLine($"{item.Id};{item.Name};{item.Address};{item.Port};{item.Hostname};{item.Map};{item.Is_online};{item.Players};{item.Maxplayers};{item.Version};{item.Uptime};{item.LF_Uri.AbsoluteUri};{item.Last_check};{item.Last_online}");
@@ -31,12 +35,14 @@ namespace BotDLL
         }
         public static List<LF_ServerInfo> ReadALL(string compare)
         {
+            _compare = compare;
+            _path = new Uri($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}/ListforgeBot/{_compare}.csv");
             while (true)
             {
                 try
                 {
                     List<LF_ServerInfo> lst = new List<LF_ServerInfo>();
-                    StreamReader sr = new StreamReader($"{compare}.csv");
+                    StreamReader sr = new StreamReader(_path.LocalPath);
                     while (!sr.EndOfStream)
                     {
                         string zeile = sr.ReadLine();
@@ -64,7 +70,6 @@ namespace BotDLL
                 }
                 catch (Exception)
                 {
-
 
                 }
             }

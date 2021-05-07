@@ -9,12 +9,11 @@ namespace BotDLL
 {
     public class CSV_Connections
     {
+        private static Uri Path = new Uri($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}/ListforgeBot/Connections.csv");
         public static Connections ReadAll()
         {
             Connections cons = new Connections();
-            string userpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string path = $"{userpath}\\Connections.csv".Replace("\\", "/");
-            StreamReader sr = new StreamReader(path);
+            StreamReader sr = new StreamReader(Path.LocalPath);
             
             while (!sr.EndOfStream)
             {
