@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:Listforge_Control_panel"
         mc:Ignorable="d"
         Title="Listforge - Control panel " Loaded="Window_Loaded" Height="500" Width="777" MinWidth="777" MinHeight="500" WindowStartupLocation="CenterScreen" BorderBrush="Black">
-    <Window.Resources>
-        <local:BoolToVisibilityConverter x:Key="BoolToVisConv"/>
-    </Window.Resources>
     <Grid DataContext="{StaticResource mvmodel}" Background="#E5000000">
         <DataGrid x:Name="lbServerAPI" ItemsSource="{Binding LstAPI_URL}" SelectedItem="{Binding SelAPI_URL}" Margin="10,10,10,0" VerticalAlignment="Top" Height="200" AutoGenerateColumns="False" CanUserAddRows="False" BorderBrush="Black" Foreground="Black" RowBackground="#33000000" AlternatingRowBackground="#7F000000" HeadersVisibility="Column" AutomationProperties.IsRowHeader="True" IsReadOnly="True" FontSize="14" Background="{x:Null}">
             <DataGrid.Columns>

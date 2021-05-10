@@ -121,7 +121,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\BaseModel.cs" />
-    <Compile Include="ViewModel\BoolToVisibilityConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\AddServerDlg.xaml.cs">
       <DependentUpon>AddServerDlg.xaml</DependentUpon>
