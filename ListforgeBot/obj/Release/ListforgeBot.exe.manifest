@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BotDLL.dll" size="64000">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BotDLL.dll" size="63488">
       <assemblyIdentity name="BotDLL" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QBrG0DsQ2xs6fA5jp8ZDTe+asary9ruqQ9GkUHz5z3g=</dsig:DigestValue>
+        <dsig:DigestValue>NsfJPZ7DuvZ4x9I2guT4+0AdHhDRp/3njI9SfGcdwgs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -138,8 +138,8 @@ namespace BotDLL
                         }
                         else
                             eb.Description += "```";
-                        if (GetBannerUrl(item.LF_Uri.AbsoluteUri) != null)
-                            eb.ImageUrl = GetBannerUrl(item.LF_Uri.AbsoluteUri);
+                        if (item.LF_Uri.AbsoluteUri != null)
+                            eb.ImageUrl = item.LF_Uri.AbsoluteUri;
                         await arg.Channel.SendMessageAsync(null, false, eb.Build());
                     }
                     else if ('s' + item.Name.ToLower() == arg.Content.ToLower().Trim('!'))
@@ -175,8 +175,8 @@ namespace BotDLL
                         eb.Description = $"```IP:           {item.Address}:{item.Port}\n" +
                                         $"Status:       {onoff}\n" +
                                         $"Players:      {item.Players}/{item.Maxplayers}\n";
-                        if (GetBannerUrl(item.LF_Uri.AbsoluteUri) != null)
-                            eb.ImageUrl = GetBannerUrl(item.LF_Uri.AbsoluteUri);
+                        if (item.LF_Uri.AbsoluteUri != null)
+                            eb.ImageUrl = item.LF_Uri.AbsoluteUri;
                     }
                     else if (lowkey == "42s")
                     {
@@ -191,8 +191,8 @@ namespace BotDLL
                                             $"Version:      {item.Version}\n" +
                                             $"Uptime:       {item.Uptime}%\n" +
                                             $"Last check:   {item.Last_check}\n";
-                        if (GetBannerUrl(item.LF_Uri.AbsoluteUri) != null)
-                            eb.ImageUrl = GetBannerUrl(item.LF_Uri.AbsoluteUri);
+                        if (item.LF_Uri.AbsoluteUri != null)
+                            eb.ImageUrl = item.LF_Uri.AbsoluteUri;
                     }
 
                     eb.Color = Color.Green;
@@ -205,22 +205,6 @@ namespace BotDLL
                     await arg.Channel.SendMessageAsync(null, false, eb.Build());
                 }
             }
-        }
-        private static string GetBannerUrl(string serverurl)
-        {
-            if (serverurl.Contains("minecraft-mp.com"))
-            {
-                serverurl = serverurl.Replace("server-s", "regular-banner-");
-                serverurl += "-5.png";
-            }
-            else if (serverurl.Contains("teamspeak-servers.org"))
-                serverurl += "banners/regular-banner-2.png";
-            else if (serverurl.Contains("counter-strike-servers.net"))
-                serverurl += "banners/regular-banner-1.png";
-            else
-                return null;
-
-            return serverurl;
         }
         static void Center(string s)
         {
