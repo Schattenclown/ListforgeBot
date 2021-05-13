@@ -12,20 +12,6 @@ namespace Listforge_Control_panel
 {
     public class MainViewModel : BaseModel
     {
-        private Visibility _apiKey;
-        public Visibility ApiKey
-        {
-            get
-            {
-                return _apiKey;
-            }
-            set
-            {
-                _apiKey = value;
-                onPropertyChanged("ApiKey");
-            }
-        }
-
         private ObservableCollection<LF_API_Uri> _lstAPI_URL;
         public ObservableCollection<LF_API_Uri> LstAPI_URL
         {

@@ -112,6 +112,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DB_CreateTableDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -124,6 +128,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\AddServerDlg.xaml.cs">
       <DependentUpon>AddServerDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DB_CreateTableDlg.xaml.cs">
+      <DependentUpon>DB_CreateTableDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

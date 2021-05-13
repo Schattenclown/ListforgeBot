@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BotDLL
 {
@@ -40,24 +41,27 @@ namespace BotDLL
         {
             connection.Close();
         }
-        public static void ExecuteNonQuery(String sql)
+        public static void ExecuteNonQuery(String sql, bool notification)
         {
             MySqlConnection connection = OpenDB();
             MySqlCommand sqlCommand = new MySqlCommand(sql, connection);
-            sqlCommand.ExecuteNonQuery();
+            int ret = sqlCommand.ExecuteNonQuery();
+            if (ret != -1 && notification == true )
+                MessageBox.Show("Worked!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             CloseDB(connection);
         }
         public static MySqlDataReader ExecuteReader(String sql, MySqlConnection connection)
         {
             MySqlCommand sqlCommand = new MySqlCommand(sql, connection);
-            //try catch noch
             try
             {
                 MySqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
                 return sqlDataReader;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString(), "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 return null;
             }
         }

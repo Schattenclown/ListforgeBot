@@ -27,7 +27,7 @@ namespace Listforge_Control_panel
         {
             AddServerViewModel addServerViewModel = FindResource("addmodel") as AddServerViewModel;
             if(addServerViewModel.API_URL.Key != null)
-                addServerViewModel.API_URL.Write();
+                addServerViewModel.API_URL.Write(true);
             DialogResult = true;
             this.Close();
         }

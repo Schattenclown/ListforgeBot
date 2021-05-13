@@ -50,6 +50,7 @@
         <Button x:Name="btDelServer" Click="btDelServer_Click" Content="Del Server" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
         <Button x:Name="btRefresh" Content="R" Click="btRefresh_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="297,0,300,10" Width="20" Height="20"/>
         <CheckBox x:Name="cbHideKeys" Content="Hide API Keys" Margin="106,359,418,10" Checked="cbHideKeys_Checked" Unchecked="cbHideKeys_Unchecked" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14"/>
-        <CheckBox x:Name="cbHideKeys_Copy" Content="Hide API Keys" Margin="485,0,179,11" Checked="cbHideKeys_Copy_Checked" Unchecked="cbHideKeys_Copy_Unchecked" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="14"/>
+        <Button x:Name="btDB_CreateTable" Click="btDB_CreateTable_Click" Content="Create DB Tabel" HorizontalAlignment="Left" Margin="10,0,0,35" Width="95" Height="20" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
+ 

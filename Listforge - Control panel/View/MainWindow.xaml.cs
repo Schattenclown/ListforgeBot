@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BotDLL;
+using Listforge_Control_panel;
 
 namespace Listforge_Control_panel
 {
@@ -28,13 +29,37 @@ namespace Listforge_Control_panel
             mvm = FindResource("mvmodel") as MainViewModel;
         }
         private void btWeb_Click(object sender, RoutedEventArgs e)
-        {   
-            System.Diagnostics.Process.Start($"{mvm.SelAPI_URL.Info.LF_Uri}");
+        {
+            try
+            {
+                System.Diagnostics.Process.Start($"{mvm.SelAPI_URL.Info.LF_Uri}");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can´t open the Void", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void btWebStat_Click(object sender, RoutedEventArgs e)
         {
-            if(mvm.SelAPI_URL.Info.LF_StatUri != null)
+            try
+            {
                 System.Diagnostics.Process.Start($"{mvm.SelAPI_URL.Info.LF_StatUri}");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can´t open the Void", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void btWebStatQC_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start($"{mvm.SelAPI_URL.Info.QC_StatUri}");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can´t open the Void", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void btAddServer_Click(object sender, RoutedEventArgs e)
         {
@@ -45,19 +70,16 @@ namespace Listforge_Control_panel
         }
         private void btDelServer_Click(object sender, RoutedEventArgs e)
         {
-            if(mvm.SelAPI_URL!=null)
+            try
             {
-                LF_API_Uri.Delete(mvm.SelAPI_URL);
-                DB_LF_ServerInfo.Delete(mvm.SelAPI_URL);
+                LF_API_Uri.Delete(mvm.SelAPI_URL, true);
+                DB_LF_ServerInfo.Delete(mvm.SelAPI_URL, true);
                 mvm.RefreshMainViewModel();
             }
-            else
+            catch (Exception)
+            {
                 MessageBox.Show("Select a server!");
-        }
-        private void btWebStatQC_Click(object sender, RoutedEventArgs e)
-        {
-            if (mvm.SelAPI_URL.Info.QC_StatUri != null)
-                System.Diagnostics.Process.Start($"{mvm.SelAPI_URL.Info.QC_StatUri}");
+            }
         }
         private void btRefresh_Click(object sender, RoutedEventArgs e)
         {
@@ -65,24 +87,17 @@ namespace Listforge_Control_panel
         }
         private void cbHideKeys_Checked(object sender, RoutedEventArgs e)
         {
-            Key.Width = 0;
-            Key.Visibility = Visibility.Hidden;
+            Key.Width = 0; Key.Visibility = Visibility.Hidden;
         }
 
         private void cbHideKeys_Unchecked(object sender, RoutedEventArgs e)
         {
-            Key.Width = 250;
-            Key.Visibility = Visibility.Visible;
+            Key.Width = 250; Key.Visibility = Visibility.Visible;
         }
-
-        private void cbHideKeys_Copy_Checked(object sender, RoutedEventArgs e)
+        private void btDB_CreateTable_Click(object sender, RoutedEventArgs e)
         {
-            mvm.ApiKey = Visibility.Hidden;
-        }
-
-        private void cbHideKeys_Copy_Unchecked(object sender, RoutedEventArgs e)
-        {
-            mvm.ApiKey = Visibility.Visible;
+            DB_CreateTableDlg DBCreateDlg = new DB_CreateTableDlg();
+            DBCreateDlg.ShowDialog();
         }
     }
 }

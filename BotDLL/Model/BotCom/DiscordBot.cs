@@ -176,7 +176,7 @@ namespace BotDLL
                                         $"Status:       {onoff}\n" +
                                         $"Players:      {item.Players}/{item.Maxplayers}\n";
                         if (item.LF_Uri.AbsoluteUri != null)
-                            eb.ImageUrl = item.LF_Uri.AbsoluteUri;
+                            eb.ImageUrl = item.LF_StatUri.AbsoluteUri;
                     }
                     else if (lowkey == "42s")
                     {

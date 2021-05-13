@@ -9,7 +9,7 @@ namespace BotDLL
 {
     public class DB_LF_ServerInfo
     {
-        public static bool InserInto(string db, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string Key, string LF_Uri, string LF_StatUri, string QC_StatUri)
+        public static bool InserInto(string db, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string Key, string LF_Uri, string LF_StatUri, string QC_StatUri, bool notification)
         {
             if (Id == null)
                 return false;
@@ -22,11 +22,11 @@ namespace BotDLL
                 {
                     string sql = $"INSERT INTO {db} (Id, Name, Address, Port, Hostname, Map, Is_online, Players, Maxplayers, Version, Uptime, Last_check, Last_online, LF_Uri)" +
                                 $"VALUES ({Id}, '{Name}', '{Address}', {Port}, '{Hostname}', '{Map}', {Is_online}, {Players}, {Maxplayers}, '{Versions.Replace("theforestDS ", "")}', {Uptime}, '{Last_check:yyyyy-MM-dd HH-mm}', '{Last_online:yyyyy-MM-dd HH-mm}', '{LF_Uri}')";
-                    DB_Connection.ExecuteNonQuery(sql);
-                    UpdateSmoll(db, Id, LF_StatUri, QC_StatUri);
+                    DB_Connection.ExecuteNonQuery(sql, notification);
+                    UpdateSmoll(db, Id, LF_StatUri, QC_StatUri, notification);
                 }
                 else
-                    Update(db, Id, Name, Address, Port, Hostname, Map, Is_online, Players, Maxplayers, Versions, Uptime, Last_check, Last_online, Key, LF_Uri, LF_StatUri, QC_StatUri);
+                    Update(db, Id, Name, Address, Port, Hostname, Map, Is_online, Players, Maxplayers, Versions, Uptime, Last_check, Last_online, Key, LF_Uri, LF_StatUri, QC_StatUri, notification);
             }
             catch (Exception)
             {
@@ -34,18 +34,18 @@ namespace BotDLL
             }
             return true;
         }
-        public static void Update(string swhatdb, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string LF_Uri, string Key, string LF_StatUri, string QC_StatUri)
+        public static void Update(string swhatdb, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string LF_Uri, string Key, string LF_StatUri, string QC_StatUri, bool notification)
         {
             string sql1 = $"UPDATE {swhatdb} SET Id={Id}, Name='{Name}', Address='{Address}', Port={Port}, Hostname='{Hostname}', Map='{Map}', Is_online={Is_online}, Players={Players}, Maxplayers={Maxplayers}, Version='{Versions.Replace("theforestDS ", "")}', " +
                 $"Uptime={Uptime}, Last_check='{Last_check:yyyyy-MM-dd HH-mm}', Last_online='{Last_online:yyyyy-MM-dd HH-mm}', LF_Uri='{LF_Uri}', `key`='{Key}' WHERE ID={Id}";
             string sql2 = $"UPDATE {swhatdb} SET LF_StatUri='{LF_StatUri}', QC_StatUri='{QC_StatUri}' WHERE ID={Id}";
-            DB_Connection.ExecuteNonQuery(sql1);
-            DB_Connection.ExecuteNonQuery(sql2);
+            DB_Connection.ExecuteNonQuery(sql1, notification);
+            DB_Connection.ExecuteNonQuery(sql2, notification);
         }
-        public static void UpdateSmoll(string swhatdb, string Id, string LF_StatUri, string QC_StatUri)
+        public static void UpdateSmoll(string swhatdb, string Id, string LF_StatUri, string QC_StatUri, bool notification)
         {
             string sql = $"UPDATE {swhatdb} SET LF_StatUri='{LF_StatUri}', QC_StatUri='{QC_StatUri}' WHERE ID={Id}";
-            DB_Connection.ExecuteNonQuery(sql);
+            DB_Connection.ExecuteNonQuery(sql, notification);
         }
         public static bool IsThere(string swhatdb, int id)
         {
@@ -131,15 +131,45 @@ namespace BotDLL
             liveInfo.LF_StatUri = new Uri(rdr.GetString("LF_StatUri"));
             liveInfo.QC_StatUri = new Uri(rdr.GetString("QC_StatUri"));
         }
-        public static void DeleteAll()
+        public static void DeleteAll(bool notification)
         {
             string sql = "DELETE FROM LF_ServerInfoLive";
-            DB_Connection.ExecuteNonQuery(sql);
+            DB_Connection.ExecuteNonQuery(sql, notification);
         }
-        public static void Delete(LF_API_Uri aPI_URL)
+        public static void Delete(LF_API_Uri aPI_URL, bool notification)
         {
             string sql = $"DELETE FROM LF_ServerInfoLive WHERE `Key` = '{aPI_URL.Key}'";
-            DB_Connection.ExecuteNonQuery(sql);
+            DB_Connection.ExecuteNonQuery(sql, notification);
+        }
+        public static void CreateTable_LF_ServerInfoLive(bool notification)
+        {
+            string sql = "CREATE DATABASE IF NOT EXISTS `db_listforge`;" +
+                            "USE `db_listforge`;" +
+                            "" +
+                            "CREATE TABLE IF NOT EXISTS `LF_ServerInfoLive` (" +
+                            "`Id` int(11) NOT NULL," +
+                            "`Name` varchar(50) DEFAULT NULL," +
+                            "`Address` varchar(50) DEFAULT NULL," +
+                            "`Port` int(11) DEFAULT NULL," +
+                            "`Hostname` varchar(50) DEFAULT NULL," +
+                            "`Map` varchar(50) DEFAULT NULL," +
+                            "`Is_online` int(11) DEFAULT NULL," +
+                            "`Players` int(11) DEFAULT NULL," +
+                            "`Maxplayers` int(11) DEFAULT NULL," +
+                            "`Version` varchar(50) DEFAULT NULL," +
+                            "`Uptime` int(11) DEFAULT NULL," +
+                            "`Last_check` datetime DEFAULT NULL," +
+                            "`Last_online` datetime DEFAULT NULL," +
+                            "`Key` varchar(50) DEFAULT NULL," +
+                            "`LF_Uri` varchar(50) DEFAULT NULL," +
+                            "`LF_StatUri` varchar(150) DEFAULT NULL," +
+                            "`QC_StatUri` varchar(6666) DEFAULT NULL," +
+                            "`LFHeaderImgUri`varchar(6666) Default Null," +
+                            "PRIMARY KEY (`Id`)," +
+                            "KEY `Key` (`Key`)" +
+                            ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+
+            DB_Connection.ExecuteNonQuery(sql, notification);
         }
     }
 }

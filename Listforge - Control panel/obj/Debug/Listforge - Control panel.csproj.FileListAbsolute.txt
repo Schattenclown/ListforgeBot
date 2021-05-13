@@ -330,3 +330,5 @@ C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\o
 C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.csproj.CopyComplete
 C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.exe
 C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.pdb
+C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\View\DB_CreateTableDlg.g.cs
+C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\View\DB_CreateTableDlg.baml

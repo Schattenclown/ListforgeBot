@@ -22,13 +22,17 @@ namespace BotDLL
         {
             return $"";
         }
-        public static void Add(TLG_Userdata ud)
+        public static void Add(TLG_Userdata ud, bool notification)
         {
-            DB_TL_Userdata.Add(ud);
+            DB_TL_Userdata.Add(ud, notification);
         }
-        public static void Change(TLG_Userdata ud)
+        public static void Change(TLG_Userdata ud, bool notification)
         {
-            DB_TL_Userdata.Change(ud);
+            DB_TL_Userdata.Change(ud, notification);
+        }
+        public static void CreateTable_Userdata(bool notification)
+        {
+            DB_TL_Userdata.CreateTable_Userdata(notification);
         }
     }
 }

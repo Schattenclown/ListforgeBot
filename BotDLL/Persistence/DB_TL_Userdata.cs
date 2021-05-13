@@ -11,7 +11,7 @@ namespace BotDLL
     {
         public static List<TLG_Userdata> ReadAll()
         {
-            String sql = "SELECT * FROM Userdata";
+            String sql = "SELECT * FROM TL_USerdata";
             List<TLG_Userdata> lst = new List<TLG_Userdata>();
             MySqlConnection connection = DB_Connection.OpenDB();
             MySqlDataReader dataReader = DB_Connection.ExecuteReader(sql, connection);
@@ -34,16 +34,31 @@ namespace BotDLL
             DB_Connection.CloseDB(connection);
             return lst;
         }
-        public static void Add(TLG_Userdata ud)
+        public static void Add(TLG_Userdata ud, bool notification)
         {
-            String sql = $"INSERT INTO Userdata (UserNr, ChatId, Username, ServerId, Abo)" +
+            String sql = $"INSERT INTO TL_USerdata (UserNr, ChatId, Username, ServerId, Abo)" +
                          $"VALUES ({ud.UserNr}, {ud.ChatId}, '{ud.Username}', {ud.ServerId}, {ud.Abo})";
-            DB_Connection.ExecuteNonQuery(sql);
+            DB_Connection.ExecuteNonQuery(sql, notification);
         }
-        public static void Change(TLG_Userdata ud)
+        public static void Change(TLG_Userdata ud, bool notification)
         {
-            String sql = $"UPDATE Userdata SET Abo={ud.Abo} WHERE ChatId={ud.ChatId} AND ServerId={ud.ServerId}";
-            DB_Connection.ExecuteNonQuery(sql);
+            String sql = $"UPDATE TL_USerdata SET Abo={ud.Abo} WHERE ChatId={ud.ChatId} AND ServerId={ud.ServerId}";
+            DB_Connection.ExecuteNonQuery(sql, notification);
+        }
+        public static void CreateTable_Userdata(bool notification)
+        {
+            string sql = "CREATE DATABASE IF NOT EXISTS `db_listforge`;" +
+                            "USE `db_listforge`;" +
+                            "CREATE TABLE IF NOT EXISTS `TL_USerdata` (" +
+                            "`UserNr` int(11) NOT NULL AUTO_INCREMENT," +
+                            "`ChatId` int(11) DEFAULT NULL," +
+                            "`Username` varchar(50) DEFAULT NULL," +
+                            "`ServerId` int(11) DEFAULT NULL," +
+                            "`Abo` int(11) DEFAULT NULL," +
+                            "PRIMARY KEY (`UserNr`)" +
+                            ") ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;";
+
+            DB_Connection.ExecuteNonQuery(sql, notification);
         }
     }
 }

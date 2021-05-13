@@ -108,13 +108,13 @@ namespace BotDLL
                         }
                         else if (e.Message.Text == $"/add{item.Name}")
                         {
-                            ChangeInform(item.Name, Convert.ToInt32(e.Message.Chat.Id), e.Message.Chat.Username, true);
+                            ChangeInform(item.Name, Convert.ToInt32(e.Message.Chat.Id), e.Message.Chat.Username, true, false);
                             np = true;
                             break;
                         }
                         else if (e.Message.Text == $"/del{item.Name}")
                         {
-                            ChangeInform(item.Name, Convert.ToInt32(e.Message.Chat.Id), e.Message.Chat.Username, false);
+                            ChangeInform(item.Name, Convert.ToInt32(e.Message.Chat.Id), e.Message.Chat.Username, false, false);
                             np = true;
                             break;
                         }
@@ -210,7 +210,7 @@ namespace BotDLL
             }
             return rightinfo;
         }
-        static async void ChangeInform(string name, int chatid, String username, bool abo)
+        static async void ChangeInform(string name, int chatid, String username, bool abo, bool notification)
         {
             int serverid = 0;
             String sabo = $"You will get notifications for {name}!";
@@ -247,7 +247,7 @@ namespace BotDLL
                         ud.Username = username;
                     else
                         ud.Username = "Noname";
-                    TLG_Userdata.Add(ud);
+                    TLG_Userdata.Add(ud, notification);
                     await botClient.SendTextMessageAsync(chatId: chatid, text: sabo);
                 }
             }
@@ -264,7 +264,7 @@ namespace BotDLL
                         ud.Username = username;
                     else
                         ud.Username = "Noname";
-                    TLG_Userdata.Change(ud);
+                    TLG_Userdata.Change(ud, notification);
                     await botClient.SendTextMessageAsync(chatId: chatid, text: sabo);
                 }
             }

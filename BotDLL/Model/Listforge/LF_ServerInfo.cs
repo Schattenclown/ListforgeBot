@@ -43,9 +43,13 @@ namespace BotDLL
         {
             return $"{Id,6} ██ {Name,-15} ██ {Address,15}:{Port,-5} ██ {Hostname,-22} ██ {Map,-20} ██ {Is_online,-6} ██ {Players,3}/{Maxplayers,-5} ██ {Version,10} ██ {Uptime,3}% ██  {Last_check,-19}  ██  {Last_online,-18}";
         }
-        public static void DeleteAll()
+        public static void DeleteAll(bool notification)
         {
-            DB_LF_ServerInfo.DeleteAll();
+            DB_LF_ServerInfo.DeleteAll(notification);
+        }
+        public static void CreateTable_LF_ServerInfoLive(bool notification)
+        {
+            DB_LF_ServerInfo.CreateTable_LF_ServerInfoLive(notification);
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿<Window x:Class="Listforge_Control_panel.DB_CreateTableDlg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Listforge_Control_panel"
+        mc:Ignorable="d"
+        Title="DB_CreateTable" Height="120" Width="330">
+    <Grid>
+        <Button x:Name="LF_ServerInfoLive" Content="LF ServerInfoLive" HorizontalAlignment="Right" Margin="0,0,172,60" VerticalAlignment="Bottom" Width="140" Click="LF_ServerInfoLive_Click"/>
+        <Button x:Name="LF_API_Uri" Content="LF API Uri" HorizontalAlignment="Right" Margin="0,0,172,35" VerticalAlignment="Bottom" Width="140" Click="LF_API_Uri_Click"/>
+        <Button x:Name="TL_USerdata" Content="Telegram Userdata" HorizontalAlignment="Right" Margin="0,0,172,10" VerticalAlignment="Bottom" Width="140" Click="TL_USerdata_Click"/>
+
+    </Grid>
+</Window>

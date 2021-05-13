@@ -36,7 +36,7 @@ namespace BotDLL
                             string LF_StatUri = BuildStatUrl("minecraft-mp.com", obj.Id);
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, "", "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, "", "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
                         }
                         else if (content.Contains("ark-servers.net"))
                         {
@@ -46,7 +46,7 @@ namespace BotDLL
                             string LF_StatUri = BuildStatUrl("ark-servers.net", obj.Id);
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
                         }
                         else if (content.Contains("conan-exiles.com"))
                         {
@@ -56,7 +56,7 @@ namespace BotDLL
                             string LF_StatUri = BuildStatUrl("conan-exiles.com", obj.Id);
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
                         }
                         else if (content.Contains("teamspeak-servers.org"))
                         {
@@ -66,7 +66,7 @@ namespace BotDLL
                             string LF_StatUri = BuildStatUrl("teamspeak-servers.org", obj.Id);
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
                         }
                         else if (content.Contains("counter-strike-servers.net"))
                         {
@@ -76,7 +76,7 @@ namespace BotDLL
                             string LF_StatUri = BuildStatUrl("counter-strike-servers.net", obj.Id);
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
                         }
                     }
                 }
