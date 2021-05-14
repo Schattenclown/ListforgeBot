@@ -29,8 +29,9 @@ namespace BotDLL
                 {
                     connection.Open();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    DebugLog.Log("ERROR: DB_Connection.OpenDB" + ex.Message);
                     Thread.Sleep(10);
                 }
             } while (connection == null);

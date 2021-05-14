@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -47,7 +48,7 @@ namespace ListforgeBot
                     Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
                     DiscordBot.Main();
                     TelegramBot.Main();
-                    //LFServerInfo.DeleteAll(); Thread.Sleep(MSTimeOutbt); 
+                    DebugLog.Main();
                     LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
                     lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
                     CSV_LF_ServerInfo.WriteAll(compare1, lstlive); Thread.Sleep(MSTimeOutbt);
@@ -56,14 +57,12 @@ namespace ListforgeBot
                     virgin++;
                 }
                 Thread.Sleep(MSTimeOut);
-                //LFServerInfo.DeleteAll(); Thread.Sleep(MSTimeOutbt); 
                 LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
                 lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
                 CSV_LF_ServerInfo.WriteAll(compare2, lstlive); Thread.Sleep(MSTimeOut);
                 lstcp2 = CSV_LF_ServerInfo.ReadALL(compare2); Thread.Sleep(MSTimeOutbt);
                 DidChangeQM(lstcp1, lstcp2);
                 Console.ForegroundColor = ConsoleColor.Green; WriteList(lstlive); Thread.Sleep(MSTimeOut);
-                //LFServerInfo.DeleteAll(); Thread.Sleep(MSTimeOutbt); 
                 LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
                 lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
                 CSV_LF_ServerInfo.WriteAll(compare1, lstlive); Thread.Sleep(MSTimeOut);

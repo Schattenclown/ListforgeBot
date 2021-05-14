@@ -29,7 +29,7 @@ namespace BotDLL
                 }
                 catch (Exception)
                 {
-
+                    DebugLog.Log("Error: Failed Insert in CSV_LF_ServerInfo.WriteAll");
                 }
             }
         }

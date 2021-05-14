@@ -22,8 +22,7 @@ namespace BotDLL
                 bool achieved = false;
                 var client = new HttpClient();
                 var client1 = new HttpClient();
-                client.DefaultRequestHeaders.Add("User-Agent", "C# console program");
-                //522 origin trycatch? auch bei con int 
+                client.DefaultRequestHeaders.Add("User-Agent", "C# console program"); 
                 try
                 {
                     string content = await client.GetStringAsync($"{item.Combined}");
@@ -87,9 +86,9 @@ namespace BotDLL
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //csv log?
+                    DebugLog.Log("ERROR: LF_Fetcher.Fetch " + ex.Message);
                 }
             }
         }

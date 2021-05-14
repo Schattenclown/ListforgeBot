@@ -28,8 +28,9 @@ namespace BotDLL
                 else
                     Update(db, Id, Name, Address, Port, Hostname, Map, Is_online, Players, Maxplayers, Versions, Uptime, Last_check, Last_online, Key, LF_Uri, LF_StatUri, QC_StatUri, LF_HeaderImgUri, notification);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                DebugLog.Log("ERROR: DB_LF_ServerInfo.InserInto:" + ex.Message);
                 return false;
             }
             return true;

@@ -298,7 +298,8 @@ namespace BotDLL
                                                                                 $"Uptime: {item.Uptime}%\n" +
                                                                                 $"{item.LF_Uri}\n" +
                                                                                 $"Last check: {item.Last_check}\n" +
-                                                                                $"Last online: {item.Last_online}\n");
+                                                                                $"Last online: {item.Last_online}\n" +
+                                                                                $"{item.LF_HeaderImgURi}");
                 else if (lowkey == false)
                     await botClient.SendTextMessageAsync(chatId: chatId, text: $"Name: {item.Name}\n" +
                                                                                 $"IP: {item.Address}:{item.Port}\n" +
@@ -307,17 +308,20 @@ namespace BotDLL
                                                                                 $"Version {item.Version.Replace("theforestDS ", "")}\n" +
                                                                                 $"Uptime: {item.Uptime}%\n" +
                                                                                 $"Last check: {item.Last_check}\n" +
-                                                                                $"Last online: {item.Last_online}\n");
+                                                                                $"Last online: {item.Last_online}\n" +
+                                                                                $"{item.LF_HeaderImgURi}");
                 else if (item.Name != "TheForest" && lowkey == true)
                     await botClient.SendTextMessageAsync(chatId: chatId, text: $"Name: {item.Name}\n" +
                                                                                 $"IP: {item.Address}:{item.Port}\n" +
                                                                                 $"Status: {onoff}\n" +
-                                                                                $"Players: {item.Players}/{item.Maxplayers}\n");
+                                                                                $"Players: {item.Players}/{item.Maxplayers}\n" +
+                                                                                $"{item.LF_HeaderImgURi}");
                 else if (lowkey == true)
                     await botClient.SendTextMessageAsync(chatId: chatId, text: $"Name: {item.Name}\n" +
                                                                                 $"IP: {item.Address}:{item.Port}\n" +
                                                                                 $"Status: {onoff}\n" +
-                                                                                $"Players: {item.Players}/{item.Maxplayers}\n");
+                                                                                $"Players: {item.Players}/{item.Maxplayers}\n" +
+                                                                                $"{item.LF_HeaderImgURi}");
             }
         }
     }
