@@ -10,7 +10,7 @@
         <local:AddServerViewModel x:Key="addmodel"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource addmodel}" Background="#AF000000">
-        <ComboBox ItemsSource="{Binding LstGame}" SelectedItem="{Binding API_URL.Game}" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ComboBox ItemsSource="{Binding LstGame}" SelectedItem="{Binding API_URL.Game}" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="242" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button x:Name="btSave" Click="btSave_Click" Content="Save" HorizontalAlignment="Left" Margin="257,41,0,0" VerticalAlignment="Top" Width="75" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBox HorizontalAlignment="Left" Height="26" Margin="65,10,0,0" TextWrapping="Wrap" Text="{Binding API_URL.Key}" VerticalAlignment="Top" Width="267" VerticalContentAlignment="Center"/>
         <Label Content="API Key" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>

@@ -173,5 +173,8 @@
   <ItemGroup>
     <Resource Include="Listforge - Control panel.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\reload.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

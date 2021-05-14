@@ -5,11 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Listforge_Control_panel"
         mc:Ignorable="d"
-        Title="DB_CreateTable" Height="120" Width="330">
+        Title="DB_CreateTable" Height="134" Width="168" MaxHeight="134" MinHeight="134" MaxWidth="168" MinWidth="168">
     <Grid>
-        <Button x:Name="LF_ServerInfoLive" Content="LF ServerInfoLive" HorizontalAlignment="Right" Margin="0,0,172,60" VerticalAlignment="Bottom" Width="140" Click="LF_ServerInfoLive_Click"/>
-        <Button x:Name="LF_API_Uri" Content="LF API Uri" HorizontalAlignment="Right" Margin="0,0,172,35" VerticalAlignment="Bottom" Width="140" Click="LF_API_Uri_Click"/>
-        <Button x:Name="TL_USerdata" Content="Telegram Userdata" HorizontalAlignment="Right" Margin="0,0,172,10" VerticalAlignment="Bottom" Width="140" Click="TL_USerdata_Click"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF664242" Offset="0"/>
+                <GradientStop Color="#FF354B23" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="LF_ServerInfoLive" Content="LF ServerInfoLive" Margin="10,8,10,70" Click="LF_ServerInfoLive_Click" Background="Black" Foreground="#FF00FF23" Height="24" VerticalAlignment="Center"/>
+        <Button x:Name="LF_API_Uri" Content="LF API Uri" Margin="10,38,10,40" Click="LF_API_Uri_Click" Background="Black" Foreground="#FF00FF23" VerticalAlignment="Center"/>
+        <Button x:Name="TL_USerdata" Content="Telegram Userdata" Margin="10,68,10,10" Click="TL_USerdata_Click" Background="Black" Foreground="#FF00FF23" VerticalAlignment="Center"/>
 
     </Grid>
 </Window>
