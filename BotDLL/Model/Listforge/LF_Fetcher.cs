@@ -11,6 +11,8 @@ namespace BotDLL
 {
     public class LF_Fetcher
     {
+        private static Random Random = new Random();
+        private static int IRandom;
         public static async void Fetch(string db)
         {
             List<LF_API_Uri> lst = LF_API_Uri.ReadAll();
@@ -34,9 +36,10 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("minecraft-mp.com", obj.Id);
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("minecraft-mp.com", obj.Id));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, "", "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, "", "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
                         }
                         else if (content.Contains("ark-servers.net"))
                         {
@@ -44,9 +47,10 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("ark-servers.net", obj.Id);
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("ark-servers.net", obj.Id));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
                         }
                         else if (content.Contains("conan-exiles.com"))
                         {
@@ -54,9 +58,10 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("conan-exiles.com", obj.Id);
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("conan-exiles.com", obj.Id));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
                         }
                         else if (content.Contains("teamspeak-servers.org"))
                         {
@@ -64,9 +69,10 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("teamspeak-servers.org", obj.Id);
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("teamspeak-servers.org", obj.Id));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
                         }
                         else if (content.Contains("counter-strike-servers.net"))
                         {
@@ -74,15 +80,16 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("counter-strike-servers.net", obj.Id);
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("counter-strike-servers.net", obj.Id));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, false);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
                         }
                     }
                 }
                 catch (Exception)
                 {
-
+                    //csv log?
                 }
             }
         }
@@ -106,6 +113,96 @@ namespace BotDLL
                 case "counter-strike-servers.net":
                     finishedUrl = $"https://counter-strike-servers.net/statistics/chart/daily/players/{id}/";
                     break;
+                default:
+                    break;
+            }
+            return finishedUrl;
+        }
+        static string BuildHeaderImgUri(string game, string id)
+        {
+            string finishedUrl = "";
+            switch (game)
+            {
+                case "minecraft-mp.com":
+
+                    IRandom = Random.Next(1, 7);
+                    switch (IRandom)
+                    {
+                        case 1:
+                            finishedUrl = $"https://minecraft-mp.com/banner-{id}.png";
+                            break;
+                        case 2:
+                            finishedUrl = $"https://minecraft-mp.com/banner-{id}-2.png";
+                            break;
+                        case 3:
+                            finishedUrl = $"https://minecraft-mp.com/banner-{id}-3.png";
+                            break;
+                        case 4:
+                            finishedUrl = $"https://minecraft-mp.com/banner-{id}-4.png";
+                            break;
+                        case 5:
+                            finishedUrl = $"https://minecraft-mp.com/banner-{id}-5.png";
+                            break;
+                        case 6:
+                            finishedUrl = $"https://minecraft-mp.com/banner-{id}-6.png";
+                            break;
+                    }
+                    break;
+
+                case "ark-servers.net":
+
+                    IRandom = Random.Next(1, 4);
+                    switch (IRandom)
+                    {
+                        case 1:
+                            finishedUrl = $"https://ark-servers.net/server/{id}/banners/banner-1.png";
+                            break;
+                        case 2:
+                            finishedUrl = $"https://ark-servers.net/server/{id}/banners/banner-2.png";
+                            break;
+                        case 3:
+                            finishedUrl = $"https://ark-servers.net/server/{id}/banners/banner-3.png";
+                            break;
+                    }
+                    break;
+
+                case "conan-exiles.com":
+
+                    IRandom = Random.Next(1, 4);
+                    switch (IRandom)
+                    {
+                        case 1:
+                            finishedUrl = $"https://conan-exiles.com/server/{id}/banners/banner-1.png";
+                            break;
+                        case 2:
+                            finishedUrl = $"https://conan-exiles.com/server/{id}/banners/banner-2.png";
+                            break;
+                        case 3:
+                            finishedUrl = $"https://conan-exiles.com/server/{id}/banners/banner-3.png";
+                            break;
+                    }
+                    break;
+
+                case "teamspeak-servers.org":
+                    IRandom = Random.Next(1, 4);
+                    switch (IRandom)
+                    {
+                        case 1:
+                            finishedUrl = $"https://teamspeak-servers.org/server/{id}/banners/banner-1.png";
+                            break;
+                        case 2:
+                            finishedUrl = $"https://teamspeak-servers.org/server/{id}/banners/banner-2.png";
+                            break;
+                        case 3:
+                            finishedUrl = $"https://teamspeak-servers.org/server/{id}/banners/banner-3.png";
+                            break;
+                    }
+                    break;
+
+                case "counter-strike-servers.net":
+                    finishedUrl = $"https://counter-strike-servers.net/server/{id}/banners/banner-1.png";
+                    break;
+
                 default:
                     break;
             }

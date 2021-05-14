@@ -26,6 +26,7 @@ namespace BotDLL
         public Uri LF_Uri { get; set; }
         public Uri LF_StatUri { get; set; }
         public Uri QC_StatUri { get; set; }
+        public Uri LF_HeaderImgURi { get; set; }
 
         public static List<LF_ServerInfo> ReadAll(string db)
         {

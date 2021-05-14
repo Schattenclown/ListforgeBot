@@ -176,7 +176,7 @@ namespace BotDLL
                                         $"Status:       {onoff}\n" +
                                         $"Players:      {item.Players}/{item.Maxplayers}\n";
                         if (item.LF_Uri.AbsoluteUri != null)
-                            eb.ImageUrl = item.LF_StatUri.AbsoluteUri;
+                            eb.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
                     }
                     else if (lowkey == "42s")
                     {
@@ -192,7 +192,7 @@ namespace BotDLL
                                             $"Uptime:       {item.Uptime}%\n" +
                                             $"Last check:   {item.Last_check}\n";
                         if (item.LF_Uri.AbsoluteUri != null)
-                            eb.ImageUrl = item.LF_Uri.AbsoluteUri;
+                            eb.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
                     }
 
                     eb.Color = Color.Green;
