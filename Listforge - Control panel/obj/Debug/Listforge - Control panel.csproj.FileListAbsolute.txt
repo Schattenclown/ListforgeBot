@@ -332,3 +332,5 @@ C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\o
 C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\Listforge - Control panel.pdb
 C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\View\DB_CreateTableDlg.g.cs
 C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\View\DB_CreateTableDlg.baml
+C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\View\DrawStatisticDlg.g.cs
+C:\Users\Administrator\Documents\GitHub\ListforgeBot\Listforge - Control panel\obj\Debug\View\DrawStatisticDlg.baml

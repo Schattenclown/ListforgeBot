@@ -116,6 +116,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DrawStatisticDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,6 +135,9 @@
     </Compile>
     <Compile Include="View\DB_CreateTableDlg.xaml.cs">
       <DependentUpon>DB_CreateTableDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DrawStatisticDlg.xaml.cs">
+      <DependentUpon>DrawStatisticDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -174,7 +181,7 @@
     <Resource Include="Listforge - Control panel.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\reload.png" />
+    <Resource Include="images\database-reload.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -99,5 +99,21 @@ namespace Listforge_Control_panel
             DB_CreateTableDlg DBCreateDlg = new DB_CreateTableDlg();
             DBCreateDlg.ShowDialog();
         }
+
+        private void btAddServer_Copy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void test_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (mvm.SelAPI_URL != null)
+            {
+                DrawStatisticDlg dssdlg = new DrawStatisticDlg();
+                dssdlg.ShowDialog();
+
+            }
+        }
     }
 }

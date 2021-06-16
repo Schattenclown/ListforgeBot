@@ -5,17 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Listforge_Control_panel"
         mc:Ignorable="d"
-        Title="DB_CreateTable" Height="134" Width="168" MaxHeight="134" MinHeight="134" MaxWidth="168" MinWidth="168">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF664242" Offset="0"/>
-                <GradientStop Color="#FF354B23" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Button x:Name="LF_ServerInfoLive" Content="LF ServerInfoLive" Margin="10,8,10,70" Click="LF_ServerInfoLive_Click" Background="Black" Foreground="#FF00FF23" Height="24" VerticalAlignment="Center"/>
-        <Button x:Name="LF_API_Uri" Content="LF API Uri" Margin="10,38,10,40" Click="LF_API_Uri_Click" Background="Black" Foreground="#FF00FF23" VerticalAlignment="Center"/>
-        <Button x:Name="TL_USerdata" Content="Telegram Userdata" Margin="10,68,10,10" Click="TL_USerdata_Click" Background="Black" Foreground="#FF00FF23" VerticalAlignment="Center"/>
+        Title="DB_CreateTable" Height="420" Width="420" MaxHeight="420" MinHeight="420" MaxWidth="420" MinWidth="420">
+    <Grid Background="Black">
+        <Button x:Name="LF_ServerInfoLive" Content="LF ServerInfoLive" Margin="10,129,10,230" Click="LF_ServerInfoLive_Click" Foreground="#FF00FF23" Height="30" VerticalAlignment="Center" Cursor="Pen">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FF4B4B4B"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="LF_API_Uri" Content="LF API Uri" Margin="10,164,10,195" Click="LF_API_Uri_Click" Foreground="#FF00FF23" Height="30" VerticalAlignment="Center" Cursor="Pen">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FF4B4B4B"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="TL_USerdata" Content="Telegram Userdata" Margin="10,199,10,160" Click="TL_USerdata_Click" Foreground="#FF00FF23" Height="30" VerticalAlignment="Center" Cursor="Pen">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FF4B4B4B"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>

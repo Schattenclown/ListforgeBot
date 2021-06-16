@@ -124,6 +124,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DrawStatistic\DrawStatistic.cs" />
     <Compile Include="Persistence\DebugLog.cs" />
     <Compile Include="Model\LF_API_Uri.cs" />
     <Compile Include="Model\BotCom\DiscordBot.cs" />
