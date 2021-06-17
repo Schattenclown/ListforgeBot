@@ -124,6 +124,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\BotCom\DiscordCommands\Base\IDiscordCommandAsync.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\HelpCommand.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\ListCommand.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\ShowAllCommand.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\ShowOneCommand.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\ShowSomeCommand.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\ShowStatusCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\AboutMeCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\AddCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\Base\ITelegramCommandAsync.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\DeleteCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\ChangeSubscriptionCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\HelpCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\ShowAllCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\ShowOneCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\ShowSomeCommand.cs" />
     <Compile Include="Model\DrawStatistic\DrawStatistic.cs" />
     <Compile Include="Persistence\DebugLog.cs" />
     <Compile Include="Model\LF_API_Uri.cs" />
