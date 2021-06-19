@@ -17,7 +17,7 @@ namespace ListforgeBot
         private static List<LF_ServerInfo> lstcp1 = new List<LF_ServerInfo>();
         private static List<LF_ServerInfo> lstcp2 = new List<LF_ServerInfo>();
         private const string db = "LF_ServerInfoLive";
-        static async Task MainAsync()
+        static async Task Main()
         {
             try
             {
