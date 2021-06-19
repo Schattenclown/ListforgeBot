@@ -120,11 +120,11 @@ namespace BotDLL
                     break;
             }
 
-            string outputMessage = await command.GetMessage();
+            string outputMessage = command != null ? await command.GetMessage() : string.Empty;
             if (outputMessage != string.Empty)
                 await botClient.SendTextMessageAsync(chatId: e.Message.Chat.Id, text: outputMessage);
 
-            if (!await command.Execute())
+            if (command == null || !await command.Execute())
             {
                 message = $"Sry cant help ( ´･･)ﾉ(._.`)\n" +
                           $"Type /help";

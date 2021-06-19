@@ -56,8 +56,7 @@ namespace BotDLL
 
             if (!arg.Author.IsBot)
             {
-                IDiscordCommandAsync command = null;
-
+                IDiscordCommandAsync command;
                 switch (arg.Content.ToLower())
                 {
                     case "!help":
