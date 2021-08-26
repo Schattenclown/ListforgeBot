@@ -140,6 +140,7 @@
     <Compile Include="Model\BotCom\TelegramCommands\ShowAllCommand.cs" />
     <Compile Include="Model\BotCom\TelegramCommands\ShowOneCommand.cs" />
     <Compile Include="Model\BotCom\TelegramCommands\ShowSomeCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\ShowStatusCommand.cs" />
     <Compile Include="Model\DrawStatistic\DrawStatistic.cs" />
     <Compile Include="Persistence\DebugLog.cs" />
     <Compile Include="Model\LF_API_Uri.cs" />

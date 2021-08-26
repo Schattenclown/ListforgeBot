@@ -55,17 +55,19 @@ namespace BotDLL
             lstlive = LF_ServerInfo.ReadAll(db);
             String message;
             String servers = "";
+            string statisticsservers = "";
             String addme = "";
             String delme = "";
 
             foreach (var item in lstlive)
             {
                 servers += "/" + item.Name + "\n";
+                statisticsservers += "/S" + item.Name + "\n";
                 addme += "/add" + item.Name + "\n";
                 delme += "/del" + item.Name + "\n";
             }
 
-            if (debug == false)
+            if (debug == true)
                 await botClient.SendTextMessageAsync(chatId: 1038648681, text: $"Connection established with\nUsername: {e.Message.Chat.Username}\nChatID: {e.Message.Chat.Id}\nMessage was: {e.Message.Text}\n");
 
             ITelegramCommandAsync command = null;
@@ -73,7 +75,7 @@ namespace BotDLL
             switch (e.Message.Text.ToLower())
             {
                 case "/help":
-                    command = new HelpCommand(servers);
+                    command = new HelpCommand(servers, statisticsservers);
                     break;
                 case "/add":
                     command = new AddCommand(addme);
@@ -81,11 +83,14 @@ namespace BotDLL
                 case "/del":
                     command = new DeleteCommand(delme);
                     break;
-                case "/42":
+                case "/42big":
                     command = new ShowAllCommand(botClient, e.Message.Chat.Id, lstlive);
                     break;
-                case "/42lk":
+                case "/42":
                     command = new ShowSomeCommand(botClient, e.Message.Chat.Id, lstlive);
+                    break;
+                case "/42s":
+                    command = new ShowStatusCommand(botClient, e.Message.Chat.Id, lstlive);
                     break;
                 case "/abo":
                     lstud = DB_TL_Userdata.ReadAll();

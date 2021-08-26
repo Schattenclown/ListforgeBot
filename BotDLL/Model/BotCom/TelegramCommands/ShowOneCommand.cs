@@ -38,24 +38,26 @@ namespace BotDLL.Model.BotCom.TelegramCommands
                     try
                     {
                         if (item.Name != "TheForest")
-                            rightinfo = $"Name: {item.Name}\n" +
+                            rightinfo = $"[Header]({item.LF_HeaderImgURi})\n" +
+                                        $"Name: {item.Name}\n" +
                                         $"IP: {item.Address}:{item.Port}\n" +
                                         $"Status: {onoff}\n" +
                                         $"Players: {item.Players}/{item.Maxplayers}\n" +
                                         $"Version {item.Version}\n" +
                                         $"Uptime: {item.Uptime}%\n" +
-                                        $"{item.LF_Uri.AbsoluteUri}\n" +
+                                        $"[ListForge]({item.LF_Uri})\n" +
                                         $"Last check: {item.Last_check}\n" +
                                         $"Last online: {item.Last_online}";
                         else
-                            rightinfo = $"Name: {item.Name}\n" +
-                                    $"IP: {item.Address}:{item.Port}\n" +
-                                    $"Status: {onoff}\n" +
-                                    $"Players: {item.Players}/{item.Maxplayers}\n" +
-                                    $"Version {item.Version.Replace("theforestDS ", "")}\n" +
-                                    $"Uptime: {item.Uptime}%\n" +
-                                    $"Last check: {item.Last_check}\n" +
-                                    $"Last online: {item.Last_online}";
+                            rightinfo = $"[Header]({item.LF_HeaderImgURi})\n" +
+                                        $"Name: {item.Name}\n" +
+                                        $"IP: {item.Address}:{item.Port}\n" +
+                                        $"Status: {onoff}\n" +
+                                        $"Players: {item.Players}/{item.Maxplayers}\n" +
+                                        $"Version {item.Version.Replace("theforestDS ", "")}\n" +
+                                        $"Uptime: {item.Uptime}%\n" +
+                                        $"Last check: {item.Last_check}\n" +
+                                        $"Last online: {item.Last_online}";
                     }
                     catch (Exception)
                     {
@@ -64,7 +66,7 @@ namespace BotDLL.Model.BotCom.TelegramCommands
                 }
             }
 
-            await botClient.SendTextMessageAsync(chatId: chatId, text: rightinfo);
+            await botClient.SendTextMessageAsync(chatId: chatId, text: rightinfo, Telegram.Bot.Types.Enums.ParseMode.Markdown);
 
             return true;
         }

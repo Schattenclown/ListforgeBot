@@ -11,24 +11,28 @@ namespace BotDLL.Model.BotCom.TelegramCommands
     {
         private string _message;
 
-        public HelpCommand(string servers)
+        public HelpCommand(string servers, string statisticsservers)
         {
-            _message = GenerateMessage(servers);
+            _message = GenerateMessage(servers, statisticsservers);
         }
 
-        private string GenerateMessage(string servers)
+        private string GenerateMessage(string servers, string statisticsservers)
         {
-            return $"Type /help for help obviously!\n" +
-                $"\n" +
-                $"/42 All ServerInfo.!\n" +
-                $"/42lk All Serverinfo. but lowkey!\n" +
-                $"\n" +
-                $"{servers}\n" +
-                $"/add Be informed if serverstats change!\n" +
-                $"/del Unsubscribe from serverstats!\n" +
-                $"/abo What am i subscribed to!\n" +
-                $"\n" +
-                $"(✿◠‿◠) thx for using me!";
+            return  $"/help shows help\n" +
+                    $"\n" +
+                    $"/42big show every server\n" +
+                    $"/42 show every server with less info\n" +
+                    $"/42s show playerstatistics for every server\n" +
+                    $"\n" +
+                    $"/list show serverlist\n" +
+                    $"\n" +
+                    $"Serverinfo from single server\n" +
+                    $"{servers.ToLower()}" +
+                    $"\n" +
+                    $"Playerstatistics from single server\n" +
+                    $"{statisticsservers.ToLower()}" +
+                    $"\n" +
+                    $"(✿◠‿◠) ty for using me";
         }
 
         public Task<bool> Execute()

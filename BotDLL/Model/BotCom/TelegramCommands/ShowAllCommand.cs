@@ -31,26 +31,26 @@ namespace BotDLL.Model.BotCom.TelegramCommands
                     onoff = "Online";
 
                 if (item.Name != "TheForest")
-                    await botClient.SendTextMessageAsync(chatId: chatId, text: $"Name: {item.Name}\n" +
+                    await botClient.SendTextMessageAsync(chatId: chatId, text: $"[Header]({item.LF_HeaderImgURi})\n" + 
+                                                                                $"Name: {item.Name}\n" +
                                                                                 $"IP: {item.Address}:{item.Port}\n" +
                                                                                 $"Status: {onoff}\n" +
                                                                                 $"Players: {item.Players}/{item.Maxplayers}\n" +
                                                                                 $"Version {item.Version}\n" +
                                                                                 $"Uptime: {item.Uptime}%\n" +
-                                                                                $"{item.LF_Uri}\n" +
+                                                                                $"[ListForge]({item.LF_Uri})\n" +
                                                                                 $"Last check: {item.Last_check}\n" +
-                                                                                $"Last online: {item.Last_online}\n" +
-                                                                                $"{item.LF_HeaderImgURi}");
+                                                                                $"Last online: {item.Last_online}", Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 else
-                    await botClient.SendTextMessageAsync(chatId: chatId, text: $"Name: {item.Name}\n" +
+                    await botClient.SendTextMessageAsync(chatId: chatId, text: $"[Header]({item.LF_HeaderImgURi})\n" +
+                                                                                $"Name: {item.Name}\n" +
                                                                                 $"IP: {item.Address}:{item.Port}\n" +
                                                                                 $"Status: {onoff}\n" +
                                                                                 $"Players: {item.Players}/{item.Maxplayers}\n" +
                                                                                 $"Version {item.Version.Replace("theforestDS ", "")}\n" +
                                                                                 $"Uptime: {item.Uptime}%\n" +
                                                                                 $"Last check: {item.Last_check}\n" +
-                                                                                $"Last online: {item.Last_online}\n" +
-                                                                                $"{item.LF_HeaderImgURi}");
+                                                                                $"Last online: {item.Last_online}", Telegram.Bot.Types.Enums.ParseMode.Markdown);
             }
 
             return true;

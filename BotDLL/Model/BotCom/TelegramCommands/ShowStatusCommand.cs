@@ -9,13 +9,13 @@ using Telegram.Bot.Types;
 
 namespace BotDLL.Model.BotCom.TelegramCommands
 {
-    public class ShowSomeCommand : ITelegramCommandAsync
+    public class ShowStatusCommand : ITelegramCommandAsync
     {
         private readonly ITelegramBotClient botClient;
         private readonly ChatId chatId;
         private readonly List<LF_ServerInfo> lstlive;
 
-        public ShowSomeCommand(ITelegramBotClient botClient, ChatId chatId, List<LF_ServerInfo> lstlive)
+        public ShowStatusCommand(ITelegramBotClient botClient, ChatId chatId, List<LF_ServerInfo> lstlive)
         {
             this.botClient = botClient;
             this.chatId = chatId;
@@ -27,7 +27,7 @@ namespace BotDLL.Model.BotCom.TelegramCommands
             foreach (var item in lstlive)
             {
                 String onoff = "Offline";
-                if (item.Is_online == true) 
+                if (item.Is_online == true)
                     onoff = "Online";
 
                 if (item.Name != "TheForest")
@@ -35,13 +35,13 @@ namespace BotDLL.Model.BotCom.TelegramCommands
                                                                                 $"IP: {item.Address}:{item.Port}\n" +
                                                                                 $"Status: {onoff}\n" +
                                                                                 $"Players: {item.Players}/{item.Maxplayers}\n" +
-                                                                                $"[Header]({item.LF_HeaderImgURi})", Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                                                                                $"[QuickStat]({item.QC_StatUri.AbsoluteUri})", Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 else
                     await botClient.SendTextMessageAsync(chatId: chatId, text: $"Name: {item.Name}\n" +
                                                                                 $"IP: {item.Address}:{item.Port}\n" +
                                                                                 $"Status: {onoff}\n" +
                                                                                 $"Players: {item.Players}/{item.Maxplayers}\n" +
-                                                                                $"[Header]({item.LF_HeaderImgURi})", Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                                                                                $"[QuickStat]({item.QC_StatUri.AbsoluteUri})", Telegram.Bot.Types.Enums.ParseMode.Markdown);
             }
 
             return true;
