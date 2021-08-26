@@ -31,16 +31,36 @@ namespace Listforge_Control_panel
 
             DrawStatistic dss = new DrawStatistic();
             dss = DrawStatistic.BuildStatistic(mvm.SelAPI_URL.Info);
-            
+
             foreach (var item in dss.DSVal2)
             {
                 Ellipse ell = new Ellipse();
                 ell.Width = 8;
                 ell.Height = 8;
-                ell.Fill = Brushes.Violet;
+                ell.Fill = Brushes.Purple;
                 Canvas.SetLeft(ell, dx);
 
-                int temp = Convert.ToInt32(caheight) - (Convert.ToInt32(caheight) / 10 * item) - 8;
+                int temp = Convert.ToInt32(caheight) - (Convert.ToInt32(caheight) / 10 * item) - 20;
+                dy = Convert.ToDouble(temp);
+
+                Canvas.SetTop(ell, dy);
+
+                dx += 20;
+
+                StatisticCanvas.Children.Add(ell);
+            }
+
+            dx = 22;
+
+            foreach (var item in dss.DSVal1)
+            {
+                Ellipse ell = new Ellipse();
+                ell.Width = 8;
+                ell.Height = 8;
+                ell.Fill = Brushes.Green;
+                Canvas.SetLeft(ell, dx);
+
+                int temp = Convert.ToInt32(caheight) - (Convert.ToInt32(caheight) / 10 * item) - 22;
                 dy = Convert.ToDouble(temp);
 
                 Canvas.SetTop(ell, dy);
