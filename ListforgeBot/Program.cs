@@ -17,7 +17,7 @@ namespace ListforgeBot
         private static List<LF_ServerInfo> lstcp1 = new List<LF_ServerInfo>();
         private static List<LF_ServerInfo> lstcp2 = new List<LF_ServerInfo>();
         private const string db = "LF_ServerInfoLive";
-        static void Main()
+        static async Task Main()
         {
             try
             {
@@ -46,8 +46,8 @@ namespace ListforgeBot
                     Center(@"╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝        ╚═╝   ");
                     Center(" ");
                     Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                    DiscordBot.Main();
-                    TelegramBot.Main();
+                    await DiscordBot.Init();
+                    await TelegramBot.Init();
                     DebugLog.Main();
                     LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
                     lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);

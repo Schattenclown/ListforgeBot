@@ -88,7 +88,7 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="test" Click="test_Click" Content="Test" HorizontalAlignment="Left" Margin="105,0,0,10" Width="80" Height="25" VerticalAlignment="Bottom" Foreground="#AD00FF00" BorderBrush="#AF00FF00" UseLayoutRounding="True" Cursor="Cross">
+        <Button x:Name="test" Click="test_Click" Content="Statistics" HorizontalAlignment="Left" Margin="105,0,0,10" Width="80" Height="25" VerticalAlignment="Bottom" Foreground="#AD00FF00" BorderBrush="#AF00FF00" UseLayoutRounding="True" Cursor="Cross">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF1D1D1D" Offset="1"/>

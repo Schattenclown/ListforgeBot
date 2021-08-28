@@ -22,7 +22,7 @@ namespace BotDLL
                 bool achieved = false;
                 var client = new HttpClient();
                 var client1 = new HttpClient();
-                client.DefaultRequestHeaders.Add("User-Agent", "C# console program"); 
+                client.DefaultRequestHeaders.Add("User-Agent", "C# console program");
                 try
                 {
                     string content = await client.GetStringAsync($"{item.Combined}");
@@ -263,9 +263,13 @@ namespace BotDLL
                     imonth = 1;
                     break;
             }
-            DateTime dt = new DateTime(year, imonth, day, hour, minute, 0).AddHours(7);
+            DateTime dt = new DateTime(year, imonth, day, hour, minute, 0);
+
             if (itspm)
-                dt.AddHours(12);
+                dt = dt.AddHours(12);
+
+            dt = dt.AddHours(7);
+
             return dt;
         }
     }
