@@ -263,9 +263,13 @@ namespace BotDLL
                     imonth = 1;
                     break;
             }
+
+            if (itspm && hour == 12)
+                hour = 0;
+
             DateTime dt = new DateTime(year, imonth, day, hour, minute, 0);
 
-            if (itspm)
+            if (itspm && hour != 0)
                 dt = dt.AddHours(12);
 
             dt = dt.AddHours(7);
