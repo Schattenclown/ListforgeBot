@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BotDLL;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ListforgeBot
 {
@@ -71,6 +74,9 @@ namespace ListforgeBot
                 Console.ForegroundColor = ConsoleColor.Red; WriteList(lstcp2);
                 Thread.Sleep(MSTimeOut);
                 GC.Collect();
+                virgin++;
+                if (virgin == 1075)
+                    RestartProgram();
             }
         }
         static void DidChangeQM(List<LF_ServerInfo> lstv1, List<LF_ServerInfo> lstv2)
@@ -183,6 +189,18 @@ namespace ListforgeBot
             {
                 Center("Console to smoll for CHANGE");
             }
+        }
+        private static void RestartProgram()
+        {
+            // Get file path of current process 
+            var filePath = Assembly.GetExecutingAssembly().Location;
+            //var filePath = Application.ExecutablePath;  // for WinForms
+
+            // Start program
+            Process.Start(filePath);
+
+            // For all Windows application but typically for Console app.
+            Environment.Exit(0);
         }
     }
 }
