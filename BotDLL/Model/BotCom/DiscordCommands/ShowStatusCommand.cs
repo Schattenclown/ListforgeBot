@@ -40,6 +40,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
                     eb.Description = $"Player Statistics for {item.Name}";
                     eb.ImageUrl = item.QC_StatUri.AbsoluteUri;
+                    eb.WithTimestamp(item.Last_check);
 
                     eb.Color = Color.Green;
                     if (onoff == "Offline")

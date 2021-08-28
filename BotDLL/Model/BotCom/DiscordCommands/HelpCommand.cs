@@ -21,23 +21,20 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             EmbedBuilder embedBuilder = new EmbedBuilder
             {
-                Description = $"```!help shows help\n" +
-                        $"\n" +
-                        $"!42big show every server\n" +
-                        $"!42 show every server with less info\n" +
-                        $"!42s show playerstatistics for every server\n" +
-                        $"\n" +
-                        $"!list show serverlist\n" +
-                        $"\n" +
-                        $"Serverinfo from single server\n" +
-                        $"{servers}\n" +
-                        $"\n" +
-                        $"Playerstatistics from single server\n" +
-                        $"{statisticsservers}\n" +
-                        $"(✿◠‿◠) ty for using me```",
-                Color = Color.LightOrange,
-                Title = "cmd info"
+                Title = "/help",
+                Description = "This is the commandhelp for the ListforgeNotify Bot",
+                Color = new Color(245, 107, 0)
             };
+            embedBuilder.AddField("/42", "show every server with less info");
+            embedBuilder.AddField("/42s", "show playerstatistics for every server");
+            embedBuilder.AddField("/42big", "show every server");
+            embedBuilder.AddField("/list", "show serverlist");
+            embedBuilder.AddField($"{servers}", "Serverinfo from single server");
+            embedBuilder.AddField($"{statisticsservers}", "Playerstatistics from single server");
+            embedBuilder.ThumbnailUrl = "https://i.imgur.com/eb0RgjI.png";
+            embedBuilder.WithAuthor("ListforgeNotify");
+            embedBuilder.WithFooter("(✿◠‿◠) ty for using me");
+            embedBuilder.WithTimestamp(DateTime.Now);
 
             return embedBuilder.Build();
         }

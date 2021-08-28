@@ -34,7 +34,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 {
                     String onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
-                    if (item.Name.ToLower() == arg.Content.ToLower().Trim('!'))
+                    if (item.Name.ToLower() == arg.Content.ToLower().Trim('/'))
                     {
                         embedBuilder.Title = item.Name;
 
@@ -45,24 +45,22 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                                             $"Status:       {onoff}\n" +
                                             $"Players:      {item.Players}/{item.Maxplayers}\n" +
                                             $"Version:      {item.Version}\n" +
-                                            $"Uptime:       {item.Uptime}%\n" +
-                                            $"Last check:   {item.Last_check}\n";
+                                            $"Uptime:       {item.Uptime}%\n";
+                        embedBuilder.WithTimestamp(item.Last_check);
                         embedBuilder.Color = Color.Green;
 
                         if (onoff == "Offline")
                         {
                             embedBuilder.Color = Color.Red;
-                            embedBuilder.Description += $"Last online:  { item.Last_online}```";
+                            embedBuilder.Description += $"Last online:  { item.Last_online}";
                         }
-                        else
-                            embedBuilder.Description += "```";
 
                         if (item.LF_Uri.AbsoluteUri != null)
                             embedBuilder.ImageUrl = item.LF_Uri.AbsoluteUri;
 
                         await arg.Channel.SendMessageAsync(null, false, embedBuilder.Build());
                     }
-                    else if ('s' + item.Name.ToLower() == arg.Content.ToLower().Trim('!'))
+                    else if ('s' + item.Name.ToLower() == arg.Content.ToLower().Trim('/'))
                     {
                         embedBuilder.Title = item.Name;
                         embedBuilder.Description = $"Player Statistics for {item.Name}";

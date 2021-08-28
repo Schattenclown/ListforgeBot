@@ -43,8 +43,9 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                                         $"Status:       {onoff}\n" +
                                         $"Players:      {item.Players}/{item.Maxplayers}\n" +
                                         $"Version:      {item.Version}\n" +
-                                        $"Uptime:       {item.Uptime}%\n" +
-                                        $"Last check:   {item.Last_check}\n";
+                                        $"Uptime:       {item.Uptime}%\n";
+
+                    embedBuilder.WithTimestamp(item.Last_check);
 
                     if (item.LF_Uri.AbsoluteUri != null)
                         embedBuilder.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;

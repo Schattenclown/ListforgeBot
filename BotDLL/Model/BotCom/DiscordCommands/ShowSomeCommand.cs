@@ -41,6 +41,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     embedBuilder.Description = $"IP:           {item.Address}:{item.Port}\n" +
                                     $"Status:       {onoff}\n" +
                                     $"Players:      {item.Players}/{item.Maxplayers}\n";
+                    embedBuilder.WithTimestamp(item.Last_check);
                     if (item.LF_Uri.AbsoluteUri != null)
                         embedBuilder.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
 

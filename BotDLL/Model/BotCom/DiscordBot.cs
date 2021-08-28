@@ -48,8 +48,8 @@ namespace BotDLL
 
             foreach (var item in lstlive)
             {
-                servers += "!" + item.Name.ToLower() + "\n";
-                statisticsservers += "!s" + item.Name.ToLower() + "\n";
+                servers += "/" + item.Name.ToLower() + "\n";
+                statisticsservers += "/s" + item.Name.ToLower() + "\n";
             }
 
             var eb = new EmbedBuilder();
@@ -59,19 +59,19 @@ namespace BotDLL
                 IDiscordCommandAsync command;
                 switch (arg.Content.ToLower())
                 {
-                    case "!help":
+                    case "/help":
                         command = new HelpCommand(servers, statisticsservers);
                         break;
-                    case "!list":
+                    case "/list":
                         command = new ListCommand(servers);
                         break;
-                    case "!42big":
+                    case "/42big":
                         command = new ShowAllCommand(arg, lstlive);
                         break;
-                    case "!42":
+                    case "/42":
                         command = new ShowSomeCommand(arg, lstlive);
                         break;
-                    case "!42s":
+                    case "/42s":
                         command = new ShowStatusCommand(arg, lstlive);
                         break;
                     default:
