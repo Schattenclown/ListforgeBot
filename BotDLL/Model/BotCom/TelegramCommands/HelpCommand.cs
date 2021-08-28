@@ -32,6 +32,9 @@ namespace BotDLL.Model.BotCom.TelegramCommands
                     $"Playerstatistics from single server\n" +
                     $"{statisticsservers.ToLower()}" +
                     $"\n" +
+                    $"/abo for what you are getting notificacions\n" +
+                    $"/add add notification\n" +
+                    $"/del del notification\n" +
                     $"(✿◠‿◠) ty for using me";
         }
 

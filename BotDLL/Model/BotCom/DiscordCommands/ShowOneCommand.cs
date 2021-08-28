@@ -41,7 +41,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                         if (item.Name != "TheForest")
                             embedBuilder.Url = item.LF_Uri.AbsoluteUri;
 
-                        embedBuilder.Description = $"```IP:           {item.Address}:{item.Port}\n" +
+                        embedBuilder.Description = $"IP:           {item.Address}:{item.Port}\n" +
                                             $"Status:       {onoff}\n" +
                                             $"Players:      {item.Players}/{item.Maxplayers}\n" +
                                             $"Version:      {item.Version}\n" +

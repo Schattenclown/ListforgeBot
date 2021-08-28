@@ -21,13 +21,13 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             EmbedBuilder embedBuilder = new EmbedBuilder
             {
-                Description = $"```!help     shows help\n" +
+                Description = $"```!help shows help\n" +
                         $"\n" +
-                        $"!42big       show every server\n" +
-                        $"!42     show every server with less info\n" +
-                        $"!42s      show playerstatistics for every server\n" +
+                        $"!42big show every server\n" +
+                        $"!42 show every server with less info\n" +
+                        $"!42s show playerstatistics for every server\n" +
                         $"\n" +
-                        $"!list     show serverlist\n" +
+                        $"!list show serverlist\n" +
                         $"\n" +
                         $"Serverinfo from single server\n" +
                         $"{servers}\n" +
