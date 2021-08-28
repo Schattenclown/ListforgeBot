@@ -28,10 +28,9 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             if (!arg.Author.IsBot)
             {
-                EmbedBuilder embedBuilder = new EmbedBuilder();
-
                 foreach (var item in serverInfos)
                 {
+                    EmbedBuilder embedBuilder = new EmbedBuilder();
                     string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
                     embedBuilder.Title = item.Name;
@@ -39,12 +38,11 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     if (item.Name != "TheForest")
                         embedBuilder.Url = item.LF_Uri.AbsoluteUri;
 
-                    embedBuilder.Description = $"IP:           {item.Address}:{item.Port}\n" +
-                                        $"Status:       {onoff}\n" +
-                                        $"Players:      {item.Players}/{item.Maxplayers}\n" +
-                                        $"Version:      {item.Version}\n" +
-                                        $"Uptime:       {item.Uptime}%\n";
-
+                    embedBuilder.AddField("Ip address", $"{item.Address}:{item.Port}", true);
+                    embedBuilder.AddField("Status", $"{onoff}", false);
+                    embedBuilder.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
+                    embedBuilder.AddField("Version", $"{item.Version}", true);
+                    embedBuilder.AddField("Uptime", $"{item.Uptime}", true);
                     embedBuilder.WithTimestamp(item.Last_check);
 
                     if (item.LF_Uri.AbsoluteUri != null)

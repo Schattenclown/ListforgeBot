@@ -22,12 +22,14 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             EmbedBuilder embedBuilder = new EmbedBuilder
             {
-                Title = "Serverlist",
-                Description = "This is the list for all Registered servers",
+                Description = "This is the list for all registered servers",
                 Color = new Color(245, 107, 0)
             };
-            embedBuilder.AddField($"{servers}", "Serverinfo from single server");
+            embedBuilder.AddField($"{servers}", "Server information from single server");
             embedBuilder.ThumbnailUrl = "https://i.imgur.com/eb0RgjI.png";
+            embedBuilder.WithAuthor("ListforgeNotify serverlist");
+            embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");
+            embedBuilder.WithTimestamp(DateTime.Now);
 
             return embedBuilder.Build();
         }

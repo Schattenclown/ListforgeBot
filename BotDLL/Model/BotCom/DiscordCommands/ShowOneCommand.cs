@@ -28,10 +28,10 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             if (!arg.Author.IsBot)
             {
-                EmbedBuilder embedBuilder = new EmbedBuilder();
-
                 foreach (var item in serverInfos)
                 {
+                    EmbedBuilder embedBuilder = new EmbedBuilder();
+
                     String onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
                     if (item.Name.ToLower() == arg.Content.ToLower().Trim('/'))
@@ -41,11 +41,11 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                         if (item.Name != "TheForest")
                             embedBuilder.Url = item.LF_Uri.AbsoluteUri;
 
-                        embedBuilder.Description = $"IP:           {item.Address}:{item.Port}\n" +
-                                            $"Status:       {onoff}\n" +
-                                            $"Players:      {item.Players}/{item.Maxplayers}\n" +
-                                            $"Version:      {item.Version}\n" +
-                                            $"Uptime:       {item.Uptime}%\n";
+                        embedBuilder.AddField("Ip address", $"{item.Address}:{item.Port}", true);
+                        embedBuilder.AddField("Status", $"{onoff}", false);
+                        embedBuilder.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
+                        embedBuilder.AddField("Version", $"{item.Version}", true);
+                        embedBuilder.AddField("Uptime", $"{item.Uptime}", true);
                         embedBuilder.WithTimestamp(item.Last_check);
                         embedBuilder.Color = Color.Green;
 
@@ -56,7 +56,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                         }
 
                         if (item.LF_Uri.AbsoluteUri != null)
-                            embedBuilder.ImageUrl = item.LF_Uri.AbsoluteUri;
+                            embedBuilder.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
 
                         await arg.Channel.SendMessageAsync(null, false, embedBuilder.Build());
                     }
@@ -69,6 +69,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                         if (item.Name != "TheForest")
                             embedBuilder.Url = item.LF_Uri.AbsoluteUri;
 
+                        embedBuilder.WithTimestamp(item.Last_check);
                         embedBuilder.Color = Color.Green;
 
                         if (onoff == "Offline")
