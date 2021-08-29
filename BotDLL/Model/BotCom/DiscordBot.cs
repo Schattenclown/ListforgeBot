@@ -45,11 +45,15 @@ namespace BotDLL
             lstlive = LF_ServerInfo.ReadAll(db);
             string servers = "";
             string statisticsservers = "";
+            String addme = "";
+            String delme = "";
 
             foreach (var item in lstlive)
             {
                 servers += "/" + item.Name.ToLower() + "\n";
                 statisticsservers += "/s" + item.Name.ToLower() + "\n";
+                addme += "/add" + item.Name + "\n";
+                delme += "/del" + item.Name + "\n";
             }
 
             var eb = new EmbedBuilder();
@@ -60,10 +64,13 @@ namespace BotDLL
                 switch (arg.Content.ToLower())
                 {
                     case "/help":
-                        command = new HelpCommand(servers, statisticsservers);
+                        command = new HelpCommand();
                         break;
                     case "/list":
                         command = new ListCommand(servers);
+                        break;
+                    case "/statlist":
+                        command = new StatListCommand(statisticsservers);
                         break;
                     case "/42big":
                         command = new ShowAllCommand(arg, lstlive);
@@ -74,12 +81,21 @@ namespace BotDLL
                     case "/42s":
                         command = new ShowStatusCommand(arg, lstlive);
                         break;
+                    case "/add":
+                        command = new AddCommand(addme);
+                        break;
+                    case "/del":
+                        command = new DeleteCommand(delme);
+                        break;
+                    case "/abo":
+                        command = new AboutMeCommand(arg);
+                        break;
                     default:
                         command = new ShowOneCommand(arg, lstlive);
                         break;
                 }
 
-                if(command != null)
+                if (command != null)
                 {
                     Embed message = await command.GetMessage();
                     if(message != null)

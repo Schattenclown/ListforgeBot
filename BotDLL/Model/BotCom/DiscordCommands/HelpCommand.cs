@@ -12,12 +12,12 @@ namespace BotDLL.Model.BotCom.DiscordCommands
     {
         private Embed _message;
 
-        public HelpCommand(string servers, string statisticsservers)
+        public HelpCommand()
         {
-            _message = GenerateMessage(servers, statisticsservers);
+            _message = GenerateMessage();
         }
 
-        private Embed GenerateMessage(string servers, string statisticsservers)
+        private Embed GenerateMessage()
         {
             EmbedBuilder embedBuilder = new EmbedBuilder
             {
@@ -25,12 +25,14 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 Description = "This is the commandhelp for the ListforgeNotify Bot",
                 Color = new Color(245, 107, 0)
             };
-            embedBuilder.AddField("/42", "Show every server with less info");
-            embedBuilder.AddField("/42s", "Show player statistics for every server");
-            embedBuilder.AddField("/42big", "Show every server");
+            embedBuilder.AddField("/42", "Show every server with there stats");
+            embedBuilder.AddField("/42s", "Show every servers player statistics");
+            embedBuilder.AddField("/42big", "Show every server with a little more stats");
             embedBuilder.AddField("/list", "Show server list");
-            embedBuilder.AddField($"{servers}", "Server information from single server");
-            embedBuilder.AddField($"{statisticsservers}", "Player statistics from single server");
+            embedBuilder.AddField("/statlist", "Show server list for the player statistics");
+            embedBuilder.AddField("/add", "About what server do you want to get notified");
+            embedBuilder.AddField("/del", "About what server do you wont get notified anymore");
+            embedBuilder.AddField("/abo", "Show about what servers you will get notified");
             embedBuilder.ThumbnailUrl = "https://i.imgur.com/eb0RgjI.png";
             embedBuilder.WithAuthor("ListforgeNotify help");
             embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");

@@ -124,8 +124,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\BotCom\DiscordCommands\AddCommand.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\Base\IDiscordCommandAsync.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\DeleteCommand.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\HelpCommand.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\AboutMeCommand.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\StatListCommand.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\ListCommand.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\ShowAllCommand.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\ShowOneCommand.cs" />
