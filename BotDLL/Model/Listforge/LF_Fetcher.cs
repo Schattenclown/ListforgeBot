@@ -264,7 +264,7 @@ namespace BotDLL
                     break;
             }
 
-            if (itspm && hour == 12)
+            if (!itspm && hour == 12)
                 hour = 0;
 
             DateTime dt = new DateTime(year, imonth, day, hour, minute, 0);
