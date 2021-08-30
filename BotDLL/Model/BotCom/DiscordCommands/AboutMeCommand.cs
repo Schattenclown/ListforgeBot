@@ -48,7 +48,8 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     {
                         if (ud.Abo == true && ud.ServerId == ld.Id && Convert.ToUInt64(ud.AuthorId) == arg.Author.Id)
                         {
-                            servers += "/" + ld.Name + "\n";
+                            if(!servers.Contains(ld.Name))
+                                servers += "/" + ld.Name + "\n";
                             sub2nothing = false;
                         }
                     }
