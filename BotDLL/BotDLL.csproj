@@ -135,7 +135,7 @@
     <Compile Include="Model\BotCom\DiscordCommands\ShowAllCommand.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\ShowOneCommand.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\ShowSomeCommand.cs" />
-    <Compile Include="Model\BotCom\DiscordCommands\ShowStatusCommand.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\ShowStatsCommand.cs" />
     <Compile Include="Model\BotCom\TelegramCommands\AboutMeCommand.cs" />
     <Compile Include="Model\BotCom\TelegramCommands\AddCommand.cs" />
     <Compile Include="Model\BotCom\TelegramCommands\Base\ITelegramCommandAsync.cs" />
@@ -145,7 +145,7 @@
     <Compile Include="Model\BotCom\TelegramCommands\ShowAllCommand.cs" />
     <Compile Include="Model\BotCom\TelegramCommands\ShowOneCommand.cs" />
     <Compile Include="Model\BotCom\TelegramCommands\ShowSomeCommand.cs" />
-    <Compile Include="Model\BotCom\TelegramCommands\ShowStatusCommand.cs" />
+    <Compile Include="Model\BotCom\TelegramCommands\ShowStatsCommand.cs" />
     <Compile Include="Model\DrawStatistic\DrawStatistic.cs" />
     <Compile Include="Model\TL_Userdata.cs" />
     <Compile Include="Persistence\DB_DC_Userdata.cs" />

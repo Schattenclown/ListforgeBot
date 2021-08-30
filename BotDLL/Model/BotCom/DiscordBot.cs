@@ -85,7 +85,7 @@ namespace BotDLL
                         command = new ShowSomeCommand(arg, lstlive);
                         break;
                     case "/42s":
-                        command = new ShowStatusCommand(arg, lstlive);
+                        command = new ShowStatsCommand(arg, lstlive);
                         break;
                     case "/add":
                         command = new AddCommand(addme);
@@ -118,6 +118,10 @@ namespace BotDLL
                                 lstud = DC_Userdata.ReadAll();
                                 command = new ChangeSubscriptionCommand(lstud, lstlive, arg, item.Name, false);
                                 break;
+                            }
+                            else if (arg.Content.ToLower() == $"/s{item.Name.ToLower()}")
+                            {
+                                command = new ShowStatsCommand(arg, item);
                             }
                         }
                         break;
@@ -170,7 +174,8 @@ namespace BotDLL
             embedBuilder.WithDescription(tags);
 
             ISocketMessageChannel chn = _client.GetChannel(channelId) as ISocketMessageChannel;
-            await chn.SendMessageAsync(null, false, embedBuilder.Build(), null);
+            if(chn != null)
+                await chn.SendMessageAsync(null, false, embedBuilder.Build(), null);
         }
 
         private static void Center(string s)

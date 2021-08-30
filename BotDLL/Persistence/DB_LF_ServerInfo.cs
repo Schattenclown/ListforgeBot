@@ -147,8 +147,15 @@ namespace BotDLL
         }
         public static void CreateTable_LF_ServerInfoLive(bool notification)
         {
-            string sql = "CREATE DATABASE IF NOT EXISTS `db_listforge`;" +
-                            "USE `db_listforge`;" +
+            CSV_Connections cSV_Connections = new CSV_Connections();
+            Connections cons = new Connections();
+            cons = CSV_Connections.ReadAll();
+
+            string database = RemoveTillWord(cons.MySqlConStr, "Database=", 9);
+            database = RemoveAfterWord(database, "; Uid", 0);
+
+            string sql = $"CREATE DATABASE IF NOT EXISTS `{database}`;" +
+                            $"USE `{database}`;" +
                             "" +
                             "CREATE TABLE IF NOT EXISTS `LF_ServerInfoLive` (" +
                             "`Id` int(11) NOT NULL," +
@@ -174,6 +181,19 @@ namespace BotDLL
                             ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
             DB_Connection.ExecuteNonQuery(sql, notification);
+        }
+
+        public static string RemoveTillWord(string input, string word, int removewordint)
+        {
+            return input.Substring(input.IndexOf(word) + removewordint);
+        }
+        public static string RemoveAfterWord(string input, string word, int keepwordint)
+        {
+            int index = input.LastIndexOf(word);
+            if (index > 0)
+                input = input.Substring(0, index + keepwordint);
+
+            return input;
         }
     }
 }

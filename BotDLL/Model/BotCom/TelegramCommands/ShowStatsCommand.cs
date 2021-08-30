@@ -9,13 +9,13 @@ using Telegram.Bot.Types;
 
 namespace BotDLL.Model.BotCom.TelegramCommands
 {
-    public class ShowStatusCommand : ITelegramCommandAsync
+    public class ShowStatsCommand : ITelegramCommandAsync
     {
         private readonly ITelegramBotClient botClient;
         private readonly ChatId chatId;
         private readonly List<LF_ServerInfo> lstlive;
 
-        public ShowStatusCommand(ITelegramBotClient botClient, ChatId chatId, List<LF_ServerInfo> lstlive)
+        public ShowStatsCommand(ITelegramBotClient botClient, ChatId chatId, List<LF_ServerInfo> lstlive)
         {
             this.botClient = botClient;
             this.chatId = chatId;

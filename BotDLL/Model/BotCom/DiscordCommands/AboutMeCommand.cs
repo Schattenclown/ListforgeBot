@@ -53,9 +53,12 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                         }
                     }
                 }
-                embedBuilder.AddField(servers, "These");
+                
+                
                 if(sub2nothing)
                     embedBuilder.AddField("You are unsubscribed to everything", ":(");
+                else
+                    embedBuilder.AddField(servers, "These");
                 
                 await arg.Channel.SendMessageAsync(null, false, embedBuilder.Build());
             }

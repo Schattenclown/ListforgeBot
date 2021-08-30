@@ -90,7 +90,7 @@ namespace BotDLL
                     command = new ShowSomeCommand(botClient, e.Message.Chat.Id, lstlive);
                     break;
                 case "/42s":
-                    command = new ShowStatusCommand(botClient, e.Message.Chat.Id, lstlive);
+                    command = new ShowStatsCommand(botClient, e.Message.Chat.Id, lstlive);
                     break;
                 case "/abo":
                     lstud = DB_TL_Userdata.ReadAll();
