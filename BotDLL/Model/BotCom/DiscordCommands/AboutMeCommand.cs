@@ -28,7 +28,11 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         public async Task<bool> Execute()
         {
             bool sub2nothing = true;
+            List<UInt64> differentchannel = new List<ulong>();
             string servers = "";
+            List<DC_Abo> lstDC_Abo = new List<DC_Abo>();
+            List<DC_Abo> lstDC_Abo_sort = new List<DC_Abo>();
+
             if (!arg.Author.IsBot)
             {
                 EmbedBuilder embedBuilder = new EmbedBuilder
@@ -46,20 +50,61 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 {
                     foreach (var ud in lstud)
                     {
-                        if (ud.Abo == true && ud.ServerId == ld.Id && Convert.ToUInt64(ud.AuthorId) == arg.Author.Id)
+                        if (ud.Abo && ud.ServerId == ld.Id && Convert.ToUInt64(ud.AuthorId) == arg.Author.Id)
                         {
-                            if(!servers.Contains(ld.Name))
-                                servers += "/" + ld.Name + "\n";
+                            DC_Abo dcabo = new DC_Abo(Convert.ToUInt64(ud.ChannelId), ld.Name);
+
+                            lstDC_Abo.Add(dcabo);
+
                             sub2nothing = false;
                         }
                     }
                 }
                 
-                
                 if(sub2nothing)
                     embedBuilder.AddField("You are unsubscribed to everything", ":(");
                 else
-                    embedBuilder.AddField(servers, "These");
+                {
+                    foreach (var item in lstDC_Abo)
+                    {
+                        if (!differentchannel.Contains(item.Channel))
+                            differentchannel.Add(item.Channel);
+                    }
+
+                    foreach (var diffchn in differentchannel)
+                    {
+                        foreach (var abo in lstDC_Abo)
+                        {
+
+                            if (!lstDC_Abo_sort.Contains(abo) && abo.Channel == diffchn)
+                            {
+                                lstDC_Abo_sort.Add(abo);
+
+                            }
+                        }
+                    }
+                }
+
+                UInt64 lastchn = 0;
+
+                foreach (var item in lstDC_Abo_sort)
+                {
+                    if (lastchn == 0)
+                        lastchn = item.Channel;
+
+                    if (!servers.Contains(item.Server))
+                        servers += "/" + item.Server + "\n";
+
+                    if (lastchn != item.Channel || lstDC_Abo_sort.Last() == item)
+                    {
+                        embedBuilder.AddField(servers, "<#" + lastchn.ToString() + ">");
+                        servers = "";
+                        servers += "/" + item.Server + "\n";
+                        lastchn = item.Channel;
+                    }
+                }
+
+                //embedBuilder.AddField(item.Server, "<#" + item.Channel.ToString() + ">");
                 
                 await arg.Channel.SendMessageAsync(null, false, embedBuilder.Build());
             }

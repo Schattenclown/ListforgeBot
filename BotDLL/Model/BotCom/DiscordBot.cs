@@ -140,6 +140,7 @@ namespace BotDLL
         public static async void DidChangePlayerCount(LF_ServerInfo obj)
         {
             lstud = DC_Userdata.ReadAll();
+            List<UInt64> differentchannel = new List<ulong>();
             bool once = false;
             EmbedBuilder embedBuilder = new EmbedBuilder
             {
@@ -151,8 +152,7 @@ namespace BotDLL
             embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");
             embedBuilder.WithTimestamp(DateTime.Now);
 
-            UInt64 channelId = 0;
-            string tags = "";
+            //UInt64 channelId = 0;
 
             foreach (var item in lstud)
             {
@@ -160,22 +160,42 @@ namespace BotDLL
                 {
                     if(!once)
                     { 
-                        channelId = Convert.ToUInt64(item.ChannelId);
+                        //channelId = Convert.ToUInt64(item.ChannelId);
                         embedBuilder.AddField($"Name", $"{obj.Name}");
                         embedBuilder.AddField("Ip address", $"{obj.Address}:{obj.Port}");
                         embedBuilder.AddField("Player count changed to", $"{obj.Players}/{obj.Maxplayers}");
                         once = true;
                     }
-
-                    tags += "<@" + item.AuthorId + ">" + "\n";
+                    if (!differentchannel.Contains(Convert.ToUInt64(item.ChannelId)))
+                        differentchannel.Add(Convert.ToUInt64(item.ChannelId));
+                    
+                    
                 }
             }
 
-            embedBuilder.WithDescription(tags);
+            string tags = "";
 
-            ISocketMessageChannel chn = _client.GetChannel(channelId) as ISocketMessageChannel;
-            if(chn != null)
-                await chn.SendMessageAsync(null, false, embedBuilder.Build(), null);
+            foreach (var item in differentchannel)
+            {
+
+                foreach (var item2 in lstud)
+                {
+
+                    if (!tags.Contains(item2.AuthorId) && item == Convert.ToUInt64(item2.ChannelId))
+                        tags += "<@" + item2.AuthorId + ">" + "\n";
+
+                }
+                
+                embedBuilder.WithDescription(tags);
+
+                ISocketMessageChannel chn = _client.GetChannel(item) as ISocketMessageChannel;
+            
+                if(chn != null)
+                    await chn.SendMessageAsync(null, false, embedBuilder.Build(), null);
+
+                tags = "";
+            }
+
         }
 
         private static void Center(string s)
