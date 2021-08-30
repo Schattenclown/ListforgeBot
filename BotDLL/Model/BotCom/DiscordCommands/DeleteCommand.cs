@@ -11,8 +11,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 {
     public class DeleteCommand : IDiscordCommandAsync
     {
-        private readonly SocketMessage arg;
-
         private Embed _message;
 
         public DeleteCommand(string delme)

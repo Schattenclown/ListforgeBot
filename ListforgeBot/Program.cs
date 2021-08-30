@@ -95,6 +95,7 @@ namespace ListforgeBot
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
                                 TelegramBot.DidChangePlayerCount(obj);
+                                DiscordBot.DidChangePlayerCount(obj);
                                 Center($"{obj}");
                                 Change();
                             }

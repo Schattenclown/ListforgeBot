@@ -15,13 +15,13 @@ namespace BotDLL
         static bool debug = false;
         static ITelegramBotClient botClient;
         static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
-        static List<TLG_Userdata> lstud = new List<TLG_Userdata>();
+        static List<TL_Userdata> lstud = new List<TL_Userdata>();
         private const string db = "LF_ServerInfoLive";
         private static string token = "";
         private static int virgin = 0;
         public static async Task Init()
         {
-            if(virgin == 0)
+            if (virgin == 0)
             {
                 Connections connections = Connections.GetConnections();
                 token = connections.TelegramBotKey;
@@ -108,20 +108,19 @@ namespace BotDLL
                         }
                         else if (e.Message.Text == $"/add{item.Name}")
                         {
-                            lstud = TLG_Userdata.ReadAll();
+                            lstud = TL_Userdata.ReadAll();
 
                             command = new ChangeSubscriptionCommand(botClient, lstud, lstlive, item.Name, e.Message.Chat.Id, e.Message.Chat.Username, true);
                             break;
                         }
                         else if (e.Message.Text == $"/del{item.Name}")
                         {
-                            lstud = TLG_Userdata.ReadAll();
+                            lstud = TL_Userdata.ReadAll();
 
                             command = new ChangeSubscriptionCommand(botClient, lstud, lstlive, item.Name, e.Message.Chat.Id, e.Message.Chat.Username, false);
                             break;
                         }
                     }
-
                     break;
             }
 
@@ -146,11 +145,11 @@ namespace BotDLL
         }
         public static async void DidChangePlayerCount(LF_ServerInfo obj)
         {
-            lstud = TLG_Userdata.ReadAll();
+            lstud = TL_Userdata.ReadAll();
 
             foreach (var item in lstud)
             {
-                if (item.Abo == true && item.ServerId == obj.Id)
+                if (item.Abo && item.ServerId == obj.Id)
                 {
                     await botClient.SendTextMessageAsync(chatId: item.ChatId, text: $"Name: /{obj.Name}\n" +
                                                                                $"IP: {obj.Address}:{obj.Port}\n" +
@@ -161,14 +160,14 @@ namespace BotDLL
         public static async void DidChangeStatus(LF_ServerInfo obj)
         {
             String sonoff = "Offline";
-            if (obj.Is_online == true)
+            if (obj.Is_online)
                 sonoff = "Online";
 
-            lstud = TLG_Userdata.ReadAll();
+            lstud = TL_Userdata.ReadAll();
 
             foreach (var item in lstud)
             {
-                if (item.Abo == true && item.ServerId == obj.Id)
+                if (item.Abo && item.ServerId == obj.Id)
                 {
                     await botClient.SendTextMessageAsync(chatId: item.ChatId, text: $"Name: /{obj.Name}\n" +
                                                                                $"IP: {obj.Address}:{obj.Port}\n" +

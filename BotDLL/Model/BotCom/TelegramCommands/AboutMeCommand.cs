@@ -12,11 +12,11 @@ namespace BotDLL.Model.BotCom.TelegramCommands
     public class AboutMeCommand : ITelegramCommandAsync
     {
         private readonly ITelegramBotClient botClient;
-        private readonly List<TLG_Userdata> lstud;
+        private readonly List<TL_Userdata> lstud;
         private readonly List<LF_ServerInfo> lstlive;
         private readonly ChatId chatId;
 
-        public AboutMeCommand(ITelegramBotClient botClient, List<TLG_Userdata> lstud, List<LF_ServerInfo> lstlive, ChatId chatId)
+        public AboutMeCommand(ITelegramBotClient botClient, List<TL_Userdata> lstud, List<LF_ServerInfo> lstlive, ChatId chatId)
         {
             this.botClient = botClient;
             this.lstud = lstud;

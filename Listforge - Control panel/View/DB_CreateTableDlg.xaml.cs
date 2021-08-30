@@ -30,11 +30,16 @@ namespace Listforge_Control_panel
         }
         private void TL_USerdata_Click(object sender, RoutedEventArgs e)
         {
-            TLG_Userdata.CreateTable_Userdata(true);
+            TL_Userdata.CreateTable_Userdata(true);
         }
         private void LF_API_Uri_Click(object sender, RoutedEventArgs e)
         {
             DB_LF_API_Uri.CreateTable_LF_API_Uri(true);
+        }
+
+        private void DC_USerdata_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            DC_Userdata.CreateTable_Userdata(true);
         }
     }
 }

@@ -12,14 +12,14 @@ namespace BotDLL.Model.BotCom.TelegramCommands
     public class ChangeSubscriptionCommand : ITelegramCommandAsync
     {
         private readonly ITelegramBotClient botClient;
-        private readonly List<TLG_Userdata> lstud;
+        private readonly List<TL_Userdata> lstud;
         private readonly List<LF_ServerInfo> lstlive;
         private readonly string servername;
         private readonly ChatId chatId;
         private readonly string username;
         private readonly bool abo;
 
-        public ChangeSubscriptionCommand(ITelegramBotClient botClient, List<TLG_Userdata> lstud, List<LF_ServerInfo> lstlive, string servername, ChatId chatId, string username, bool abo)
+        public ChangeSubscriptionCommand(ITelegramBotClient botClient, List<TL_Userdata> lstud, List<LF_ServerInfo> lstlive, string servername, ChatId chatId, string username, bool abo)
         {
             this.botClient = botClient;
             this.lstud = lstud;
@@ -33,7 +33,11 @@ namespace BotDLL.Model.BotCom.TelegramCommands
         public async Task<bool> Execute()
         {
             int serverid = 0;
-            string sabo = $"You will get notifications for {servername}!";
+            string sabo;
+            if (abo == true)
+                sabo = $"You will get notifications for {servername}!";
+            else
+                sabo = $"You will no longer get notifications for {servername}!";
 
             foreach (var item in lstlive)
             {
@@ -52,7 +56,7 @@ namespace BotDLL.Model.BotCom.TelegramCommands
 
             if (found == false)
             {
-                TLG_Userdata ud = new TLG_Userdata
+                TL_Userdata ud = new TL_Userdata
                 {
                     ChatId = Convert.ToInt32(chatId),
                     ServerId = serverid,
@@ -62,23 +66,23 @@ namespace BotDLL.Model.BotCom.TelegramCommands
                     ud.Username = username;
                 else
                     ud.Username = "Noname";
-                TLG_Userdata.Add(ud, false);
+                TL_Userdata.Add(ud, false);
                 await botClient.SendTextMessageAsync(chatId: chatId, text: sabo);
             }
             else if (found == true)
             {
-                    TLG_Userdata ud = new TLG_Userdata
-                    {
-                        ChatId = Convert.ToInt32(chatId),
-                        ServerId = serverid,
-                        Abo = abo
-                    };
-                    if (username != null)
-                        ud.Username = username;
-                    else
-                        ud.Username = "Noname";
-                    TLG_Userdata.Change(ud, false);
-                    await botClient.SendTextMessageAsync(chatId: chatId, text: sabo);
+                TL_Userdata ud = new TL_Userdata
+                {
+                    ChatId = Convert.ToInt32(chatId),
+                    ServerId = serverid,
+                    Abo = abo
+                };
+                if (username != null)
+                    ud.Username = username;
+                else
+                    ud.Username = "Noname";
+                TL_Userdata.Change(ud, false);
+                await botClient.SendTextMessageAsync(chatId: chatId, text: sabo);
             }
 
             return true;

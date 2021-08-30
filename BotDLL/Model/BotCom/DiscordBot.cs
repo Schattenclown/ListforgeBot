@@ -17,6 +17,7 @@ namespace BotDLL
     {
 
         private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
+        static List<DC_Userdata> lstud = new List<DC_Userdata>();
         private const string db = "LF_ServerInfoLive";
         private static DiscordSocketClient _client;
         private static string token = "";
@@ -63,6 +64,11 @@ namespace BotDLL
                 IDiscordCommandAsync command;
                 switch (arg.Content.ToLower())
                 {
+                    case "/test":
+                        command = null;
+                        LF_ServerInfo obj = lstlive[1];
+                        DidChangePlayerCount(obj);
+                        break;
                     case "/help":
                         command = new HelpCommand();
                         break;
@@ -88,23 +94,83 @@ namespace BotDLL
                         command = new DeleteCommand(delme);
                         break;
                     case "/abo":
-                        command = new AboutMeCommand(arg);
+                        lstud = DB_DC_Userdata.ReadAll();
+                        lstlive = LF_ServerInfo.ReadAll(db);
+                        command = new AboutMeCommand(lstud, lstlive, arg);
                         break;
                     default:
-                        command = new ShowOneCommand(arg, lstlive);
+                        command = null;
+                        foreach (var item in lstlive)
+                        {
+                            if (arg.Content.ToLower() == $"/{item.Name.ToLower()}")
+                            {
+                                command = new ShowOneCommand(arg, lstlive);
+                                break;
+                            }
+                            else if (arg.Content.ToLower() == $"/add{item.Name.ToLower()}")
+                            {
+                                lstud = DC_Userdata.ReadAll();
+                                command = new ChangeSubscriptionCommand(lstud, lstlive, arg, item.Name, true);
+                                break;
+                            }
+                            else if (arg.Content.ToLower() == $"/del{item.Name.ToLower()}")
+                            {
+                                lstud = DC_Userdata.ReadAll();
+                                command = new ChangeSubscriptionCommand(lstud, lstlive, arg, item.Name, false);
+                                break;
+                            }
+                        }
                         break;
                 }
 
                 if (command != null)
                 {
                     Embed message = await command.GetMessage();
-                    if(message != null)
+                    if (message != null)
                         await arg.Channel.SendMessageAsync(null, false, message);
 
                     await command.Execute();
                 }
             }
+        }
+        public static async void DidChangePlayerCount(LF_ServerInfo obj)
+        {
+            lstud = DC_Userdata.ReadAll();
+            bool once = false;
+            EmbedBuilder embedBuilder = new EmbedBuilder
+            {
+                Title = "Player count changed!",
+                Color = new Color(245, 107, 0)
+            };
+            embedBuilder.ThumbnailUrl = "https://i.imgur.com/eb0RgjI.png";
+            embedBuilder.WithAuthor("ListforgeNotify abo");
+            embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");
+            embedBuilder.WithTimestamp(DateTime.Now);
 
+            UInt64 channelId = 0;
+            string tags = "";
+
+            foreach (var item in lstud)
+            {
+                if (item.Abo && item.ServerId == obj.Id)
+                {
+                    if(!once)
+                    { 
+                        channelId = Convert.ToUInt64(item.ChannelId);
+                        embedBuilder.AddField($"Name", $"{obj.Name}");
+                        embedBuilder.AddField("Ip address", $"{obj.Address}:{obj.Port}");
+                        embedBuilder.AddField("Player count changed to", $"{obj.Players}/{obj.Maxplayers}");
+                        once = true;
+                    }
+
+                    tags += "<@" + item.AuthorId + ">" + "\n";
+                }
+            }
+
+            embedBuilder.WithDescription(tags);
+
+            ISocketMessageChannel chn = _client.GetChannel(channelId) as ISocketMessageChannel;
+            await chn.SendMessageAsync(null, false, embedBuilder.Build(), null);
         }
 
         private static void Center(string s)
@@ -120,6 +186,7 @@ namespace BotDLL
             catch (Exception)
             {
                 Console.WriteLine("Console to small");
+
             }
         }
 

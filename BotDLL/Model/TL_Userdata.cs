@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BotDLL
 {
-    public class TLG_Userdata
+    public class TL_Userdata
     {
         public int UserNr { get; set; }
         public int ChatId { get; set; }
@@ -14,7 +14,7 @@ namespace BotDLL
         public int ServerId { get; set; }
         public bool Abo { get; set; }
 
-        public static List<TLG_Userdata> ReadAll()
+        public static List<TL_Userdata> ReadAll()
         {
             return DB_TL_Userdata.ReadAll();
         }
@@ -22,11 +22,11 @@ namespace BotDLL
         {
             return $"";
         }
-        public static void Add(TLG_Userdata ud, bool notification)
+        public static void Add(TL_Userdata ud, bool notification)
         {
             DB_TL_Userdata.Add(ud, notification);
         }
-        public static void Change(TLG_Userdata ud, bool notification)
+        public static void Change(TL_Userdata ud, bool notification)
         {
             DB_TL_Userdata.Change(ud, notification);
         }

@@ -11,8 +11,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 {
     public class AddCommand : IDiscordCommandAsync
     {
-        private readonly SocketMessage arg;
-
         private Embed _message;
 
         public AddCommand(string addme)

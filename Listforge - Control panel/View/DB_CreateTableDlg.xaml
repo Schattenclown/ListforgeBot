@@ -31,6 +31,14 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+        <Button x:Name="DC_USerdata_Copy" Content="Discord Userdata" Margin="10,234,10,125" Click="DC_USerdata_Copy_Click"  Foreground="#FF00FF23" Height="30" VerticalAlignment="Center" Cursor="Pen">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FF4B4B4B"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
