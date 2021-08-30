@@ -52,7 +52,10 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     {
                         if (ud.Abo && ud.ServerId == ld.Id && Convert.ToUInt64(ud.AuthorId) == arg.Author.Id)
                         {
-                            DC_Abo dcabo = new DC_Abo(Convert.ToUInt64(ud.ChannelId), ld.Name);
+                            DC_Abo dcabo = new DC_Abo(Convert.ToUInt64(ud.ChannelId), Convert.ToUInt64(ud.AuthorId), ld.Name);
+
+                            if (!differentchannel.Contains(Convert.ToUInt64(ud.ChannelId)) && Convert.ToUInt64(ud.AuthorId) == arg.Author.Id)
+                                differentchannel.Add(Convert.ToUInt64(ud.ChannelId));
 
                             lstDC_Abo.Add(dcabo);
 
@@ -67,18 +70,17 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 {
                     foreach (var item in lstDC_Abo)
                     {
-                        if (!differentchannel.Contains(item.Channel))
-                            differentchannel.Add(item.Channel);
+                        
                     }
 
                     foreach (var diffchn in differentchannel)
                     {
-                        foreach (var abo in lstDC_Abo)
+                        foreach (var dC_Abo in lstDC_Abo)
                         {
 
-                            if (!lstDC_Abo_sort.Contains(abo) && abo.Channel == diffchn)
+                            if (!lstDC_Abo_sort.Contains(dC_Abo) && dC_Abo.ChannelId == diffchn)
                             {
-                                lstDC_Abo_sort.Add(abo);
+                                lstDC_Abo_sort.Add(dC_Abo);
 
                             }
                         }
@@ -90,17 +92,17 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 foreach (var item in lstDC_Abo_sort)
                 {
                     if (lastchn == 0)
-                        lastchn = item.Channel;
+                        lastchn = item.ChannelId;
 
                     if (!servers.Contains(item.Server))
                         servers += "/" + item.Server + "\n";
 
-                    if (lastchn != item.Channel || lstDC_Abo_sort.Last() == item)
+                    if (lastchn != item.ChannelId || lstDC_Abo_sort.Last() == item)
                     {
                         embedBuilder.AddField(servers, "<#" + lastchn.ToString() + ">");
                         servers = "";
                         servers += "/" + item.Server + "\n";
-                        lastchn = item.Channel;
+                        lastchn = item.ChannelId;
                     }
                 }
 

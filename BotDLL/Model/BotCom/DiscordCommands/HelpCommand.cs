@@ -25,7 +25,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 Description = "This is the commandhelp for the ListforgeNotify Bot",
                 Color = new Color(245, 107, 0)
             };
-            embedBuilder.AddField("/42", "Show every server with there stats");
+            embedBuilder.AddField("/42", "Show every server with their stats");
             embedBuilder.AddField("/42s", "Show every servers player statistics");
             embedBuilder.AddField("/42big", "Show every server with a little more stats");
             embedBuilder.AddField("/list", "Show server list");
