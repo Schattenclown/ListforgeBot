@@ -93,8 +93,10 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     Title = $"{sabo}",
                     Color = new Color(245, 107, 0)
                 };
-                embedBuilder.AddField($"{arg.Author}", "You");
-                embedBuilder.AddField($"{arg.Channel}", "In channel");
+                embedBuilder.WithDescription("Who?:" + "<@" + arg.Author.Id + ">\n" + "Where?:" + "<#" + arg.Channel.Id + ">");
+                
+                //embedBuilder.AddField("<@" + arg.Channel.Id + ">", "In channel");
+                
                 embedBuilder.ThumbnailUrl = "https://i.imgur.com/eb0RgjI.png";
                 embedBuilder.WithAuthor("ListforgeNotify abo");
                 embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");
