@@ -143,35 +143,48 @@ namespace BotDLL
         {
             await botClient.SendTextMessageAsync(chatId: 1038648681, text: $"I had a connection Problem!");
         }
-        public static async void DidChangePlayerCount(LF_ServerInfo obj)
+        public static async void TGChange(LF_ServerInfo obj, string whatchanged)
         {
             lstud = TL_Userdata.ReadAll();
 
-            foreach (var item in lstud)
+            if (whatchanged == "player")
             {
-                if (item.Abo && item.ServerId == obj.Id)
+                foreach (var item in lstud)
                 {
-                    await botClient.SendTextMessageAsync(chatId: item.ChatId, text: $"Name: /{obj.Name}\n" +
-                                                                               $"IP: {obj.Address}:{obj.Port}\n" +
-                                                                               $"Player count changed to: {obj.Players}/{obj.Maxplayers}");
+                    if (item.Abo && item.ServerId == obj.Id)
+                    {
+                        await botClient.SendTextMessageAsync(chatId: item.ChatId, text: $"Name: /{obj.Name}\n" +
+                                                                                   $"IP: {obj.Address}:{obj.Port}\n" +
+                                                                                   $"Player count changed to: {obj.Players}/{obj.Maxplayers}");
+                    }
                 }
             }
-        }
-        public static async void DidChangeStatus(LF_ServerInfo obj)
-        {
-            String sonoff = "Offline";
-            if (obj.Is_online)
-                sonoff = "Online";
-
-            lstud = TL_Userdata.ReadAll();
-
-            foreach (var item in lstud)
+            else if (whatchanged == "status")
             {
-                if (item.Abo && item.ServerId == obj.Id)
+                string sonoff = "Offline";
+                if (obj.Is_online)
+                    sonoff = "Online";
+
+                foreach (var item in lstud)
                 {
-                    await botClient.SendTextMessageAsync(chatId: item.ChatId, text: $"Name: /{obj.Name}\n" +
-                                                                               $"IP: {obj.Address}:{obj.Port}\n" +
-                                                                               $"Status changed to: {sonoff}");
+                    if (item.Abo && item.ServerId == obj.Id)
+                    {
+                        await botClient.SendTextMessageAsync(chatId: item.ChatId, text: $"Name: /{obj.Name}\n" +
+                                                                                   $"IP: {obj.Address}:{obj.Port}\n" +
+                                                                                   $"Status changed to: {sonoff}");
+                    }
+                }
+            }
+            else if (whatchanged == "version")
+            {
+                foreach (var item in lstud)
+                {
+                    if (item.Abo && item.ServerId == obj.Id)
+                    {
+                        await botClient.SendTextMessageAsync(chatId: item.ChatId, text: $"Name: /{obj.Name}\n" +
+                                                                                   $"IP: {obj.Address}:{obj.Port}\n" +
+                                                                                   $"Serverversion changed to: {obj.Version}");
+                    }
                 }
             }
         }

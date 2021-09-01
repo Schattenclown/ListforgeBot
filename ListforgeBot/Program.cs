@@ -94,8 +94,8 @@ namespace ListforgeBot
                             if (itemlive.Id == itemcp1.Id)
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
-                                TelegramBot.DidChangePlayerCount(obj);
-                                DiscordBot.DidChangePlayerCount(obj);
+                                TelegramBot.TGChange(obj, "player");
+                                DiscordBot.DCChange(obj, "player");
                                 Center($"{obj}");
                                 Change();
                             }
@@ -110,7 +110,8 @@ namespace ListforgeBot
                             if (itemlive.Id == itemcp1.Id)
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
-                                TelegramBot.DidChangeStatus(obj);
+                                TelegramBot.TGChange(obj, "status");
+                                DiscordBot.DCChange(obj, "status");
                                 Center($"{obj}");
                                 Change();
                             }
@@ -125,7 +126,8 @@ namespace ListforgeBot
                             if (itemlive.Id == itemcp1.Id)
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
-                                TelegramBot.DidChangePlayerCount(obj);
+                                TelegramBot.TGChange(obj, "version");
+                                DiscordBot.DCChange(obj, "version");
                                 Center($"{obj}");
                                 Change();
                             }

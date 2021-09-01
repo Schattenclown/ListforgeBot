@@ -67,7 +67,9 @@ namespace BotDLL
                     case "/test":
                         command = null;
                         LF_ServerInfo obj = lstlive[1];
-                        DidChangePlayerCount(obj);
+                        DCChange(obj, "player");
+                        DCChange(obj, "status");
+                        DCChange(obj, "version");
                         break;
                     case "/help":
                         command = new HelpCommand();
@@ -137,11 +139,12 @@ namespace BotDLL
                 }
             }
         }
-        public static async void DidChangePlayerCount(LF_ServerInfo obj)
+        public static async void DCChange(LF_ServerInfo obj, string whatchanged)
         {
             lstud = DC_Userdata.ReadAll();
             List<UInt64> differentchannel = new List<ulong>();
             bool once = false;
+
             EmbedBuilder embedBuilder = new EmbedBuilder
             {
                 Title = "Player count changed!",
@@ -152,24 +155,30 @@ namespace BotDLL
             embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");
             embedBuilder.WithTimestamp(DateTime.Now);
 
-            //UInt64 channelId = 0;
-
             foreach (var item in lstud)
             {
                 if (item.Abo && item.ServerId == obj.Id)
                 {
                     if(!once)
                     { 
-                        //channelId = Convert.ToUInt64(item.ChannelId);
                         embedBuilder.AddField($"Name", $"{obj.Name}");
                         embedBuilder.AddField("Ip address", $"{obj.Address}:{obj.Port}");
-                        embedBuilder.AddField("Player count changed to", $"{obj.Players}/{obj.Maxplayers}");
+                        if( whatchanged == "player")
+                            embedBuilder.AddField("Player count changed to ", $"{obj.Players}/{obj.Maxplayers}");
+                        else if (whatchanged == "status")
+                        {
+                            string sonoff = "Offline";
+                            if (obj.Is_online)
+                                sonoff = "Online";
+                            embedBuilder.AddField("Status changed to ", $"{sonoff}");
+                        }
+                        else if(whatchanged == "version")
+                            embedBuilder.AddField("Serverversion changed to ", $"{obj.Version}");
+
                         once = true;
                     }
                     if (!differentchannel.Contains(Convert.ToUInt64(item.ChannelId)))
                         differentchannel.Add(Convert.ToUInt64(item.ChannelId));
-                    
-                    
                 }
             }
 
@@ -177,13 +186,10 @@ namespace BotDLL
 
             foreach (var item in differentchannel)
             {
-
                 foreach (var item2 in lstud)
                 {
-
                     if (!tags.Contains(item2.AuthorId) && item == Convert.ToUInt64(item2.ChannelId))
                         tags += "<@" + item2.AuthorId + ">" + "\n";
-
                 }
                 
                 embedBuilder.WithDescription(tags);
@@ -195,7 +201,6 @@ namespace BotDLL
 
                 tags = "";
             }
-
         }
 
         private static void Center(string s)
