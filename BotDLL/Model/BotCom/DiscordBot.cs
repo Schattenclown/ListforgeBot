@@ -66,7 +66,7 @@ namespace BotDLL
                 {
                     case "/test":
                         command = null;
-                        LF_ServerInfo obj = lstlive[1];
+                        LF_ServerInfo obj = lstlive[2];
                         DCChange(obj, "player");
                         DCChange(obj, "status");
                         DCChange(obj, "version");
@@ -147,7 +147,6 @@ namespace BotDLL
 
             EmbedBuilder embedBuilder = new EmbedBuilder
             {
-                Title = "Player count changed!",
                 Color = new Color(245, 107, 0)
             };
             embedBuilder.ThumbnailUrl = "https://i.imgur.com/eb0RgjI.png";
@@ -160,20 +159,27 @@ namespace BotDLL
                 if (item.Abo && item.ServerId == obj.Id)
                 {
                     if(!once)
-                    { 
+                    {
                         embedBuilder.AddField($"Name", $"{obj.Name}");
                         embedBuilder.AddField("Ip address", $"{obj.Address}:{obj.Port}");
                         if( whatchanged == "player")
+                        { 
+                            embedBuilder.Title = "Player count changed!";
                             embedBuilder.AddField("Player count changed to ", $"{obj.Players}/{obj.Maxplayers}");
+                        }
                         else if (whatchanged == "status")
                         {
+                            embedBuilder.Title = "Status changed!";
                             string sonoff = "Offline";
                             if (obj.Is_online)
                                 sonoff = "Online";
                             embedBuilder.AddField("Status changed to ", $"{sonoff}");
                         }
                         else if(whatchanged == "version")
+                        {
+                            embedBuilder.Title = "Version changed!";
                             embedBuilder.AddField("Serverversion changed to ", $"{obj.Version}");
+                        }
 
                         once = true;
                     }
@@ -188,7 +194,7 @@ namespace BotDLL
             {
                 foreach (var item2 in lstud)
                 {
-                    if (!tags.Contains(item2.AuthorId) && item == Convert.ToUInt64(item2.ChannelId))
+                    if (!tags.Contains(item2.AuthorId) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo)
                         tags += "<@" + item2.AuthorId + ">" + "\n";
                 }
                 
