@@ -66,7 +66,7 @@ namespace BotDLL
                 {
                     case "/test":
                         command = null;
-                        LF_ServerInfo obj = lstlive[2];
+                        LF_ServerInfo obj = lstlive[0];
                         DCChange(obj, "player");
                         DCChange(obj, "status");
                         DCChange(obj, "version");
@@ -194,7 +194,7 @@ namespace BotDLL
             {
                 foreach (var item2 in lstud)
                 {
-                    if (!tags.Contains(item2.AuthorId) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo)
+                    if (!tags.Contains(item2.AuthorId) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && item2.ServerId == obj.Id)
                         tags += "<@" + item2.AuthorId + ">" + "\n";
                 }
                 
