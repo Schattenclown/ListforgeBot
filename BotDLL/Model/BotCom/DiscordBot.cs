@@ -125,15 +125,16 @@ namespace BotDLL
                             {
                                 command = new ShowStatsCommand(arg, item);
                             }
-                            else if (arg.Content.ToLower() == "/addall")
+                            /*else if (arg.Content.ToLower() == "/addall")
                             {
                                 lstlive = LF_ServerInfo.ReadAll(db);
+
                                 foreach (var item1 in lstlive)
                                 {
                                     command = new ChangeSubscriptionCommand(lstud, lstlive, arg, item1.Name, true);
                                     await command.Execute();
                                 }
-                            }
+                            }*/
                         }
                         break;
                 }
