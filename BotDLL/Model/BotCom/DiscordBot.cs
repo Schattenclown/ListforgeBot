@@ -161,7 +161,7 @@ namespace BotDLL
                 Color = new Color(245, 107, 0)
             };
             embedBuilder.ThumbnailUrl = "https://i.imgur.com/eb0RgjI.png";
-            embedBuilder.WithAuthor("ListforgeNotify abo");
+            embedBuilder.WithAuthor($"ListforgeNotify {obj.Name}");
             embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");
             embedBuilder.WithTimestamp(DateTime.Now);
 
