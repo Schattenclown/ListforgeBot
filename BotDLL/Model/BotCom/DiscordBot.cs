@@ -176,6 +176,7 @@ namespace BotDLL
                         if( whatchanged == "player")
                         { 
                             embedBuilder.Title = "Player count changed!";
+                            embedBuilder.Color = Color.DarkPurple;
                             embedBuilder.AddField("Player count changed to ", $"{obj.Players}/{obj.Maxplayers}");
                         }
                         else if (whatchanged == "status")
@@ -193,6 +194,7 @@ namespace BotDLL
                         else if(whatchanged == "version")
                         {
                             embedBuilder.Title = "Version changed!";
+                            embedBuilder.Color = Color.DarkMagenta;
                             embedBuilder.AddField("Serverversion changed to ", $"{obj.Version}");
                         }
 
