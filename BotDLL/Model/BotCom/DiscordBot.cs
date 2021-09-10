@@ -182,8 +182,12 @@ namespace BotDLL
                         {
                             embedBuilder.Title = "Status changed!";
                             string sonoff = "Offline";
+                            embedBuilder.Color = Color.Red;
                             if (obj.Is_online)
+                            {
                                 sonoff = "Online";
+                                embedBuilder.Color = Color.Green;
+                            }
                             embedBuilder.AddField("Status changed to ", $"{sonoff}");
                         }
                         else if(whatchanged == "version")
