@@ -57,6 +57,9 @@ namespace BotDLL
                 case Game.TeamSpeak:
                     aPI_URL.URL = new Uri("https://teamspeak-servers.org/api/?object=servers&element=detail&key=");
                     break;
+                case Game.Valheim:
+                    aPI_URL.URL = new Uri("https://valheim-servers.io/api/?object=servers&element=detail&key=");
+                    break;
                 default:
                     break;
             }

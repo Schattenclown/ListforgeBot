@@ -26,7 +26,6 @@ namespace BotDLL
         public LF_ServerInfo Info { get; set; }
         public static List<LF_API_Uri> ReadAll()
         {
-
             return DB_LF_API_Uri.ReadAll();
         }
         public void Write(bool notification)

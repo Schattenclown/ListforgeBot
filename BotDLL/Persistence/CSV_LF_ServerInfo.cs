@@ -11,7 +11,7 @@ namespace BotDLL
     {
         private static string _compare;
         private static Uri _path;
-        public static void WriteAll(string compare, List<LF_ServerInfo> lst)
+        public static void WriteAll(string compare, List<LF_ServerInfo> lst) 
         {
             _compare = compare;
             _path = new Uri($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}/ListforgeBot/{_compare}.csv");

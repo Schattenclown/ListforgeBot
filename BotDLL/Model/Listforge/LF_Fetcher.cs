@@ -57,7 +57,9 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("conan-exiles.com", obj.Id);
+                            //if()
                             Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("conan-exiles.com", obj.Id));
+                            
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
                             achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
@@ -89,11 +91,21 @@ namespace BotDLL
                             LF_Valheim obj = LF_Valheim.CreateObj(content);
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
-                            string LF_StatUri = BuildStatUrl("counter-strike-servers.net", obj.Id);
-                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("counter-strike-servers.net", obj.Id));
-                            string rawcontent = await client1.GetStringAsync(LF_StatUri);
-                            QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, null, null, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
+                            string LF_StatUri = BuildStatUrl("valheim-servers.io", obj.Id);
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("valheim-servers.io", obj.Id));
+                            string rawcontent = null;
+                            
+                            try
+                            {
+                                rawcontent = await client1.GetStringAsync(LF_StatUri);
+                                QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
+                                achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, null, null, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
+                            }
+                            catch (Exception)
+                            {
+                                achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, null, null, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, null, LF_HeaderImgUri, false);
+                            }
+
                         }
                     }
                 }

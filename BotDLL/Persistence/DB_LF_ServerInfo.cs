@@ -94,9 +94,18 @@ namespace BotDLL
                     Key = rdr.GetString("key"),
                     LF_Uri = new Uri(rdr.GetString("LF_Uri")),
                     LF_StatUri = new Uri(rdr.GetString("LF_StatUri")),
-                    QC_StatUri = new Uri(rdr.GetString("QC_StatUri")),
                     LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri"))
                 };
+
+                try
+                {
+                    obj.QC_StatUri = new Uri(rdr.GetString("QC_StatUri"));
+                }
+                catch (Exception)
+                {
+
+                }
+
                 lst.Add(obj);
             }
             DB_Connection.CloseDB(connection);
@@ -132,7 +141,14 @@ namespace BotDLL
             liveInfo.Key = rdr.GetString("key");
             liveInfo.LF_Uri = new Uri(rdr.GetString("LF_Uri"));
             liveInfo.LF_StatUri = new Uri(rdr.GetString("LF_StatUri"));
-            liveInfo.QC_StatUri = new Uri(rdr.GetString("QC_StatUri"));
+            try
+            {
+                liveInfo.QC_StatUri = new Uri(rdr.GetString("QC_StatUri"));
+            }
+            catch (Exception)
+            {
+                liveInfo.QC_StatUri = null;
+            }
             liveInfo.LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri"));
         }
         public static void DeleteAll(bool notification)
