@@ -44,6 +44,7 @@ namespace Listforge_Control_panel
             this.LstGame.Add(Game.CSGO);
             this.LstGame.Add(Game.Minecraft);
             this.LstGame.Add(Game.TeamSpeak);
+            this.LstGame.Add(Game.Valheim);
 
             this.API_URL = new LF_API_Uri();
         }

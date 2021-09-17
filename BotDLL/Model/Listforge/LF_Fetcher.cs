@@ -84,6 +84,17 @@ namespace BotDLL
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
                             achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
                         }
+                        else if (content.Contains("valheim-servers.io"))
+                        {
+                            LF_Valheim obj = LF_Valheim.CreateObj(content);
+                            DateTime last_check = Builddatetime(obj.Last_check);
+                            DateTime last_online = Builddatetime(obj.Last_online);
+                            string LF_StatUri = BuildStatUrl("counter-strike-servers.net", obj.Id);
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("counter-strike-servers.net", obj.Id));
+                            string rawcontent = await client1.GetStringAsync(LF_StatUri);
+                            QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, null, null, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -111,6 +122,9 @@ namespace BotDLL
                     break;
                 case "counter-strike-servers.net":
                     finishedUrl = $"https://counter-strike-servers.net/statistics/chart/daily/players/{id}/";
+                    break;
+                case "valheim-servers.io":
+                    finishedUrl = $"https://valheim-servers.io/server/{id}/stats/";
                     break;
                 default:
                     break;
@@ -200,6 +214,22 @@ namespace BotDLL
 
                 case "counter-strike-servers.net":
                     finishedUrl = $"https://counter-strike-servers.net/server/{id}/banners/banner-1.png";
+                    break;
+
+                case "valheim-servers.io":
+                    IRandom = Random.Next(1, 4);
+                    switch (IRandom)
+                    {
+                        case 1:
+                            finishedUrl = $"https://valheim-servers.io/server/{id}/banners/banner-1.png";
+                            break;
+                        case 2:
+                            finishedUrl = $"https://valheim-servers.io/server/{id}/banners/banner-2.png";
+                            break;
+                        case 3:
+                            finishedUrl = $"https://valheim-servers.io/server/{id}/banners/banner-3.png";
+                            break;
+                    }
                     break;
 
                 default:

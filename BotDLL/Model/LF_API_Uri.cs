@@ -13,7 +13,8 @@ namespace BotDLL
         Conan,
         CSGO,
         Minecraft,
-        TeamSpeak
+        TeamSpeak,
+        Valheim
     }
     public class LF_API_Uri
     {

@@ -148,6 +148,7 @@
     <Compile Include="Model\BotCom\TelegramCommands\ShowStatsCommand.cs" />
     <Compile Include="Model\DC_Abo.cs" />
     <Compile Include="Model\DrawStatistic\DrawStatistic.cs" />
+    <Compile Include="Model\Listforge\GameClass\LF_Valheim.cs" />
     <Compile Include="Model\TL_Userdata.cs" />
     <Compile Include="Persistence\DB_DC_Userdata.cs" />
     <Compile Include="Persistence\DebugLog.cs" />
