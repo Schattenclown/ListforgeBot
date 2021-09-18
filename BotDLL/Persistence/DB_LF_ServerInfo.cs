@@ -93,12 +93,12 @@ namespace BotDLL
                     Last_online = rdr.GetDateTime("Last_online"),
                     Key = rdr.GetString("key"),
                     LF_Uri = new Uri(rdr.GetString("LF_Uri")),
-                    LF_StatUri = new Uri(rdr.GetString("LF_StatUri")),
-                    LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri"))
+                    LF_StatUri = new Uri(rdr.GetString("LF_StatUri"))
                 };
 
                 try
                 {
+                    obj.LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri"));
                     obj.QC_StatUri = new Uri(rdr.GetString("QC_StatUri"));
                 }
                 catch (Exception)
@@ -144,12 +144,12 @@ namespace BotDLL
             try
             {
                 liveInfo.QC_StatUri = new Uri(rdr.GetString("QC_StatUri"));
+                liveInfo.LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri")); 
             }
             catch (Exception)
             {
                 liveInfo.QC_StatUri = null;
             }
-            liveInfo.LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri"));
         }
         public static void DeleteAll(bool notification)
         {

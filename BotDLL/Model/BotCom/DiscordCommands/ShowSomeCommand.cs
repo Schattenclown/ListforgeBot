@@ -40,7 +40,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     embedBuilder.AddField("Status", $"{onoff}", true);
                     embedBuilder.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
                     embedBuilder.WithTimestamp(item.Last_check);
-                    if (item.LF_Uri.AbsoluteUri != null)
+                    if (item.LF_Uri.AbsoluteUri != null && item.LF_HeaderImgURi != null)
                         embedBuilder.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
 
                     embedBuilder.Color = Color.Green;

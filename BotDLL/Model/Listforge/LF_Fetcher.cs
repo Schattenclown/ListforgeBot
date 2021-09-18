@@ -35,7 +35,7 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("minecraft-mp.com", obj.Id);
-                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("minecraft-mp.com", obj.Id));
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("minecraft-mp.com", obj.Id, null));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
                             achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, "", "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
@@ -46,7 +46,7 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("ark-servers.net", obj.Id);
-                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("ark-servers.net", obj.Id));
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("ark-servers.net", obj.Id, obj.Map));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
                             achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
@@ -56,12 +56,21 @@ namespace BotDLL
                             LF_Conan obj = LF_Conan.CreateObj(content);
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
-                            string LF_StatUri = BuildStatUrl("conan-exiles.com", obj.Id);
+                            
+                            string LF_StatUri = null;
+
                             Uri LF_HeaderImgUri = null;
-                            if (obj.Map.ToString() != "Noraml")
-                                LF_HeaderImgUri = new Uri(BuildHeaderImgUri("conan-exiles.com", obj.Id));
+                            
+                            LF_StatUri = BuildStatUrl("conan-exiles.com", obj.Id);
+
+                            if (obj.Map.ToString() != "Normal")
+                            {
+                                LF_HeaderImgUri = new Uri(BuildHeaderImgUri("conan-exiles.com", obj.Id, obj.Map));
+                            }
+
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
+
                             achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
                         }
                         else if (content.Contains("teamspeak-servers.org"))
@@ -70,7 +79,7 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("teamspeak-servers.org", obj.Id);
-                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("teamspeak-servers.org", obj.Id));
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("teamspeak-servers.org", obj.Id, null));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
                             achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, "", obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
@@ -81,7 +90,7 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("counter-strike-servers.net", obj.Id);
-                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("counter-strike-servers.net", obj.Id));
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("counter-strike-servers.net", obj.Id, obj.Map));
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
                             achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, obj.Hostname, obj.Map, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
@@ -92,7 +101,7 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("valheim-servers.io", obj.Id);
-                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("valheim-servers.io", obj.Id));
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("valheim-servers.io", obj.Id, null));
                             string rawcontent = null;
                             
                             try
@@ -143,7 +152,7 @@ namespace BotDLL
             }
             return finishedUrl;
         }
-        static string BuildHeaderImgUri(string game, string id)
+        static string BuildHeaderImgUri(string game, string id, string map)
         {
             string finishedUrl = "";
             switch (game)
