@@ -251,7 +251,7 @@ namespace BotDLL.Model.BotCom
 #if DEBUG
             ac.RegisterCommands<DiscordCommands.Slash>(testguild, perms =>
             {
-                perms.AddRole(889266812267663380, true);
+                //perms.AddRole(889266812267663380, true);
                 perms.AddRole(889497376274931743, true);
             });
 #else
