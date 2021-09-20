@@ -17,6 +17,9 @@ namespace BotDLL.Model.BotCom.DiscordCommands
     /// </summary>
     internal class Slash : ApplicationCommandsModule
     {
+        private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
+        public const string db = "LF_ServerInfoLive";
+
         /// <summary>
         /// Send the help of this bot.
         /// </summary>
@@ -25,7 +28,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         public static async Task HelpAsync(InteractionContext ic)
         {
             await ic.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
-            
+
             DiscordEmbedBuilder builder = new DiscordEmbedBuilder()
             {
 
@@ -48,6 +51,8 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             await ic.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(builder.Build()));
         }
+
+
 
         // [ChoiceProvider(typeof(ExperimentChoiceProvider))][Option("experiment", "Experiment")] string experiment
         public class ExperimentChoiceProvider : IChoiceProvider
@@ -178,6 +183,27 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             var bot_invite = ic.Client.GetInAppOAuth(Permissions.Administrator);
 
             await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent(bot_invite.AbsoluteUri).WithAvatarUrl(ic.Client.CurrentUser.AvatarUrl));
+        }
+
+        [SlashCommand("test", "test", true)]
+        public static async Task TestAsync(InteractionContext ic)
+        {
+
+            await ic.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
+
+            DiscordEmbedBuilder builder = new DiscordEmbedBuilder
+            {
+                Title = "test",
+                Color = new DiscordColor(245, 107, 0)
+            };
+
+            lstlive = LF_ServerInfo.ReadAll(db);
+            LF_ServerInfo obj = lstlive[0];
+            DiscordBot.DCChange(obj, "player");
+            DiscordBot.DCChange(obj, "status");
+            DiscordBot.DCChange(obj, "version");
+
+            await ic.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(builder.Build()));
         }
     }
 }

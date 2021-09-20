@@ -47,7 +47,7 @@ namespace ListforgeBot
         {
             try
             {
-                Console.SetWindowSize(200, 49);
+                Console.SetWindowSize(250, 49);
             }
             catch (Exception)
             {
@@ -174,7 +174,7 @@ namespace ListforgeBot
             try
             {
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                Center($"{"Id",6} ██ {"Name",-15} ██ {"Address",15}:{"Port",-5} ██ {"Hostname",-22} ██ {"Map",-20} ██ {"Online",-5} ██ {"Pl",3}/{"MaxPl",-5} ██ {"Version",10} ██ {"UpT",-3}% ██  {"Last_check",-19}  ██  {"Last_online",-19}");
+                Center($"{"Id",8} ██ {"Name",-15} ██ {"Address",20}:{"Port",-5} ██ {"Hostname",-22} ██ {"Map",-20} ██ {"Online",-5} ██ {"Pl",3}/{"MaxPl",-5} ██ {"Version",10} ██ {"UpT",-3}% ██  {"Last_check",-19}  ██  {"Last_online",-19}");
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
                 foreach (var item in lst)
                 {
