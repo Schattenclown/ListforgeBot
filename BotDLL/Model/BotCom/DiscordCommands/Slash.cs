@@ -42,9 +42,12 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             eb.AddField("/42s", "Show´s every servers player statistics");
             eb.AddField("/42big", "Show´s every Server with a little more informations");
             eb.AddField("/list", "Show´s the server list");
-            eb.AddField("/statlist", "Show server list for the player statistics");
+            eb.AddField("/status", "Show´s status from a singel server");
+            eb.AddField("/statistics", "Show´s the playerstatistics from a singel server");
             eb.AddField("/add", "Adds you to an subscription for a server");
+            eb.AddField("/addall", "Adds you to every serversubscription");
             eb.AddField("/del", "About what server do you wont get notified anymore");
+            eb.AddField("/delall", "Deletes you from every serversubscription");
             eb.AddField("/abo", "Show´s about what servers you will get notified");
             eb.WithThumbnail("https://i.imgur.com/eb0RgjI.png");
             eb.WithAuthor("ListforgeNotify help");
@@ -235,34 +238,190 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         }
 
         /// <summary>
-        /// Checks the exp async.
+        /// Show´s status of a singel server
+        /// </summary>
+        /// <param name="ctx">The ctx.</param>
+        /// <param name="servers">The servers.</param>
+        /// <returns>A Task.</returns>
+        [SlashCommand("status", "Show´s status from a singel server")]
+        public static async Task StatusAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "status")] string servers)
+        {
+            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
+
+            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
+            var ecp = new ServerNameChoiceProvider();
+            var choices = await ecp.Provider();
+            DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
+
+            foreach (var item in lstlive)
+            {
+                if(item.Name.ToLower() == choices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
+                {
+                    string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
+
+                    eb.Title = item.Name;
+
+                    if (item.Name != "TheForest")
+                        eb.Url = item.LF_Uri.AbsoluteUri;
+
+                    eb.AddField("Ip address", $"{item.Address}:{item.Port}", true);
+                    eb.AddField("Status", $"{onoff}", false);
+                    eb.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
+                    eb.AddField("Version", $"{item.Version}", true);
+                    eb.AddField("Uptime", $"{item.Uptime}%", true);
+                    eb.WithTimestamp(item.Last_check);
+
+                    if (item.LF_HeaderImgURi != null)
+                        eb.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
+
+                    eb.Color = DiscordColor.Green;
+                    if (onoff == "Offline")
+                        eb.Color = DiscordColor.Red;
+                }
+            }
+
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
+        }
+
+        /// <summary>
+        /// Show´s the playerstatistics from a singel server
+        /// </summary>
+        /// <param name="ctx">The ctx.</param>
+        /// <param name="servers">The servers.</param>
+        /// <returns>A Task.</returns>
+        [SlashCommand("statistics", "Show´s the playerstatistics from a singel server")]
+        public static async Task StatisticsAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "statistics")] string servers)
+        {
+            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
+
+            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
+            var ecp = new ServerNameChoiceProvider();
+            var choices = await ecp.Provider();
+            DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
+
+            foreach (var item in lstlive)
+            {
+                if (item.Name.ToLower() == choices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
+                {
+                    string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
+
+                    eb.Title = item.Name;
+                    if (item.Name != "TheForest")
+                        eb.Url = item.LF_Uri.AbsoluteUri;
+
+                    eb.Description = $"Player Statistics for {item.Name}";
+                    if (item.QC_StatUri != null)
+                        eb.ImageUrl = item.QC_StatUri.AbsoluteUri;
+                    else
+                        eb.Description = "Hm Broke no stats!";
+                    eb.WithTimestamp(item.Last_check);
+
+                    eb.Color = DiscordColor.Green;
+                    if (onoff == "Offline")
+                        eb.Color = DiscordColor.Red;
+                }
+            }
+
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
+        }
+
+        /// <summary>
+        /// Adds you to an subscription for a server
         /// </summary>
         /// <param name="ctx">The ctx.</param>
         /// <param name="experiment">The experiment.</param>
         /// <param name="gid">The gid.</param>
         /// <returns>A Task.</returns>
         [SlashCommand("add", "Adds you to an subscription for a server")]
-        public static async Task CheckExpAsync(InteractionContext ctx, [ChoiceProvider(typeof(ExperimentChoiceProvider))][Option("Server", "adding")] string servers)
+        public static async Task AddAboAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "adding")] string servers)
         {
-            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..." ));
+            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
 
-            var ecp = new ExperimentChoiceProvider();
+            var ecp = new ServerNameChoiceProvider();
             var choices = await ecp.Provider();
 
-            eb = ChangeSubscriptionCommand(choices.First(d => d.Value.ToString() == servers).Name, ctx);
+            eb = ChangeSubscriptionCommand(choices.First(d => d.Value.ToString().ToLower() == servers).Name, ctx, true);
 
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
         }
 
         /// <summary>
-        /// Subadd command
+        /// Adds you to every serversubscription
+        /// </summary>
+        /// <param name="ic">The ic.</param>
+        /// <returns>A Task.</returns>
+        [SlashCommand("addall", "Adds you to every serversubscription", true)]
+        public static async Task AddAllAsync(InteractionContext ic)
+        {
+            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
+
+            _ = new List<LF_ServerInfo>();
+            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
+
+            foreach (var item in lstlive)
+            {
+                DiscordEmbedBuilder eb = ChangeSubscriptionCommand(item.Name, ic, true);
+
+                await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
+            }
+
+            await ic.DeleteResponseAsync();
+        }
+
+        /// <summary>
+        /// Delete´s you from an subscription for a server
+        /// </summary>
+        /// <param name="ctx">The ctx.</param>
+        /// <param name="experiment">The experiment.</param>
+        /// <param name="gid">The gid.</param>
+        /// <returns>A Task.</returns>
+        [SlashCommand("del", "Delete´s you from an subscription for a server")]
+        public static async Task DelAboAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "deleting")] string servers)
+        {
+            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
+
+            DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
+
+            var ecp = new ServerNameChoiceProvider();
+            var choices = await ecp.Provider();
+
+            eb = ChangeSubscriptionCommand(choices.First(d => d.Value.ToString().ToLower() == servers).Name, ctx, false);
+
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
+        }
+
+        /// <summary>
+        /// Delete´s you from an subscription for a server
+        /// </summary>
+        /// <param name="ic">The ic.</param>
+        /// <returns>A Task.</returns>
+        [SlashCommand("delall", "Deletes you from every serversubscription", true)]
+        public static async Task DelAllAsync(InteractionContext ic)
+        {
+            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
+
+            _ = new List<LF_ServerInfo>();
+            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
+
+            foreach (var item in lstlive)
+            {
+                DiscordEmbedBuilder eb = ChangeSubscriptionCommand(item.Name, ic, false);
+
+                await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
+            }
+
+            await ic.DeleteResponseAsync();
+        }
+
+        /// <summary>
+        /// ChangeSubscriptionCommand
         /// </summary>
         /// <param name="servername">The servername.</param>
         /// <param name="ctx">The ctx.</param>
         /// <returns>A DiscordEmbedBuilder.</returns>
-        public static DiscordEmbedBuilder ChangeSubscriptionCommand(string servername, InteractionContext ctx)
+        public static DiscordEmbedBuilder ChangeSubscriptionCommand(string servername, InteractionContext ctx, bool abo)
         {
             bool found = false;
             int serverid = 0;
@@ -289,7 +448,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     ChannelId = ctx.Channel.Id.ToString(),
                     Author = ctx.Member.DisplayName,
                     ServerId = serverid,
-                    Abo = true
+                    Abo = abo
                 };
                 DC_Userdata.Add(ud, false);
             }
@@ -301,57 +460,26 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     ChannelId = ctx.Channel.Id.ToString(),
                     Author = ctx.Member.DisplayName,
                     ServerId = serverid,
-                    Abo = true
+                    Abo = abo
                 };
                 DC_Userdata.Change(ud, false);
             }
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder
             {
-                Title = $"You will get notifications for {servername}!",
                 Color = new DiscordColor(245, 107, 0)
             };
+            eb.Title = $"You will not get notified for {servername} anymore!";
+            if (abo)
+                eb.Title = $"You will get notifications for {servername}!";
             eb.WithDescription("Who?:" + "<@" + ctx.Member.Id.ToString() + ">\n" + "Where?:" + "<#" + ctx.Channel.Id.ToString() + ">");
             eb.WithThumbnail("https://i.imgur.com/eb0RgjI.png");
-            eb.WithAuthor("ListforgeNotify abo");
+            eb.WithAuthor($"ListforgeNotify {servername.ToUpper()}");
             eb.WithFooter("(✿◠‿◠) thanks for using me");
             eb.WithTimestamp(DateTime.Now);
             eb.Build();
 
             return eb;
-        }
-
-        /// <summary>
-        /// The experiment choice provider.
-        /// </summary>
-        //[ChoiceProvider(typeof(ExperimentChoiceProvider))][Option("experiment", "Experiment")] string experiment
-        public class ExperimentChoiceProvider : IChoiceProvider
-        {
-            public async Task<IEnumerable<DiscordApplicationCommandOptionChoice>> Provider()
-            {
-                _ = new List<LF_ServerInfo>();
-                List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
-                string servers = "";
-
-                foreach (var item in lstlive)
-                {
-                    servers += item.Name.ToLower() + ";";
-                }
-                servers = servers.Trim(';');
-                string[] arrServers = servers.Split(';');
-
-                DiscordApplicationCommandOptionChoice[] choices = new DiscordApplicationCommandOptionChoice[arrServers.Length];
-
-                int i = 0;
-
-                foreach (var item in arrServers)
-                {
-                    choices[i] = new DiscordApplicationCommandOptionChoice(item, i.ToString());
-                    i++;
-                }
-
-                return choices;
-            }
         }
 
         /// <summary>
@@ -498,18 +626,4 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent(bot_invite.AbsoluteUri));
         }
     }
-
-    /*
-            _ = new List<LF_ServerInfo>();
-            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
-            string servers;
-
-            foreach (var item in lstlive)
-            {
-                servers += "/" + item.Name.ToLower() + "\n";
-                statisticsservers += "/s" + item.Name.ToLower() + "\n";
-                addme += "/add" + item.Name + "\n";
-                delme += "/del" + item.Name + "\n";
-            }
-    */
 }

@@ -201,11 +201,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Model\BotCom\DiscordCommands\old\ChangeSubscriptionCommand.csd" />
+    <Compile Include="Model\BotCom\DiscordCommands\ServerNameChoiceProvider.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\Main.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\Slash.cs" />
-    <None Include="Model\BotCom\DiscordCommands\old\ShowOneCommand.csd" />
-    <None Include="Model\BotCom\DiscordCommands\old\ShowSomeCommand.csd" />
     <Compile Include="Model\BotCom\Events\ClientEvents.cs" />
     <Compile Include="Model\BotCom\Events\GuildEvents.cs" />
     <Compile Include="Model\BotCom\Events\SlashEvents.cs" />
