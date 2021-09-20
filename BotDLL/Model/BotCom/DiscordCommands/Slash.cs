@@ -177,7 +177,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             var bot_invite = ic.Client.GetInAppOAuth(Permissions.Administrator);
 
-            await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent(bot_invite.AbsoluteUri).WithAvatarUrl(ic.Client.CurrentUser.AvatarUrl));
+            await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent(bot_invite.AbsoluteUri));
         }
     }
 }
