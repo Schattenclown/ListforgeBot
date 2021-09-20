@@ -367,18 +367,18 @@ namespace BotDLL.Model.BotCom
                     await command.Execute();
                 }
             }
-        }
+        }*/
         public static async void DCChange(LF_ServerInfo obj, string whatchanged)
         {
             lstud = DC_Userdata.ReadAll();
-            List<UInt64> differentchannel = new List<ulong>();
+            var differentchannel = new List<ulong>();
             bool once = false;
 
-            EmbedBuilder embedBuilder = new EmbedBuilder
+            DiscordEmbedBuilder embedBuilder = new DiscordEmbedBuilder
             {
-                Color = new Color(245, 107, 0)
+                Color = new DiscordColor(245, 107, 0)
             };
-            embedBuilder.ThumbnailUrl = "https://i.imgur.com/eb0RgjI.png";
+            embedBuilder.WithThumbnail("https://i.imgur.com/eb0RgjI.png");
             embedBuilder.WithAuthor($"ListforgeNotify {obj.Name}");
             embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");
             embedBuilder.WithTimestamp(DateTime.Now);
@@ -394,25 +394,25 @@ namespace BotDLL.Model.BotCom
                         if( whatchanged == "player")
                         { 
                             embedBuilder.Title = "Player count changed!";
-                            embedBuilder.Color = Color.DarkPurple;
+                            embedBuilder.Color = DiscordColor.Purple;
                             embedBuilder.AddField("Player count changed to ", $"{obj.Players}/{obj.Maxplayers}");
                         }
                         else if (whatchanged == "status")
                         {
                             embedBuilder.Title = "Status changed!";
                             string sonoff = "Offline";
-                            embedBuilder.Color = Color.Red;
+                            embedBuilder.Color = DiscordColor.Red;
                             if (obj.Is_online)
                             {
                                 sonoff = "Online";
-                                embedBuilder.Color = Color.Green;
+                                embedBuilder.Color = DiscordColor.Green;
                             }
                             embedBuilder.AddField("Status changed to ", $"{sonoff}");
                         }
                         else if(whatchanged == "version")
                         {
                             embedBuilder.Title = "Version changed!";
-                            embedBuilder.Color = Color.DarkMagenta;
+                            embedBuilder.Color = DiscordColor.Magenta;
                             embedBuilder.AddField("Serverversion changed to ", $"{obj.Version}");
                         }
 
@@ -435,10 +435,10 @@ namespace BotDLL.Model.BotCom
                 
                 embedBuilder.WithDescription(tags);
 
-                ISocketMessageChannel chn = _client.GetChannel(item) as ISocketMessageChannel;
+                var chn = await Client.GetChannelAsync(item);
             
                 if(chn != null)
-                    await chn.SendMessageAsync(null, false, embedBuilder.Build(), null);
+                    await chn.SendMessageAsync(embedBuilder.Build());
 
                 tags = "";
             }
@@ -461,13 +461,13 @@ namespace BotDLL.Model.BotCom
             }
         }
 
-        private static Task Log(LogMessage msg)
+        private static Task Log(string msg)
         {
             try
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                Center($"DISCORD: {msg.ToString()}");
+                Center($"DISCORD: {msg}");
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
             }
             catch (Exception)
@@ -476,6 +476,6 @@ namespace BotDLL.Model.BotCom
             }
 
             return Task.CompletedTask;
-        }*/
+        }
     }
 }
