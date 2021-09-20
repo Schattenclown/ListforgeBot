@@ -102,7 +102,7 @@ namespace ListforgeBot
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
                                 TelegramBot.TGChange(obj, "player");
-                                //dbot.DCChange(obj, "player");
+                                DiscordBot.DCChange(obj, "player");
                                 Center($"{obj}");
                                 Change();
                             }
@@ -118,7 +118,7 @@ namespace ListforgeBot
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
                                 TelegramBot.TGChange(obj, "status");
-                                //dbot.DCChange(obj, "status");
+                                DiscordBot.DCChange(obj, "status");
                                 Center($"{obj}");
                                 Change();
                             }
@@ -134,7 +134,7 @@ namespace ListforgeBot
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
                                 TelegramBot.TGChange(obj, "version");
-                                //dbot.DCChange(obj, "version");
+                                DiscordBot.DCChange(obj, "version");
                                 Center($"{obj}");
                                 Change();
                             }
