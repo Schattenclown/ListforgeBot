@@ -1,30 +1,53 @@
-﻿using System;
+﻿using BotDLL;
+using BotDLL.Model.BotCom;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using BotDLL;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ListforgeBot
 {
     public class Program
     {
+        #region Test
+        /*
+        static void Main()
+        {
+            DiscordBot bot = new DiscordBot();
+            bot.RunAsync().Wait();
+        }*/
+        #endregion
+
+        #region Variables
+        /// <summary>
+        /// The ms time out.
+        /// </summary>
         private const int MSTimeOut = 5000;
+        /// <summary>
+        /// The ms time out bt.
+        /// </summary>
         private const int MSTimeOutbt = 5000;
         private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
         private static List<LF_ServerInfo> lstcp1 = new List<LF_ServerInfo>();
         private static List<LF_ServerInfo> lstcp2 = new List<LF_ServerInfo>();
+        /// <summary>
+        /// The db.
+        /// </summary>
         private const string db = "LF_ServerInfoLive";
+        private static DiscordBot dbot;
+        #endregion
+
+        /// <summary>
+        /// The main program.
+        /// </summary>
         static async Task Main()
         {
             try
             {
-                Console.SetWindowSize(200, 49);
+                Console.SetWindowSize(250, 49);
             }
             catch (Exception)
             {
@@ -49,7 +72,8 @@ namespace ListforgeBot
                     Center(@"╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝        ╚═╝   ");
                     Center(" ");
                     Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                    await DiscordBot.Init();
+                    dbot = new DiscordBot();
+                    await dbot.RunAsync();
                     await TelegramBot.Init();
                     DebugLog.Main();
                     LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
@@ -79,6 +103,11 @@ namespace ListforgeBot
                     RestartProgram();
             }
         }
+        /// <summary>
+        /// Checks for changes.
+        /// </summary>
+        /// <param name="lstv1">The LF server info 1.</param>
+        /// <param name="lstv2">The LF server info 1.</param>
         static void DidChangeQM(List<LF_ServerInfo> lstv1, List<LF_ServerInfo> lstv2)
         {
             foreach (var itemcp1 in lstv1)
@@ -93,7 +122,7 @@ namespace ListforgeBot
                         {
                             if (itemlive.Id == itemcp1.Id)
                             {
-                                LF_ServerInfo obj = itemlive as LF_ServerInfo;
+                                LF_ServerInfo obj = itemlive;
                                 TelegramBot.TGChange(obj, "player");
                                 DiscordBot.DCChange(obj, "player");
                                 Center($"{obj}");
@@ -109,7 +138,7 @@ namespace ListforgeBot
                         {
                             if (itemlive.Id == itemcp1.Id)
                             {
-                                LF_ServerInfo obj = itemlive as LF_ServerInfo;
+                                LF_ServerInfo obj = itemlive;
                                 TelegramBot.TGChange(obj, "status");
                                 DiscordBot.DCChange(obj, "status");
                                 Center($"{obj}");
@@ -125,7 +154,7 @@ namespace ListforgeBot
                         {
                             if (itemlive.Id == itemcp1.Id)
                             {
-                                LF_ServerInfo obj = itemlive as LF_ServerInfo;
+                                LF_ServerInfo obj = itemlive;
                                 TelegramBot.TGChange(obj, "version");
                                 DiscordBot.DCChange(obj, "version");
                                 Center($"{obj}");
@@ -136,12 +165,16 @@ namespace ListforgeBot
                 }
             }
         }
+        /// <summary>
+        /// Writes the list.
+        /// </summary>
+        /// <param name="lst">The LF server info.</param>
         static void WriteList(List<LF_ServerInfo> lst)
         {
             try
             {
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                Center($"{"Id",6} ██ {"Name",-15} ██ {"Address",15}:{"Port",-5} ██ {"Hostname",-22} ██ {"Map",-20} ██ {"Online",-5} ██ {"Pl",3}/{"MaxPl",-5} ██ {"Version",10} ██ {"UpT",-3}% ██  {"Last_check",-19}  ██  {"Last_online",-19}");
+                Center($"{"Id",8} ██ {"Name",-15} ██ {"Address",20}:{"Port",-5} ██ {"Hostname",-22} ██ {"Map",-20} ██ {"Online",-5} ██ {"Pl",3}/{"MaxPl",-5} ██ {"Version",10} ██ {"UpT",-3}% ██  {"Last_check",-19}  ██  {"Last_online",-19}");
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
                 foreach (var item in lst)
                 {
@@ -154,6 +187,11 @@ namespace ListforgeBot
                 Center("Console to smoll for List");
             }
         }
+
+        /// <summary>
+        /// Centers the console.
+        /// </summary>
+        /// <param name="s">The text.</param>
         static void Center(string s)
         {
             try
@@ -173,6 +211,10 @@ namespace ListforgeBot
                 Console.WriteLine("██");
             }
         }
+
+        /// <summary>
+        /// Change banner.
+        /// </summary>
         static void Change()
         {
             try
@@ -193,6 +235,10 @@ namespace ListforgeBot
                 Center("Console to smoll for CHANGE");
             }
         }
+
+        /// <summary>
+        /// Restarts the program.
+        /// </summary>
         private static void RestartProgram()
         {
             // Get file path of current process 
