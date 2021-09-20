@@ -11,21 +11,38 @@ using System.Threading.Tasks;
 namespace ListforgeBot
 {
     public class Program
-    {/*
+    {
+        #region Test
+        /*
         static void Main()
         {
             DiscordBot bot = new DiscordBot();
             bot.RunAsync().Wait();
         }*/
-        
-        
+        #endregion
+
+        #region Variables
+        /// <summary>
+        /// The ms time out.
+        /// </summary>
         private const int MSTimeOut = 5000;
+        /// <summary>
+        /// The ms time out bt.
+        /// </summary>
         private const int MSTimeOutbt = 5000;
         private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
         private static List<LF_ServerInfo> lstcp1 = new List<LF_ServerInfo>();
         private static List<LF_ServerInfo> lstcp2 = new List<LF_ServerInfo>();
+        /// <summary>
+        /// The db.
+        /// </summary>
         private const string db = "LF_ServerInfoLive";
         private static DiscordBot dbot;
+        #endregion
+
+        /// <summary>
+        /// The main program.
+        /// </summary>
         static async Task Main()
         {
             try
@@ -86,6 +103,11 @@ namespace ListforgeBot
                     RestartProgram();
             }
         }
+        /// <summary>
+        /// Checks for changes.
+        /// </summary>
+        /// <param name="lstv1">The LF server info 1.</param>
+        /// <param name="lstv2">The LF server info 1.</param>
         static void DidChangeQM(List<LF_ServerInfo> lstv1, List<LF_ServerInfo> lstv2)
         {
             foreach (var itemcp1 in lstv1)
@@ -100,7 +122,7 @@ namespace ListforgeBot
                         {
                             if (itemlive.Id == itemcp1.Id)
                             {
-                                LF_ServerInfo obj = itemlive as LF_ServerInfo;
+                                LF_ServerInfo obj = itemlive;
                                 TelegramBot.TGChange(obj, "player");
                                 DiscordBot.DCChange(obj, "player");
                                 Center($"{obj}");
@@ -116,7 +138,7 @@ namespace ListforgeBot
                         {
                             if (itemlive.Id == itemcp1.Id)
                             {
-                                LF_ServerInfo obj = itemlive as LF_ServerInfo;
+                                LF_ServerInfo obj = itemlive;
                                 TelegramBot.TGChange(obj, "status");
                                 DiscordBot.DCChange(obj, "status");
                                 Center($"{obj}");
@@ -132,7 +154,7 @@ namespace ListforgeBot
                         {
                             if (itemlive.Id == itemcp1.Id)
                             {
-                                LF_ServerInfo obj = itemlive as LF_ServerInfo;
+                                LF_ServerInfo obj = itemlive;
                                 TelegramBot.TGChange(obj, "version");
                                 DiscordBot.DCChange(obj, "version");
                                 Center($"{obj}");
@@ -143,6 +165,10 @@ namespace ListforgeBot
                 }
             }
         }
+        /// <summary>
+        /// Writes the list.
+        /// </summary>
+        /// <param name="lst">The LF server info.</param>
         static void WriteList(List<LF_ServerInfo> lst)
         {
             try
@@ -161,6 +187,11 @@ namespace ListforgeBot
                 Center("Console to smoll for List");
             }
         }
+
+        /// <summary>
+        /// Centers the console.
+        /// </summary>
+        /// <param name="s">The text.</param>
         static void Center(string s)
         {
             try
@@ -180,6 +211,10 @@ namespace ListforgeBot
                 Console.WriteLine("██");
             }
         }
+
+        /// <summary>
+        /// Change banner.
+        /// </summary>
         static void Change()
         {
             try
@@ -200,6 +235,10 @@ namespace ListforgeBot
                 Center("Console to smoll for CHANGE");
             }
         }
+
+        /// <summary>
+        /// Restarts the program.
+        /// </summary>
         private static void RestartProgram()
         {
             // Get file path of current process 
