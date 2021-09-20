@@ -250,24 +250,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             var ecp = new ExperimentChoiceProvider();
             var p = await ecp.Provider();
-            switch (servers)
-            {
-                case "0":                   
-
-                    eb = ChangeSubscriptionCommand(p.First(d => d.Value.ToString() == servers).Name, ctx);
-                    break;
-                case "1":
-                    break;
-                case "2":
-                    break;
-                case "3":
-                    return;
-                case "4":
-                    return;
-                default:
-                    await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Invalid Experiment" ));
-                    return;
-            }
+            eb = ChangeSubscriptionCommand(p.First(d => d.Value.ToString() == servers).Name, ctx);
 
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
         }
