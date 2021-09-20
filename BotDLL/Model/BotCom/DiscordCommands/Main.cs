@@ -11,6 +11,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 {
     internal class Main : BaseCommandModule 
     {
+        
         [Command("ping"), Description("Ping")]
         public async Task PingAsync(CommandContext ctx)
         {
