@@ -198,7 +198,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             };
 
             lstlive = LF_ServerInfo.ReadAll(db);
-            LF_ServerInfo obj = lstlive[0];
+            LF_ServerInfo obj = lstlive[1];
             DiscordBot.DCChange(obj, "player");
             DiscordBot.DCChange(obj, "status");
             DiscordBot.DCChange(obj, "version");
