@@ -6,6 +6,7 @@ using DisCatSharp.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 using static BotDLL.Model.BotCom.DiscordBot;
@@ -42,7 +43,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             eb.AddField("/42big", "Show´s every Server with a little more informations");
             eb.AddField("/list", "Show´s the server list");
             eb.AddField("/statlist", "Show server list for the player statistics");
-            eb.AddField("/add", "About what server do you want to get notified");
+            eb.AddField("/add", "Adds you to an subscription for a server");
             eb.AddField("/del", "About what server do you wont get notified anymore");
             eb.AddField("/abo", "Show´s about what servers you will get notified");
             eb.WithThumbnail("https://i.imgur.com/eb0RgjI.png");
@@ -234,6 +235,140 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         }
 
         /// <summary>
+        /// Checks the exp async.
+        /// </summary>
+        /// <param name="ctx">The ctx.</param>
+        /// <param name="experiment">The experiment.</param>
+        /// <param name="gid">The gid.</param>
+        /// <returns>A Task.</returns>
+        [SlashCommand("add", "Adds you to an subscription for a server")]
+        public static async Task CheckExpAsync(InteractionContext ctx, [ChoiceProvider(typeof(ExperimentChoiceProvider))][Option("Server", "adding")] string servers)
+        {
+            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..." ));
+
+            DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
+
+            switch (servers)
+            {
+                case "0":                   
+
+                    eb = ChangeSubscriptionCommand("", ctx);
+                    break;
+                case "1":
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    return;
+                case "4":
+                    return;
+                default:
+                    await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Invalid Experiment" ));
+                    return;
+            }
+
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
+        }
+
+        /// <summary>
+        /// Subadd command
+        /// </summary>
+        /// <param name="servername">The servername.</param>
+        /// <param name="ctx">The ctx.</param>
+        /// <returns>A DiscordEmbedBuilder.</returns>
+        public static DiscordEmbedBuilder ChangeSubscriptionCommand(string servername, InteractionContext ctx)
+        {
+            bool found = false;
+            int serverid = 0;
+            var lstud = DB_DC_Userdata.ReadAll();
+            var lstlive = LF_ServerInfo.ReadAll(db);
+
+            foreach (var item in lstlive)
+            {
+                if (item.Name == servername)
+                    serverid = item.Id;
+            }
+
+            foreach (var item in lstud)
+            {
+                if (item.ChannelId == ctx.Channel.Id.ToString() && item.ServerId == serverid && item.AuthorId == ctx.Member.Id.ToString())
+                    found = true;
+            }
+
+            if (!found)
+            {
+                DC_Userdata ud = new DC_Userdata
+                {
+                    AuthorId = ctx.Member.Id.ToString(),
+                    ChannelId = ctx.Channel.Id.ToString(),
+                    Author = ctx.Member.DisplayName,
+                    ServerId = serverid,
+                    Abo = true
+                };
+                DC_Userdata.Add(ud, true);
+            }
+            else if (found)
+            {
+                DC_Userdata ud = new DC_Userdata
+                {
+                    AuthorId = ctx.Member.Id.ToString(),
+                    ChannelId = ctx.Channel.Id.ToString(),
+                    Author = ctx.Member.DisplayName,
+                    ServerId = serverid,
+                    Abo = true
+                };
+                DC_Userdata.Change(ud, true);
+            }
+
+            DiscordEmbedBuilder eb = new DiscordEmbedBuilder
+            {
+                Title = $"You will get notifications for {servername}!",
+                Color = new DiscordColor(245, 107, 0)
+            };
+            eb.WithDescription("Who?:" + "<@" + ctx.Member.Id.ToString() + ">\n" + "Where?:" + "<#" + ctx.Channel.Id.ToString() + ">");
+            eb.WithThumbnail("https://i.imgur.com/eb0RgjI.png");
+            eb.WithAuthor("ListforgeNotify abo");
+            eb.WithFooter("(✿◠‿◠) thanks for using me");
+            eb.WithTimestamp(DateTime.Now);
+            eb.Build();
+
+            return eb;
+        }
+
+        /// <summary>
+        /// The experiment choice provider.
+        /// </summary>
+        //[ChoiceProvider(typeof(ExperimentChoiceProvider))][Option("experiment", "Experiment")] string experiment
+        public class ExperimentChoiceProvider : IChoiceProvider
+        {
+            public async Task<IEnumerable<DiscordApplicationCommandOptionChoice>> Provider()
+            {
+                _ = new List<LF_ServerInfo>();
+                List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
+                string servers = "";
+
+                foreach (var item in lstlive)
+                {
+                    servers += item.Name.ToLower() + ";";
+                }
+                servers = servers.Trim(';');
+                string[] arrServers = servers.Split(';');
+
+                DiscordApplicationCommandOptionChoice[] choices = new DiscordApplicationCommandOptionChoice[arrServers.Length];
+
+                int i = 0;
+
+                foreach (var item in arrServers)
+                {
+                    choices[i] = new DiscordApplicationCommandOptionChoice(item, i.ToString());
+                    i++;
+                }
+
+                return choices;
+            }
+        }
+
+        /// <summary>
         /// Show´s about what servers you will get notified
         /// </summary>
         /// <param name="ic">The ic.</param>
@@ -375,24 +510,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             var bot_invite = ic.Client.GetInAppOAuth(Permissions.Administrator);
 
             await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent(bot_invite.AbsoluteUri));
-        }
-
-        /// <summary>
-        /// The experiment choice provider.
-        /// </summary>
-        //[ChoiceProvider(typeof(ExperimentChoiceProvider))][Option("experiment", "Experiment")] string experiment
-        public class ExperimentChoiceProvider : IChoiceProvider
-        {
-            public async Task<IEnumerable<DiscordApplicationCommandOptionChoice>> Provider()
-            {
-                return new DiscordApplicationCommandOptionChoice[]
-                {
-                    new DiscordApplicationCommandOptionChoice("Role Icons", "1"),
-                    new DiscordApplicationCommandOptionChoice("Activities", "2"),
-                    new DiscordApplicationCommandOptionChoice("Stage Events", "3"),
-                    new DiscordApplicationCommandOptionChoice("Role Subscriptions", "4")
-                };
-            }
         }
     }
 
