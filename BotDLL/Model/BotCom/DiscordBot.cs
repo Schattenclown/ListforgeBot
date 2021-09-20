@@ -95,8 +95,8 @@ namespace BotDLL.Model.BotCom
         public static CommandsNextExtension CNext { get; internal set; }
         public static InteractivityExtension INext { get; internal set; }
         public static CancellationTokenSource ShutdownRequest;
-        //public static readonly ulong testguild = 881868642600505354;
-        public static readonly ulong testguild = 778976023042719794;
+        public static readonly ulong testguild = 881868642600505354;
+        //public static readonly ulong testguild = 778976023042719794;
         public static string prefix = "lfn/";
 
         /// <summary>
@@ -250,8 +250,8 @@ namespace BotDLL.Model.BotCom
 #if DEBUG
             ac.RegisterCommands<DiscordCommands.Slash>(testguild, perms =>
             {
-                //perms.AddRole(889266812267663380, true);
-                perms.AddRole(889497376274931743, true);
+                perms.AddRole(889266812267663380, true);
+                //perms.AddRole(889497376274931743, true);
             });
 #else
             ac.RegisterCommands<DiscordCommands.Slash>();
