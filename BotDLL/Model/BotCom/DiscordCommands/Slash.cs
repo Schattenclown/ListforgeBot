@@ -249,8 +249,9 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
 
             var ecp = new ExperimentChoiceProvider();
-            var p = await ecp.Provider();
-            eb = ChangeSubscriptionCommand(p.First(d => d.Value.ToString() == servers).Name, ctx);
+            var choices = await ecp.Provider();
+
+            eb = ChangeSubscriptionCommand(choices.First(d => d.Value.ToString() == servers).Name, ctx);
 
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
         }
@@ -290,7 +291,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     ServerId = serverid,
                     Abo = true
                 };
-                DC_Userdata.Add(ud, true);
+                DC_Userdata.Add(ud, false);
             }
             else if (found)
             {
@@ -302,7 +303,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     ServerId = serverid,
                     Abo = true
                 };
-                DC_Userdata.Change(ud, true);
+                DC_Userdata.Change(ud, false);
             }
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder
