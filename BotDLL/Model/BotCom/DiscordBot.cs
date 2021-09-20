@@ -191,7 +191,7 @@ namespace BotDLL.Model.BotCom
             await Client.ConnectAsync();
             Console.WriteLine($"Starting with Prefix {prefix}");
             Console.WriteLine($"Starting {Client.CurrentUser.Username}");
-
+            /*
             while (!ShutdownRequest.IsCancellationRequested)
             {
                 await Task.Delay(2000);
@@ -199,7 +199,7 @@ namespace BotDLL.Model.BotCom
             await Client.UpdateStatusAsync(activity: null, userStatus: UserStatus.Offline, idleSince: null);
             await Client.DisconnectAsync();
             await Task.Delay(2500);
-            Dispose();
+            Dispose();*/
         }
 
 
