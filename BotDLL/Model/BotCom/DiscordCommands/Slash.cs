@@ -271,7 +271,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             foreach (var item in lstlive)
             {
-                if (item.Name == servername)
+                if (item.Name.ToLower() == servername.ToLower())
                     serverid = item.Id;
             }
 
