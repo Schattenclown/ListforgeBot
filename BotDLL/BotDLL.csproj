@@ -202,7 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Model\BotCom\DiscordCommands\old\AddCommand.csd" />
-    <None Include="Model\BotCom\DiscordCommands\Base\IDiscordCommandAsync.csd" />
     <None Include="Model\BotCom\DiscordCommands\old\ChangeSubscriptionCommand.csd" />
     <None Include="Model\BotCom\DiscordCommands\old\DeleteCommand.csd" />
     <None Include="Model\BotCom\DiscordCommands\old\HelpCommand.csd" />

@@ -17,8 +17,10 @@ namespace BotDLL.Model.BotCom.DiscordCommands
     /// </summary>
     internal class Slash : ApplicationCommandsModule
     {
-        private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
-        public const string db = "LF_ServerInfoLive";
+        /// <summary>
+        /// This is the Database Table name.
+        /// </summary>
+        private const string db = "LF_ServerInfoLive";
 
         /// <summary>
         /// Send the help of this bot.
@@ -36,7 +38,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 Description = "This is the command help for the ListforgeNotify Bot",
                 Color = new DiscordColor(245, 107, 0)
             };
-            builder.AddField("/42", "Show every server with their stats");
+            builder.AddField("/42", "Show´s every Server with their informations");
             builder.AddField("/42s", "Show every servers player statistics");
             builder.AddField("/42big", "Show every server with a little more stats");
             builder.AddField("/list", "Show server list");
@@ -52,9 +54,56 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             await ic.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(builder.Build()));
         }
 
+        /// <summary>
+        /// Show´s every Server with their informations
+        /// </summary>
+        /// <param name="ic">The ic.</param>
+        /// <returns>A Task.</returns>
+        [SlashCommand("42", "Show´s every Server with their informations", true)]
+        public static async Task ShowAllAsync(InteractionContext ic)
+        {
+            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
+
+            _ = new List<LF_ServerInfo>();
+            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
 
 
-        // [ChoiceProvider(typeof(ExperimentChoiceProvider))][Option("experiment", "Experiment")] string experiment
+            foreach (var item in lstlive)
+            {
+                DiscordEmbedBuilder embedBuilder = new DiscordEmbedBuilder();
+                string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
+
+                embedBuilder.Title = item.Name;
+
+                if (item.Name != "TheForest")
+                    embedBuilder.Url = item.LF_Uri.AbsoluteUri;
+
+                embedBuilder.AddField("Ip address", $"{item.Address}:{item.Port}", true);
+                embedBuilder.AddField("Status", $"{onoff}", false);
+                embedBuilder.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
+                embedBuilder.AddField("Version", $"{item.Version}", true);
+                embedBuilder.AddField("Uptime", $"{item.Uptime}", true);
+                embedBuilder.WithTimestamp(item.Last_check);
+
+                if (item.LF_HeaderImgURi != null)
+                    embedBuilder.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
+
+                embedBuilder.Color = DiscordColor.Green;
+
+                if (onoff == "Offline")
+                    embedBuilder.Color = DiscordColor.Red;
+
+                await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(embedBuilder.Build()));
+                Task.Delay(1000);
+            }
+
+            await ic.DeleteResponseAsync();
+        }
+
+        /// <summary>
+        /// The experiment choice provider.
+        /// </summary>
+        //[ChoiceProvider(typeof(ExperimentChoiceProvider))][Option("experiment", "Experiment")] string experiment
         public class ExperimentChoiceProvider : IChoiceProvider
         {
             public async Task<IEnumerable<DiscordApplicationCommandOptionChoice>> Provider()
@@ -69,6 +118,11 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             }
         }
 
+        /// <summary>
+        /// Shows the abo async.
+        /// </summary>
+        /// <param name="ic">The ic.</param>
+        /// <returns>A Task.</returns>
         [SlashCommand("abo", "Show about what servers you will get notified", true)]
         public static async Task ShowAboAsync(InteractionContext ic)
         {
@@ -175,6 +229,11 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embed.Build()));
         }
 
+        /// <summary>
+        /// Generates an Invite link.
+        /// </summary>
+        /// <param name="ic">The ic.</param>
+        /// <returns>A Task.</returns>
         [SlashCommand("invite", "Invite ListforgeNotify", true)]
         public static async Task InviteAsync(InteractionContext ic)
         {
@@ -185,25 +244,84 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent(bot_invite.AbsoluteUri));
         }
 
+        /// <summary>
+        /// Tests the async.
+        /// </summary>
+        /// <param name="ic">The ic.</param>
+        /// <returns>A Task.</returns>
         [SlashCommand("test", "test", true)]
         public static async Task TestAsync(InteractionContext ic)
         {
-
             await ic.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
-
-            DiscordEmbedBuilder builder = new DiscordEmbedBuilder
-            {
-                Title = "test",
-                Color = new DiscordColor(245, 107, 0)
-            };
-
-            lstlive = LF_ServerInfo.ReadAll(db);
+            
+            _ = new List<LF_ServerInfo>();
+            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
             LF_ServerInfo obj = lstlive[1];
             DiscordBot.DCChange(obj, "player");
             DiscordBot.DCChange(obj, "status");
             DiscordBot.DCChange(obj, "version");
+        }
 
-            await ic.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(builder.Build()));
+        /// <summary>
+        /// Show´s every Server with their informations
+        /// </summary>
+        /// <param name="ic">The ic.</param>
+        /// <returns>A Task.</returns>
+        [SlashCommand("42s", "Show every servers player statistics", true)]
+        public static async Task ShowStatsAsync(InteractionContext ic)
+        {
+            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
+
+            _ = new List<LF_ServerInfo>();
+            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
+
+            DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
+
+            if (lstlive != null)
+            {
+                foreach (var item in lstlive)
+                {
+                    string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
+
+                    eb.Title = item.Name;
+                    if (item.Name != "TheForest")
+                        eb.Url = item.LF_Uri.AbsoluteUri;
+
+                    eb.Description = $"Player Statistics for {item.Name}";
+                    if (item.QC_StatUri != null)
+                        eb.ImageUrl = item.QC_StatUri.AbsoluteUri;
+                    else
+                        eb.Description = "Hm Broke no stats!";
+                    eb.WithTimestamp(item.Last_check);
+
+                    eb.Color = DiscordColor.Green;
+                    if (onoff == "Offline")
+                        eb.Color = DiscordColor.Red;
+
+                    await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
+                }
+            }
+            /*else if (lF_ServerInfo != null)
+            {
+                string onoff = "Offline"; if (lF_ServerInfo.Is_online == true) onoff = "Online";
+
+                eb.Title = lF_ServerInfo.Name;
+                if (lF_ServerInfo.Name != "TheForest")
+                    eb.Url = lF_ServerInfo.LF_Uri.AbsoluteUri;
+
+                eb.Description = $"Player Statistics for {lF_ServerInfo.Name}";
+                eb.ImageUrl = lF_ServerInfo.QC_StatUri.AbsoluteUri;
+                eb.WithTimestamp(lF_ServerInfo.Last_check);
+
+                eb.Color = DiscordColor.Green;
+                if (onoff == "Offline")
+                    eb.Color = DiscordColor.Red;
+
+                await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
+                Task.Delay(1000);
+            }*/
+
+            await ic.DeleteResponseAsync();
         }
     }
 }
