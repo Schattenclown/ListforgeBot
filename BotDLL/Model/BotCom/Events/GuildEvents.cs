@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using DisCatSharp;
 using DisCatSharp.EventArgs;
 
-namespace BotDLL.EventListener
+namespace BotDLL.Model.BotCom.Events
 {
     /// <summary>
     /// The guild events.
     /// </summary>
-    class GuildEvents
+    internal class GuildEvents
     {
         public static Task Client_GuildUnavailable(DiscordClient dcl, GuildDeleteEventArgs e)
         {
@@ -30,6 +30,7 @@ namespace BotDLL.EventListener
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Left Guild: " + e.Guild.Name);
+            Console.ForegroundColor = ConsoleColor.Gray;
             return Task.CompletedTask;
         }
 
@@ -39,6 +40,7 @@ namespace BotDLL.EventListener
             Console.WriteLine("Joined Guild: " + e.Guild.Name);
             Console.WriteLine("Reloading cache");
             //sender.ReconnectAsync(true);
+            Console.ForegroundColor = ConsoleColor.Gray;
             return Task.CompletedTask;
         }
     }

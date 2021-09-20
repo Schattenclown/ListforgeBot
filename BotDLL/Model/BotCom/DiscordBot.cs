@@ -1,31 +1,81 @@
-﻿using BotDLL.Model.BotCom.DiscordCommands;
-using BotDLL.Model.BotCom.DiscordCommands.Base;
-using DisCatSharp;
+﻿using DisCatSharp;
+using DisCatSharp.ApplicationCommands;
 using DisCatSharp.CommandsNext;
 using DisCatSharp.Entities;
+using DisCatSharp.Enums;
 using DisCatSharp.EventArgs;
-using DisCatSharp.Exceptions;
 using DisCatSharp.Interactivity;
-using DisCatSharp.Interactivity.Extensions;
 using DisCatSharp.Interactivity.Enums;
-using DisCatSharp.ApplicationCommands;
+using DisCatSharp.Interactivity.EventHandling;
+using DisCatSharp.Interactivity.Extensions;
+
 using Microsoft.Extensions.Logging;
+
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DisCatSharp.Enums;
-using DisCatSharp.Interactivity.EventHandling;
-using static BotDLL.EventListener.ClientEvents;
-using static BotDLL.EventListener.GuildEvents;
-using static BotDLL.EventListener.SlashEvents;
 
-namespace BotDLL
+using static BotDLL.Model.BotCom.Events.ClientEvents;
+using static BotDLL.Model.BotCom.Events.GuildEvents;
+using static BotDLL.Model.BotCom.Events.ApplicationCommandsEvents;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+
+namespace BotDLL.Model.BotCom
 {
-    public class DiscordBot
+    #region MultiDict
+    /// <summary>
+    /// Multidictionary
+    /// </summary>
+    /// <typeparam name="TKey">Key</typeparam>
+    /// <typeparam name="TValue">Value</typeparam>
+    public class MultiDict<TKey, TValue>
+    {
+        private readonly Dictionary<TKey, List<TValue>> _data = new Dictionary<TKey, List<TValue>>();
+
+        /// <summary>
+        /// Adds a <see cref="List{T}"/> to an <see cref="Dictionary{TKey, TValue}"/>
+        /// </summary>
+        /// <param name="k">Key</param>
+        /// <param name="v">Value</param>
+        public void Add(TKey k, TValue v)
+        {
+            if (_data.ContainsKey(k))
+                _data[k].Add(v);
+            else
+                _data.Add(k, new List<TValue>() { v });
+        }
+
+        /// <summary>
+        /// Deletes a <see cref="List{T}"/> from  an <see cref="Dictionary{TKey, TValue}"/>
+        /// </summary>
+        /// <param name="k">Key</param>
+        /// <param name="v">Value</param>
+        public void Del(TKey k, TValue v)
+        {
+            if (_data.ContainsKey(k))
+                _data[k].Remove(v);
+        }
+
+        /// <summary>
+        /// Gets a <see cref="Dictionary{TKey, TValue}"/>
+        /// </summary>
+        /// <returns>Dictionary</returns>
+        public Dictionary<TKey, List<TValue>> Get()
+        {
+            return _data;
+        }
+    }
+    #endregion
+
+    public class DiscordBot : IDisposable
     { /* möpse
         ( . )( . )
          )      (
@@ -38,23 +88,32 @@ namespace BotDLL
 
         private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
         static List<DC_Userdata> lstud = new List<DC_Userdata>();
-        private const string db = "LF_ServerInfoLive";
-        private static string token = "";
-        private static int virgin = 0;
-        private static DiscordClient Client { get; set; }
-        private static ApplicationCommandsExtension ApplicationCommands { get; set; }
-        private static CommandsNextExtension CNext { get; set; }
-        private static InteractivityExtension INext { get; set; }
+        public const string db = "LF_ServerInfoLive";
+        public static string token = "";
+        public static int virgin = 0;
+        public static DiscordClient Client { get; internal set; }
+        public static ApplicationCommandsExtension ApplicationCommands { get; internal set; }
+        public static CommandsNextExtension CNext { get; internal set; }
+        public static InteractivityExtension INext { get; internal set; }
         public static CancellationTokenSource ShutdownRequest;
-        private readonly ulong testguild = 881868642600505354;
+        public static readonly ulong testguild = 881868642600505354;
         public static string prefix = "lfn/";
+
+        /// <summary>
+        /// Binarie to text.
+        /// </summary>
+        /// <param name="data">The binary data.</param>
+        public static string BinaryToText(byte[] data)
+        {
+            return Encoding.UTF8.GetString(data);
+        }
 
         public DiscordBot()
         {
             if (virgin == 0)
             {
-                Connections connections = Connections.GetConnections();
-                token = connections.DiscordBotKey;
+                //Connections connections = Connections.GetConnections();
+                token = "ODg3NTE5MDA4NjA0MTgwNTQx.YUFUfA.0OezBChU2JfL_t0GxE57rJbYK88";//connections.DiscordBotKey;
                 virgin = 69;
             }
             ShutdownRequest = new CancellationTokenSource();
@@ -112,17 +171,46 @@ namespace BotDLL
                 ResponseBehavior = InteractionResponseBehavior.Respond
             });
 
-            RegisterEventListener(Client);
+            RegisterEventListener(Client, ApplicationCommands, CNext);
             RegisterCommands(CNext, ApplicationCommands);
 
         }
+        public void Dispose()
+        {
+            Client.Dispose();
+            INext = null;
+            CNext = null;
+            Client = null;
+            ApplicationCommands = null;
+        }
+
+        public async Task RunAsync()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            await Client.ConnectAsync();
+            Console.WriteLine($"Starting with Prefix {prefix}");
+            Console.WriteLine($"Starting {Client.CurrentUser.Username}");
+
+            while (!ShutdownRequest.IsCancellationRequested)
+            {
+                await Task.Delay(2000);
+            }
+            await Client.UpdateStatusAsync(activity: null, userStatus: UserStatus.Offline, idleSince: null);
+            await Client.DisconnectAsync();
+            await Task.Delay(2500);
+            Dispose();
+        }
+
 
         #region Register Commands & Events
         /// <summary>
         /// Registers the event listener.
         /// </summary>
         /// <param name="client">The discord client.</param>
-        private void RegisterEventListener(DiscordClient client)
+        /// <param name="ac">The application commands extension.</param>
+        /// <param name="cnext">The commands next extension.</param>
+        private void RegisterEventListener(DiscordClient client, ApplicationCommandsExtension ac, CommandsNextExtension cnext)
         {
 
             client.Ready += Client_Ready;
@@ -144,11 +232,11 @@ namespace BotDLL
 #if DEBUG
             client.UnknownEvent += Client_UnknownEvent;
 #endif
-            client.SlashCommandErrored += Ac_SlashCommandErrored;
-            client.SlashCommandExecuted += Ac_SlashCommandExecuted;
-            client.ContextMenuErrored += Ac_ContextMenuErrored;
-            client.ContextMenuExecuted += Ac_ContextMenuExecuted;
-            client.CommandErrored += CNext_CommandErrored;
+            ac.SlashCommandErrored += Ac_SlashCommandErrored;
+            ac.SlashCommandExecuted += Ac_SlashCommandExecuted;
+            ac.ContextMenuErrored += Ac_ContextMenuErrored;
+            ac.ContextMenuExecuted += Ac_ContextMenuExecuted;
+            cnext.CommandErrored += CNext_CommandErrored;
         }
 
         /// <summary>
@@ -168,9 +256,7 @@ namespace BotDLL
             ac.RegisterCommands<DiscordCommands.Slash>();
 #endif
         }
-
         #endregion
-
         /*
 
         private static async Task MessageReceivedAsync(SocketMessage arg)

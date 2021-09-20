@@ -1,25 +1,31 @@
-﻿using System;
+﻿using BotDLL;
+using BotDLL.Model.BotCom;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using BotDLL;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ListforgeBot
 {
     public class Program
-    {
+    {/*
+        static void Main()
+        {
+            DiscordBot bot = new DiscordBot();
+            bot.RunAsync().Wait();
+        }*/
+        
+        
         private const int MSTimeOut = 5000;
         private const int MSTimeOutbt = 5000;
         private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
         private static List<LF_ServerInfo> lstcp1 = new List<LF_ServerInfo>();
         private static List<LF_ServerInfo> lstcp2 = new List<LF_ServerInfo>();
         private const string db = "LF_ServerInfoLive";
+        private static DiscordBot dbot;
         static async Task Main()
         {
             try
@@ -49,7 +55,8 @@ namespace ListforgeBot
                     Center(@"╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝        ╚═╝   ");
                     Center(" ");
                     Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                    await DiscordBot.Init();
+                    dbot = new DiscordBot();
+                    await dbot.RunAsync();
                     await TelegramBot.Init();
                     DebugLog.Main();
                     LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
@@ -95,7 +102,7 @@ namespace ListforgeBot
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
                                 TelegramBot.TGChange(obj, "player");
-                                DiscordBot.DCChange(obj, "player");
+                                //dbot.DCChange(obj, "player");
                                 Center($"{obj}");
                                 Change();
                             }
@@ -111,7 +118,7 @@ namespace ListforgeBot
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
                                 TelegramBot.TGChange(obj, "status");
-                                DiscordBot.DCChange(obj, "status");
+                                //dbot.DCChange(obj, "status");
                                 Center($"{obj}");
                                 Change();
                             }
@@ -127,7 +134,7 @@ namespace ListforgeBot
                             {
                                 LF_ServerInfo obj = itemlive as LF_ServerInfo;
                                 TelegramBot.TGChange(obj, "version");
-                                DiscordBot.DCChange(obj, "version");
+                                //dbot.DCChange(obj, "version");
                                 Center($"{obj}");
                                 Change();
                             }
