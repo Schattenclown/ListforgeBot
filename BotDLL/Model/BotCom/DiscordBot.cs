@@ -112,8 +112,8 @@ namespace BotDLL.Model.BotCom
         {
             if (virgin == 0)
             {
-                //Connections connections = Connections.GetConnections();
-                token = "ODg3NTE5MDA4NjA0MTgwNTQx.YUFUfA.0OezBChU2JfL_t0GxE57rJbYK88";//connections.DiscordBotKey;
+                Connections connections = Connections.GetConnections();
+                token = connections.DiscordBotKey;
                 virgin = 69;
             }
             ShutdownRequest = new CancellationTokenSource();
