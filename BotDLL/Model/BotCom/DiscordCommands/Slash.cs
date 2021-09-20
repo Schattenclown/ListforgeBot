@@ -169,5 +169,15 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             WithAuthor($"{user.Username}", user.AvatarUrl, user.AvatarUrl);
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embed.Build()));
         }
+
+        [SlashCommand("invite", "Invite ListforgeNotify", true)]
+        public static async Task InviteAsync(InteractionContext ic)
+        {
+            await ic.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
+
+            var bot_invite = ic.Client.GetInAppOAuth(Permissions.Administrator);
+
+            await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent(bot_invite.AbsoluteUri).WithAvatarUrl(ic.Client.CurrentUser.AvatarUrl));
+        }
     }
 }
