@@ -8,7 +8,7 @@ using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 
-namespace BotDLL
+namespace BotDLL.Model.BotCom
 {
     public class TelegramBot
     {
