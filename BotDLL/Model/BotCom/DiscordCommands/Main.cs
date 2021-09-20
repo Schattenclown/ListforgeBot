@@ -14,7 +14,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
     /// </summary>
     internal class Main : BaseCommandModule 
     {
-
         /// <summary>
         /// prob. does nothing
         /// </summary>
