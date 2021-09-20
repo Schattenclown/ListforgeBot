@@ -76,15 +76,14 @@ namespace BotDLL.Model.BotCom
     #endregion
 
     public class DiscordBot : IDisposable
-    { /* möpse
-        ( . )( . )
-         )      (
-        (   oo   )
-         |  ||  | 
-         |  V   |
-       */
-
-
+    {   /* 
+              möpse
+            ( . )( . )
+             )      (
+            (   oo   )
+             |  ||  | 
+             |  V   |
+        */
 
         private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
         static List<DC_Userdata> lstud = new List<DC_Userdata>();

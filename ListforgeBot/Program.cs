@@ -99,6 +99,7 @@ namespace ListforgeBot
                 Thread.Sleep(MSTimeOut);
                 GC.Collect();
                 virgin++;
+                //1075 about 24h
                 if (virgin == 1075)
                     RestartProgram();
             }
@@ -241,6 +242,9 @@ namespace ListforgeBot
         /// </summary>
         private static void RestartProgram()
         {
+            dbot = new DiscordBot();
+            dbot.Dispose();
+
             // Get file path of current process 
             var filePath = Assembly.GetExecutingAssembly().Location;
             //var filePath = Application.ExecutablePath;  // for WinForms
