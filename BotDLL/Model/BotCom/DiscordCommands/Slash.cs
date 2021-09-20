@@ -248,11 +248,13 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
 
+            var ecp = new ExperimentChoiceProvider();
+            var p = await ecp.Provider();
             switch (servers)
             {
                 case "0":                   
 
-                    eb = ChangeSubscriptionCommand("", ctx);
+                    eb = ChangeSubscriptionCommand(p.First(d => d.Value.ToString() == servers).Name, ctx);
                     break;
                 case "1":
                     break;
