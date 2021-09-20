@@ -324,11 +324,11 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         }
 
         /// <summary>
-        /// Tests the async.
+        /// Testst the functionality of the DCChange [player, status, version]
         /// </summary>
         /// <param name="ic">The ic.</param>
         /// <returns>A Task.</returns>
-        [SlashCommand("test", "test", true)]
+        [SlashCommand("test", "Testst the functionality of the DCChange [player, status, version]", true)]
         public static async Task TestAsync(InteractionContext ic)
         {
             await ic.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
