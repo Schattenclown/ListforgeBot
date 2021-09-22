@@ -53,6 +53,9 @@ namespace BotDLL
             cons = CSV_Connections.ReadAll();
 
             string database = RemoveTillWord(cons.MySqlConStr, "Database=", 9);
+#if DEBUG
+            database = RemoveTillWord(cons.MySqlConStrDebug, "Database=", 9);
+#endif
             database = RemoveAfterWord(database, "; Uid", 0);
 
             string sql = $"CREATE DATABASE IF NOT EXISTS `{database}`;" +

@@ -17,6 +17,9 @@ namespace BotDLL
         {
             Connections connections = Connections.GetConnections();
             token = connections.MySqlConStr;
+#if DEBUG
+            token = connections.MySqlConStrDebug;
+#endif
         }
         public static MySqlConnection OpenDB()
         {

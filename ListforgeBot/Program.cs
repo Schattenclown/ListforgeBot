@@ -12,15 +12,6 @@ namespace ListforgeBot
 {
     public class Program
     {
-        #region Test
-        /*
-        static void Main()
-        {
-            DiscordBot bot = new DiscordBot();
-            bot.RunAsync().Wait();
-        }*/
-        #endregion
-
         #region Variables
         /// <summary>
         /// The ms time out.

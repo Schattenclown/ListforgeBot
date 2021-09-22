@@ -57,16 +57,11 @@ namespace BotDLL
                             DateTime last_check = Builddatetime(obj.Last_check);
                             DateTime last_online = Builddatetime(obj.Last_online);
                             
-                            string LF_StatUri = null;
+                            string LF_StatUri = BuildStatUrl("conan-exiles.com", obj.Id);
 
-                            Uri LF_HeaderImgUri = null;
-                            
-                            LF_StatUri = BuildStatUrl("conan-exiles.com", obj.Id);
-
-                            if (obj.Map.ToString() != "Normal")
-                            {
-                                LF_HeaderImgUri = new Uri(BuildHeaderImgUri("conan-exiles.com", obj.Id, obj.Map));
-                            }
+                            Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("conan-exiles.com", obj.Id, obj.Map));
+                            if (obj.Map.ToString() == "Normal")
+                                LF_HeaderImgUri = null;
 
                             string rawcontent = await client1.GetStringAsync(LF_StatUri);
                             QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
@@ -102,19 +97,9 @@ namespace BotDLL
                             DateTime last_online = Builddatetime(obj.Last_online);
                             string LF_StatUri = BuildStatUrl("valheim-servers.io", obj.Id);
                             Uri LF_HeaderImgUri = new Uri(BuildHeaderImgUri("valheim-servers.io", obj.Id, null));
-                            string rawcontent = null;
-                            
-                            try
-                            {
-                                rawcontent = await client1.GetStringAsync(LF_StatUri);
-                                QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
-                                achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, null, null, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
-                            }
-                            catch (Exception)
-                            {
-                                achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, null, null, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, null, LF_HeaderImgUri, false);
-                            }
-
+                            string rawcontent = await client1.GetStringAsync(LF_StatUri);
+                            QC_UriGenerator qcobj = QC_UriGenerator.CreateObj(rawcontent);
+                            achieved = DB_LF_ServerInfo.InserInto(db, obj.Id, obj.Name, obj.Address, obj.Port, null, null, obj.Is_online, obj.Players, obj.Maxplayers, obj.Version, obj.Uptime, last_check, last_online, obj.Url, item.Key, LF_StatUri, qcobj.QC_StatUri, LF_HeaderImgUri, false);
                         }
                     }
                 }
@@ -145,7 +130,7 @@ namespace BotDLL
                     finishedUrl = $"https://counter-strike-servers.net/statistics/chart/daily/players/{id}/";
                     break;
                 case "valheim-servers.io":
-                    finishedUrl = $"https://valheim-servers.io/server/{id}/stats/";
+                    finishedUrl = $"https://valheim-servers.io/statistics/chart/daily/players/{id}/";
                     break;
                 default:
                     break;

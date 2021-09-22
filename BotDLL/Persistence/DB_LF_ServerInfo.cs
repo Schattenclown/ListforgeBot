@@ -37,11 +37,11 @@ namespace BotDLL
         }
         public static void Update(string swhatdb, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string LF_Uri, string Key, string LF_StatUri, string QC_StatUri, Uri LF_HeaderImgUri, bool notification)
         {
-            string sql1 =   $"UPDATE {swhatdb} SET Id={Id}, Name='{Name}', Address='{Address}', Port={Port}, Hostname='{Hostname}', Map='{Map}', Is_online={Is_online}, Players={Players}, Maxplayers={Maxplayers}, Version='{Versions.Replace("theforestDS ", "")}', " +
+            string sql1 = $"UPDATE {swhatdb} SET Id={Id}, Name='{Name}', Address='{Address}', Port={Port}, Hostname='{Hostname}', Map='{Map}', Is_online={Is_online}, Players={Players}, Maxplayers={Maxplayers}, Version='{Versions.Replace("theforestDS ", "")}', " +
                             $"Uptime={Uptime}, Last_check='{Last_check:yyyyy-MM-dd HH-mm}', Last_online='{Last_online:yyyyy-MM-dd HH-mm}', LF_Uri='{LF_Uri}', `key`='{Key}' WHERE ID={Id}";
             DB_Connection.ExecuteNonQuery(sql1, notification);
-            
-            string sql2 =   $"UPDATE {swhatdb} SET LF_StatUri='{LF_StatUri}', QC_StatUri='{QC_StatUri}', LFHeaderImgUri='{LF_HeaderImgUri}' WHERE ID={Id}";
+
+            string sql2 = $"UPDATE {swhatdb} SET LF_StatUri='{LF_StatUri}', QC_StatUri='{QC_StatUri}', LFHeaderImgUri='{LF_HeaderImgUri}' WHERE ID={Id}";
             DB_Connection.ExecuteNonQuery(sql2, notification);
         }
         public static void UpdateSmoll(string swhatdb, string Id, string LF_StatUri, string QC_StatUri, Uri LF_HeaderImgUri, bool notification)
@@ -99,11 +99,19 @@ namespace BotDLL
                 try
                 {
                     obj.LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri"));
+                }
+                catch (Exception)
+                {
+                    DebugLog.Log($"{obj.Address} LFHeaderImgUri was null Exception");
+                }
+
+                try
+                {
                     obj.QC_StatUri = new Uri(rdr.GetString("QC_StatUri"));
                 }
                 catch (Exception)
                 {
-
+                    DebugLog.Log($"{obj.Address} QC_StatUri was null Exception");
                 }
 
                 lst.Add(obj);
@@ -144,7 +152,7 @@ namespace BotDLL
             try
             {
                 liveInfo.QC_StatUri = new Uri(rdr.GetString("QC_StatUri"));
-                liveInfo.LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri")); 
+                liveInfo.LF_HeaderImgURi = new Uri(rdr.GetString("LFHeaderImgUri"));
             }
             catch (Exception)
             {
@@ -168,6 +176,9 @@ namespace BotDLL
             cons = CSV_Connections.ReadAll();
 
             string database = RemoveTillWord(cons.MySqlConStr, "Database=", 9);
+#if DEBUG
+            database = RemoveTillWord(cons.MySqlConStrDebug, "Database=", 9);
+#endif
             database = RemoveAfterWord(database, "; Uid", 0);
 
             string sql = $"CREATE DATABASE IF NOT EXISTS `{database}`;" +

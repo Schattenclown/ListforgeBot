@@ -66,8 +66,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         public static async Task ShowAllAsync(InteractionContext ic)
         {
             await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
-
-            _ = new List<LF_ServerInfo>();
+            
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
 
             foreach (var item in lstlive)
@@ -76,10 +75,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
                 eb.Title = item.Name;
-
-                if (item.Name != "TheForest")
-                    eb.Url = item.LF_Uri.AbsoluteUri;
-
+                eb.Url = item.LF_Uri.AbsoluteUri;
                 eb.AddField("Ip address", $"{item.Address}:{item.Port}", true);
                 eb.AddField("Status", $"{onoff}", false);
                 eb.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
@@ -108,7 +104,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
 
-            _ = new List<LF_ServerInfo>();
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
@@ -120,8 +115,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
                     eb.Title = item.Name;
-                    if (item.Name != "TheForest")
-                        eb.Url = item.LF_Uri.AbsoluteUri;
+                    eb.Url = item.LF_Uri.AbsoluteUri;
 
                     eb.Description = $"Player Statistics for {item.Name}";
                     if (item.QC_StatUri != null)
@@ -137,26 +131,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
                 }
             }
-            /*
-                else if (lF_ServerInfo != null)
-                {
-                    string onoff = "Offline"; if (lF_ServerInfo.Is_online == true) onoff = "Online";
-
-                    eb.Title = lF_ServerInfo.Name;
-                    if (lF_ServerInfo.Name != "TheForest")
-                        eb.Url = lF_ServerInfo.LF_Uri.AbsoluteUri;
-
-                    eb.Description = $"Player Statistics for {lF_ServerInfo.Name}";
-                    eb.ImageUrl = lF_ServerInfo.QC_StatUri.AbsoluteUri;
-                    eb.WithTimestamp(lF_ServerInfo.Last_check);
-
-                    eb.Color = DiscordColor.Green;
-                    if (onoff == "Offline")
-                        eb.Color = DiscordColor.Red;
-
-                    await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
-                }
-            */
 
             await ic.DeleteResponseAsync();
         }
@@ -171,7 +145,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
 
-            _ = new List<LF_ServerInfo>();
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
 
             foreach (var item in lstlive)
@@ -180,10 +153,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
                 eb.Title = item.Name;
-
-                if (item.Name != "TheForest")
-                    eb.Url = item.LF_Uri.AbsoluteUri;
-
+                eb.Url = item.LF_Uri.AbsoluteUri;
                 eb.AddField("Ip address", $"{item.Address}:{item.Port}", true);
                 eb.AddField("Status", $"{onoff}", false);
                 eb.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
@@ -214,13 +184,12 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             await ic.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
 
-            _ = new List<LF_ServerInfo>();
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
             string servers = "";
 
             foreach (var item in lstlive)
             {
-                servers += item.Name.ToLower() + "\n";
+                servers += item.Name.ToUpper() + "\n";
             }
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder
@@ -260,10 +229,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
                     eb.Title = item.Name;
-
-                    if (item.Name != "TheForest")
-                        eb.Url = item.LF_Uri.AbsoluteUri;
-
+                    eb.Url = item.LF_Uri.AbsoluteUri;
                     eb.AddField("Ip address", $"{item.Address}:{item.Port}", true);
                     eb.AddField("Status", $"{onoff}", false);
                     eb.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
@@ -306,9 +272,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
                     eb.Title = item.Name;
-                    if (item.Name != "TheForest")
-                        eb.Url = item.LF_Uri.AbsoluteUri;
-
+                    eb.Url = item.LF_Uri.AbsoluteUri;
                     eb.Description = $"Player Statistics for {item.Name}";
                     if (item.QC_StatUri != null)
                         eb.ImageUrl = item.QC_StatUri.AbsoluteUri;
@@ -357,7 +321,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
 
-            _ = new List<LF_ServerInfo>();
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
 
             foreach (var item in lstlive)
@@ -402,7 +365,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         {
             await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
 
-            _ = new List<LF_ServerInfo>();
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
 
             foreach (var item in lstlive)
@@ -578,16 +540,26 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <param name="ic">The ic.</param>
         /// <returns>A Task.</returns>
         [SlashCommand("test", "Testst the functionality of the DCChange [player, status, version]", true)]
-        public static async Task TestAsync(InteractionContext ic)
+        public static async Task TestAsync(InteractionContext ic, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "testserver")] string servers)
         {
             await ic.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
 
-            _ = new List<LF_ServerInfo>();
+            var ecp = new ServerNameChoiceProvider();
+            var choices = await ecp.Provider();
+
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
-            LF_ServerInfo obj = lstlive[1];
-            DiscordBot.DCChange(obj, "player");
-            DiscordBot.DCChange(obj, "status");
-            DiscordBot.DCChange(obj, "version");
+           
+            foreach (var item in lstlive)
+            {
+                if (item.Name.ToLower() == choices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
+                {
+                    DiscordBot.DCChange(item, "player");
+                    DiscordBot.DCChange(item, "status");
+                    DiscordBot.DCChange(item, "version");
+                }
+            }
+
+            await ic.DeleteResponseAsync();
         }
 
         /// <summary>

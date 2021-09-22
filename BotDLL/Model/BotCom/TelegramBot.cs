@@ -25,6 +25,9 @@ namespace BotDLL.Model.BotCom
             {
                 Connections connections = Connections.GetConnections();
                 token = connections.TelegramBotKey;
+#if DEBUG
+                token = connections.TelegramBotKeyDebug;
+#endif
                 virgin = 69;
             }
 

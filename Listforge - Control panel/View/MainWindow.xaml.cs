@@ -65,8 +65,11 @@ namespace Listforge_Control_panel
         {
             AddServerDlg addServerDlg = new AddServerDlg();
             addServerDlg.ShowDialog();
-            if(addServerDlg.DialogResult == true)
+            if (addServerDlg.DialogResult == true)
+            {
                 mvm.RefreshMainViewModel();
+                LF_Fetcher.Fetch("LF_ServerInfoLive");
+            }
         }
         private void btDelServer_Click(object sender, RoutedEventArgs e)
         {
@@ -83,6 +86,7 @@ namespace Listforge_Control_panel
         }
         private void btRefresh_Click(object sender, RoutedEventArgs e)
         {
+            LF_Fetcher.Fetch("LF_ServerInfoLive");
             mvm.RefreshMainViewModel();
         }
         private void cbHideKeys_Checked(object sender, RoutedEventArgs e)
@@ -99,12 +103,6 @@ namespace Listforge_Control_panel
             DB_CreateTableDlg DBCreateDlg = new DB_CreateTableDlg();
             DBCreateDlg.ShowDialog();
         }
-
-        private void btAddServer_Copy_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void test_Click(object sender, RoutedEventArgs e)
         {
 

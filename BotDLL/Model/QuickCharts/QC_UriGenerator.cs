@@ -17,6 +17,9 @@ namespace BotDLL
             {
                 Connections connections = Connections.GetConnections();
                 token = connections.QuickChartApi;
+#if DEBUG
+                token = connections.QuickChartApiDebug;
+#endif
                 virgin = 69;
             }
             QC_UriGenerator obj = new QC_UriGenerator();

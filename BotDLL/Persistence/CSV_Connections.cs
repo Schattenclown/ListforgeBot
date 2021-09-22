@@ -23,20 +23,32 @@ namespace BotDLL
                 {
                     string row = sr.ReadLine();
                     string[] infos = row.Split(';');
-    
+
                     switch (infos[0])
                     {
                         case "DiscordBotKey":
-                                cons.DiscordBotKey = infos[1];
-                                break;
-                        case "TelegramBotKey":
-                                cons.TelegramBotKey = infos[1];
+                            cons.DiscordBotKey = infos[1];
                             break;
-                        case "DBConnectionString":
-                                cons.MySqlConStr = infos[1].Replace(',', ';');
+                        case "DiscordBotKeyDebug":
+                            cons.DiscordBotDebug = infos[1];
+                            break;
+                        case "TelegramBotKey":
+                            cons.TelegramBotKey = infos[1];
+                            break;
+                        case "TelegramBotKeyDebug":
+                            cons.TelegramBotKeyDebug = infos[1];
+                            break;
+                        case "MySqlConStr":
+                            cons.MySqlConStr = infos[1].Replace(',', ';');
+                            break;
+                        case "MySqlConStrDebug":
+                            cons.MySqlConStrDebug = infos[1].Replace(',', ';');
                             break;
                         case "QuickChartApi":
                             cons.QuickChartApi = infos[1];
+                            break;
+                        case "QuickChartApiDebug":
+                            cons.QuickChartApiDebug = infos[1];
                             break;
                         default:
                             break;
@@ -48,14 +60,17 @@ namespace BotDLL
             catch (Exception)
             {
                 DirectoryInfo dir = new DirectoryInfo(_path.LocalPath);
-                if(!dir.Exists)
+                if (!dir.Exists)
                     dir.Create();
 
                 StreamWriter streamWriter = new StreamWriter(_filepath.LocalPath);
-                streamWriter.WriteLine( "DiscordBotKey;<API Key here>\n" +
+                streamWriter.WriteLine("DiscordBotKey;<API Key here>\n" +
+                                        "DiscordBotKeyDebug;<API Key here>\n" +
                                         "TelegramBotKey;<API Key here>\n" +
-                                        "DBConnectionString;<DBConnectionString here>\n" +
-                                        "QuickChartApi;<API Key here>");
+                                        "MySqlConStr;<DBConnectionString here>\n" +
+                                        "MySqlConStrDebug;<DBConnectionString here>\n" +
+                                        "QuickChartApi;<API Key here>" +
+                                        "QuickChartApiDebug;<API Key here>");
 
                 streamWriter.Close();
                 throw new Exception($"{_path.LocalPath}\n" +
