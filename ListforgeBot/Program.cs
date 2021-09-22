@@ -42,7 +42,7 @@ namespace ListforgeBot
             }
             catch (Exception)
             {
-                Console.SetWindowSize(150, 49);
+                Console.SetWindowSize(150, 30);
             }
             int virgin = 0;
             string compare1 = "LFServerInfocompare1";
