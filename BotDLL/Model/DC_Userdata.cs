@@ -4,11 +4,12 @@ namespace BotDLL
 {
     public class DC_Userdata
     {
-        public string AuthorId { get; set; }
-        public string ChannelId { get; set; }
+        public ulong AuthorId { get; set; }
+        public ulong ChannelId { get; set; }
         public string Author { get; set; }
         public int ServerId { get; set; }
         public bool Abo { get; set; }
+        public bool LowKeyAbo { get; set; }
 
         public static List<DC_Userdata> ReadAll()
         {

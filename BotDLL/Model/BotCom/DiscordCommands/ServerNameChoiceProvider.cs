@@ -19,7 +19,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         private const string db = "LF_ServerInfoLive";
         public async Task<IEnumerable<DiscordApplicationCommandOptionChoice>> Provider()
         {
-            _ = new List<LF_ServerInfo>();
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
             string servers = "";
 

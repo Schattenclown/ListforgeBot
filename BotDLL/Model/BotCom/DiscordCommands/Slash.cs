@@ -261,13 +261,14 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
-            var ecp = new ServerNameChoiceProvider();
-            var choices = await ecp.Provider();
+            var serverNameChoiceProvider = new ServerNameChoiceProvider();
+            var serverNameChoices = await serverNameChoiceProvider.Provider();
+
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
 
             foreach (var item in lstlive)
             {
-                if (item.Name.ToLower() == choices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
+                if (item.Name.ToLower() == serverNameChoices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
                 {
                     string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
@@ -297,16 +298,23 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <param name="gid">The gid.</param>
         /// <returns>A Task.</returns>
         [SlashCommand("add", "Adds you to an subscription for a server")]
-        public static async Task AddAboAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "adding")] string servers)
+        public static async Task AddAboAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "adding")] string servers, [ChoiceProvider(typeof(AboStateChoiceProvider))][Option("Add", "State")] string aboState)
         {
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
+            bool lowKeyState = false;
 
-            var ecp = new ServerNameChoiceProvider();
-            var choices = await ecp.Provider();
+            var serverNameChoiceProvider = new ServerNameChoiceProvider();
+            var serverNameChoices = await serverNameChoiceProvider.Provider();
 
-            eb = ChangeSubscriptionCommand(choices.First(d => d.Value.ToString().ToLower() == servers).Name, ctx, true);
+            var aboStateChoiceProvider = new AboStateChoiceProvider();
+            var aboStateChoices = await aboStateChoiceProvider.Provider();
+
+            if ("LOWKEY".ToLower() == aboStateChoices.First(c => c.Value.ToString().ToLower() == aboState).Name.ToLower())
+                lowKeyState = true;
+
+            eb = ChangeSubscriptionCommand(serverNameChoices.First(d => d.Value.ToString().ToLower() == servers).Name, ctx, true, lowKeyState);
 
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
         }
@@ -325,7 +333,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             foreach (var item in lstlive)
             {
-                DiscordEmbedBuilder eb = ChangeSubscriptionCommand(item.Name, ic, true);
+                DiscordEmbedBuilder eb = ChangeSubscriptionCommand(item.Name, ic, true, false);
 
                 await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
             }
@@ -350,7 +358,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             var ecp = new ServerNameChoiceProvider();
             var choices = await ecp.Provider();
 
-            eb = ChangeSubscriptionCommand(choices.First(d => d.Value.ToString().ToLower() == servers).Name, ctx, false);
+            eb = ChangeSubscriptionCommand(choices.First(d => d.Value.ToString().ToLower() == servers).Name, ctx, false, false);
 
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
         }
@@ -369,7 +377,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             foreach (var item in lstlive)
             {
-                DiscordEmbedBuilder eb = ChangeSubscriptionCommand(item.Name, ic, false);
+                DiscordEmbedBuilder eb = ChangeSubscriptionCommand(item.Name, ic, false, false);
 
                 await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
             }
@@ -383,7 +391,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <param name="servername">The servername.</param>
         /// <param name="ctx">The ctx.</param>
         /// <returns>A DiscordEmbedBuilder.</returns>
-        public static DiscordEmbedBuilder ChangeSubscriptionCommand(string servername, InteractionContext ctx, bool abo)
+        public static DiscordEmbedBuilder ChangeSubscriptionCommand(string servername, InteractionContext ctx, bool abo, bool lowKeyAbo)
         {
             bool found = false;
             int serverid = 0;
@@ -398,7 +406,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             foreach (var item in lstud)
             {
-                if (item.ChannelId == ctx.Channel.Id.ToString() && item.ServerId == serverid && item.AuthorId == ctx.Member.Id.ToString())
+                if (item.ChannelId == ctx.Channel.Id && item.ServerId == serverid && item.AuthorId == ctx.Member.Id)
                     found = true;
             }
 
@@ -406,11 +414,12 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             {
                 DC_Userdata ud = new DC_Userdata
                 {
-                    AuthorId = ctx.Member.Id.ToString(),
-                    ChannelId = ctx.Channel.Id.ToString(),
+                    AuthorId = ctx.Member.Id,
+                    ChannelId = ctx.Channel.Id,
                     Author = ctx.Member.DisplayName,
                     ServerId = serverid,
-                    Abo = abo
+                    Abo = abo,
+                    LowKeyAbo = lowKeyAbo
                 };
                 DC_Userdata.Add(ud, false);
             }
@@ -418,11 +427,12 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             {
                 DC_Userdata ud = new DC_Userdata
                 {
-                    AuthorId = ctx.Member.Id.ToString(),
-                    ChannelId = ctx.Channel.Id.ToString(),
+                    AuthorId = ctx.Member.Id,
+                    ChannelId = ctx.Channel.Id,
                     Author = ctx.Member.DisplayName,
                     ServerId = serverid,
-                    Abo = abo
+                    Abo = abo,
+                    LowKeyAbo = lowKeyAbo
                 };
                 DC_Userdata.Change(ud, false);
             }
@@ -539,13 +549,16 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// </summary>
         /// <param name="ic">The ic.</param>
         /// <returns>A Task.</returns>
-        [SlashCommand("test", "Testst the functionality of the DCChange [player, status, version]", true)]
-        public static async Task TestAsync(InteractionContext ic, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "testserver")] string servers)
+        [SlashCommand("test", "Test´s the functionality of the DCChange [player, status, version]", true)]
+        public static async Task TestAsync(InteractionContext ic, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "testserver")] string servers, [ChoiceProvider(typeof(TestFunctionChoiceProvider))][Option("test", "function")] string functions)
         {
-            await ic.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
+            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             var ecp = new ServerNameChoiceProvider();
             var choices = await ecp.Provider();
+
+            var testFunctionChoiceProvider = new TestFunctionChoiceProvider();
+            var testFunctionChoices = await testFunctionChoiceProvider.Provider();
 
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
            
@@ -553,13 +566,16 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             {
                 if (item.Name.ToLower() == choices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
                 {
-                    DiscordBot.DCChange(item, "player");
-                    DiscordBot.DCChange(item, "status");
-                    DiscordBot.DCChange(item, "version");
+                    if("Player count changed".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
+                        DiscordBot.DCChange(item, "player");
+                    else if ("Status changed".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
+                        DiscordBot.DCChange(item, "status");
+                    else if ("Version changed".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
+                        DiscordBot.DCChange(item, "version");
                 }
             }
 
-            await ic.DeleteResponseAsync();
+            await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Finished!"));
         }
 
         /// <summary>

@@ -201,6 +201,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\BotCom\DiscordCommands\TestFunctionChoiceProvider.cs" />
+    <Compile Include="Model\BotCom\DiscordCommands\AboStateChoiceProvider.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\ServerNameChoiceProvider.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\Main.cs" />
     <Compile Include="Model\BotCom\DiscordCommands\Slash.cs" />

@@ -22,11 +22,12 @@ namespace BotDLL
             {
                 DC_Userdata ud = new DC_Userdata
                 {
-                    AuthorId = dataReader.GetString("AuthorId"),
-                    ChannelId = dataReader.GetString("ChannelId"),
+                    AuthorId = dataReader.GetUInt64("AuthorId"),
+                    ChannelId = dataReader.GetUInt64("ChannelId"),
                     Author = dataReader.GetString("Author"),
                     ServerId = dataReader.GetInt32("ServerId"),
-                    Abo = dataReader.GetBoolean("Abo")
+                    Abo = dataReader.GetBoolean("Abo"),
+                    LowKeyAbo = dataReader.GetBoolean("LowKeyAbo")
                 };
 
                 lst.Add(ud);
@@ -37,13 +38,13 @@ namespace BotDLL
         }
         public static void Add(DC_Userdata ud, bool notification)
         {
-            String sql = $"INSERT INTO DC_Userdata (AuthorId, ChannelId, Author, ServerId, Abo)" +
-                         $"VALUES ('{ud.AuthorId}', '{ud.ChannelId}', '{ud.Author}', {ud.ServerId}, {ud.Abo})";
+            String sql = $"INSERT INTO DC_Userdata (AuthorId, ChannelId, Author, ServerId, Abo, LowKeyAbo)" +
+                         $"VALUES ('{ud.AuthorId}', '{ud.ChannelId}', '{ud.Author}', {ud.ServerId}, {ud.Abo}, {ud.LowKeyAbo})";
             DB_Connection.ExecuteNonQuery(sql, notification);
         }
         public static void Change(DC_Userdata ud, bool notification)
         {
-            String sql = $"UPDATE DC_Userdata SET Abo={ud.Abo}, Author='{ud.Author}' WHERE AuthorId={ud.AuthorId} AND ChannelId={ud.ChannelId} AND ServerId={ud.ServerId}";
+            String sql = $"UPDATE DC_Userdata SET Abo={ud.Abo}, LowKeyAbo={ud.LowKeyAbo}, Author='{ud.Author}' WHERE AuthorId={ud.AuthorId} AND ChannelId={ud.ChannelId} AND ServerId={ud.ServerId}";
             DB_Connection.ExecuteNonQuery(sql, notification);
         }
         public static void CreateTable_Userdata(bool notification)
@@ -65,7 +66,8 @@ namespace BotDLL
                             "`ChannelId` varchar(50) DEFAULT NULL," +
                             "`Author` varchar(50) DEFAULT NULL," +
                             "`ServerId` int(11) DEFAULT NULL," +
-                            "`Abo` int(11) DEFAULT NULL" +
+                            "`Abo` int(11) DEFAULT NULL," +
+                            "`LowKeyAbo` int(11) DEFAULT NULL" +
                             ") ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;";
 
             DB_Connection.ExecuteNonQuery(sql, notification);

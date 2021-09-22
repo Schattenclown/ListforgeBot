@@ -271,7 +271,7 @@ namespace BotDLL.Model.BotCom
                 Color = new DiscordColor(245, 107, 0)
             };
             embedBuilder.WithThumbnail("https://i.imgur.com/eb0RgjI.png");
-            embedBuilder.WithAuthor($"ListforgeNotify {obj.Name}");
+            embedBuilder.WithAuthor($"ListforgeNotify");
             embedBuilder.WithFooter("(✿◠‿◠) thanks for using me");
             embedBuilder.WithTimestamp(DateTime.Now);
 
@@ -281,17 +281,20 @@ namespace BotDLL.Model.BotCom
                 {
                     if(!once)
                     {
+                        embedBuilder.Url = obj.LF_Uri.AbsoluteUri;
                         embedBuilder.AddField($"Name", $"{obj.Name}");
                         embedBuilder.AddField("Ip address", $"{obj.Address}:{obj.Port}");
                         if( whatchanged == "player")
-                        { 
-                            embedBuilder.Title = "Player count changed!";
+                        {
+                            embedBuilder.WithAuthor($"ListforgeNotify Player count changed!");
+                            embedBuilder.Title = $"{obj.Name}";
                             embedBuilder.Color = DiscordColor.Gold;
                             embedBuilder.AddField("Player count changed to ", $"{obj.Players}/{obj.Maxplayers}");
                         }
                         else if (whatchanged == "status")
                         {
-                            embedBuilder.Title = "Status changed!";
+                            embedBuilder.WithAuthor($"ListforgeNotify Status changed!");
+                            embedBuilder.Title = $"{obj.Name}";
                             string sonoff = "Offline";
                             embedBuilder.Color = DiscordColor.Red;
                             if (obj.Is_online)
@@ -303,7 +306,8 @@ namespace BotDLL.Model.BotCom
                         }
                         else if(whatchanged == "version")
                         {
-                            embedBuilder.Title = "Version changed!";
+                            embedBuilder.WithAuthor($"ListforgeNotify Version changed!");
+                            embedBuilder.Title = $"{obj.Name}";
                             embedBuilder.Color = DiscordColor.Gray;
                             embedBuilder.AddField("Serverversion changed to ", $"{obj.Version}");
                         }
@@ -321,7 +325,11 @@ namespace BotDLL.Model.BotCom
             {
                 foreach (var item2 in lstud)
                 {
-                    if (!tags.Contains(item2.AuthorId) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && item2.ServerId == obj.Id)
+                    if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && !item2.LowKeyAbo && item2.ServerId == obj.Id && !tags.Contains(item2.AuthorId.ToString()))
+                        tags += "<@" + item2.AuthorId + ">" + "\n";
+                    else if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.LowKeyAbo && item2.ServerId == obj.Id && obj.Players == 0 || obj.Players == 1 && !tags.Contains(item2.AuthorId.ToString()))
+                        tags += "<@" + item2.AuthorId + ">" + "\n";
+                    else if(!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && item2.LowKeyAbo && item2.ServerId == obj.Id && whatchanged == "version" || whatchanged == "status" && !tags.Contains(item2.AuthorId.ToString()))
                         tags += "<@" + item2.AuthorId + ">" + "\n";
                 }
                 
@@ -329,7 +337,7 @@ namespace BotDLL.Model.BotCom
 
                 var chn = await Client.GetChannelAsync(item);
             
-                if(chn != null)
+                if(chn != null && tags != "")
                     await chn.SendMessageAsync(embedBuilder.Build());
 
                 tags = "";
