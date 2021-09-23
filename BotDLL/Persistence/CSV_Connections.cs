@@ -64,7 +64,7 @@ namespace BotDLL
                     dir.Create();
 
                 StreamWriter streamWriter = new StreamWriter(_filepath.LocalPath);
-                streamWriter.WriteLine("DiscordBotKey;<API Key here>\n" +
+                streamWriter.WriteLine( "DiscordBotKey;<API Key here>\n" +
                                         "DiscordBotKeyDebug;<API Key here>\n" +
                                         "TelegramBotKey;<API Key here>\n" +
                                         "MySqlConStr;<DBConnectionString here>\n" +

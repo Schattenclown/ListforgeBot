@@ -34,7 +34,7 @@ namespace BotDLL
                 }
                 catch (Exception ex)
                 {
-                    DebugLog.Log("ERROR: DB_Connection.OpenDB" + ex.Message);
+                    DebugLog.WriteLog("ERROR: DB_Connection.OpenDB" + ex.Message);
                     Thread.Sleep(10);
                 }
             } while (connection == null);
@@ -45,12 +45,12 @@ namespace BotDLL
         {
             connection.Close();
         }
-        public static void ExecuteNonQuery(String sql, bool notification)
+        public static void ExecuteNonQuery(String sql, bool showMessageBox)
         {
             MySqlConnection connection = OpenDB();
             MySqlCommand sqlCommand = new MySqlCommand(sql, connection);
             int ret = sqlCommand.ExecuteNonQuery();
-            if (ret != -1 && notification == true )
+            if (ret != -1 && showMessageBox == true )
                 MessageBox.Show("Worked!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             CloseDB(connection);
         }
@@ -65,7 +65,6 @@ namespace BotDLL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
                 return null;
             }
         }

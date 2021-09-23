@@ -27,9 +27,9 @@ namespace BotDLL
                     sw.Close();
                     break;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    DebugLog.Log("Error: Failed Insert in CSV_LF_ServerInfo.WriteAll");
+                    DebugLog.WriteLog("ERROR: Failed Insert in comparefile CSV_LF_ServerInfo.WriteAll" + ex.Message);
                 }
             }
         }
@@ -68,9 +68,9 @@ namespace BotDLL
                     }
                     return lst;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    DebugLog.WriteLog("ERROR: Failed ReadAll in comparefile CSV_LF_ServerInfo.WriteAll" + ex.Message);
                 }
             }
         }

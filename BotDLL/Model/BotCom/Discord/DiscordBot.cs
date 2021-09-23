@@ -25,8 +25,6 @@ using System.Threading.Tasks;
 using static BotDLL.Model.BotCom.Events.ClientEvents;
 using static BotDLL.Model.BotCom.Events.GuildEvents;
 using static BotDLL.Model.BotCom.Events.ApplicationCommandsEvents;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 
 namespace BotDLL.Model.BotCom
 {
@@ -325,11 +323,11 @@ namespace BotDLL.Model.BotCom
             {
                 foreach (var item2 in lstud)
                 {
-                    if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && !item2.LowKeyAbo && item2.ServerId == obj.Id && !tags.Contains(item2.AuthorId.ToString()))
+                    if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && !item2.MinimalAbo && item2.ServerId == obj.Id && !tags.Contains(item2.AuthorId.ToString()))
                         tags += "<@" + item2.AuthorId + ">" + "\n";
-                    else if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.LowKeyAbo && item2.ServerId == obj.Id && obj.Players == 0 || obj.Players == 1 && !tags.Contains(item2.AuthorId.ToString()))
+                    else if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.MinimalAbo && item2.ServerId == obj.Id && obj.Players == 0 || obj.Players == 1 && !tags.Contains(item2.AuthorId.ToString()))
                         tags += "<@" + item2.AuthorId + ">" + "\n";
-                    else if(!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && item2.LowKeyAbo && item2.ServerId == obj.Id && whatchanged == "version" || whatchanged == "status" && !tags.Contains(item2.AuthorId.ToString()))
+                    else if(!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && item2.MinimalAbo && item2.ServerId == obj.Id && whatchanged == "version" || whatchanged == "status" && !tags.Contains(item2.AuthorId.ToString()))
                         tags += "<@" + item2.AuthorId + ">" + "\n";
                 }
                 

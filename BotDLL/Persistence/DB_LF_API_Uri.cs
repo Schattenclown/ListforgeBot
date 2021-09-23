@@ -37,7 +37,7 @@ namespace BotDLL
             LF_ServerInfo liveInfo = new LF_ServerInfo(aPI.Key);
             aPI.Info = liveInfo;
         }
-        public static void Write(LF_API_Uri aPI_URL, bool notification)
+        public static void Write(LF_API_Uri aPI_URL, bool showMessageBox)
         {
 
             switch (aPI_URL.Game)
@@ -66,15 +66,15 @@ namespace BotDLL
             aPI_URL.Combined = new Uri($"{aPI_URL.URL}{aPI_URL.Key}");
 
             string sql = $"INSERT INTO LF_API_Uri(Uri, `Key`, Combined) VALUES('{aPI_URL.URL}', '{aPI_URL.Key}', '{aPI_URL.Combined}')";
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
-        public static void Delete(LF_API_Uri aPI_URL, bool notification)
+        public static void Delete(LF_API_Uri aPI_URL, bool showMessageBox)
         {
             string sql = $"DELETE FROM LF_API_Uri WHERE `Key` = '{aPI_URL.Key}'";
 
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
-        public static void CreateTable_LF_API_Uri(bool notification)
+        public static void CreateTable_LF_API_Uri(bool showMessageBox)
         {
             CSV_Connections cSV_Connections = new CSV_Connections();
             Connections cons = new Connections();
@@ -96,7 +96,7 @@ namespace BotDLL
                             "PRIMARY KEY (`UriNr`) USING BTREE" +
                             ") ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;";
 
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
 
         public static string RemoveTillWord(string input, string word, int removewordint)

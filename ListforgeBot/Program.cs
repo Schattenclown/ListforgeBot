@@ -36,6 +36,8 @@ namespace ListforgeBot
         /// </summary>
         static async Task Main()
         {
+            DebugLog.Main();
+
             try
             {
                 Console.SetWindowSize(250, 49);
@@ -43,6 +45,7 @@ namespace ListforgeBot
             catch (Exception)
             {
                 Console.SetWindowSize(150, 30);
+                DebugLog.WriteLog("ERROR: Screenresolution was to small for the Console");
             }
             int virgin = 0;
             string compare1 = "LFServerInfocompare1";
@@ -52,6 +55,7 @@ namespace ListforgeBot
             {
                 if (virgin == 0)
                 {
+                    DebugLog.WriteLog("DEBUG: Entered virgin state");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
                     Center(" ");
@@ -66,7 +70,6 @@ namespace ListforgeBot
                     dbot = new DiscordBot();
                     await dbot.RunAsync();
                     await TelegramBot.Init();
-                    DebugLog.Main();
                     LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
                     lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
                     CSV_LF_ServerInfo.WriteAll(compare1, lstlive); Thread.Sleep(MSTimeOutbt);
@@ -118,7 +121,7 @@ namespace ListforgeBot
                                 TelegramBot.TGChange(obj, "player");
                                 DiscordBot.DCChange(obj, "player");
                                 Center($"{obj}");
-                                Change();
+                                Change(obj);
                             }
                         }
                     }
@@ -134,7 +137,7 @@ namespace ListforgeBot
                                 TelegramBot.TGChange(obj, "status");
                                 DiscordBot.DCChange(obj, "status");
                                 Center($"{obj}");
-                                Change();
+                                Change(obj);
                             }
                         }
                     }
@@ -150,7 +153,7 @@ namespace ListforgeBot
                                 TelegramBot.TGChange(obj, "version");
                                 DiscordBot.DCChange(obj, "version");
                                 Center($"{obj}");
-                                Change();
+                                Change(obj);
                             }
                         }
                     }
@@ -207,7 +210,7 @@ namespace ListforgeBot
         /// <summary>
         /// Change banner.
         /// </summary>
-        static void Change()
+        static void Change(LF_ServerInfo obj)
         {
             try
             {
@@ -221,6 +224,7 @@ namespace ListforgeBot
                 Center(@"  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝ ");
                 Center(" ");
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+                DebugLog.WriteLog($"{obj.Name} {obj.Players} {obj.Address}:{obj.Port} {obj.LF_Uri.AbsoluteUri}");
             }
             catch (Exception)
             {

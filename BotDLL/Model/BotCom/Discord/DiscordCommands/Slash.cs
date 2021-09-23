@@ -6,10 +6,7 @@ using DisCatSharp.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-
-using static BotDLL.Model.BotCom.DiscordBot;
 
 namespace BotDLL.Model.BotCom.DiscordCommands
 {
@@ -39,8 +36,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 Color = new DiscordColor(245, 107, 0)
             };
             eb.AddField("/42", "Show´s every Server with their informations");
-            eb.AddField("/42s", "Show´s every servers player statistics");
-            eb.AddField("/42big", "Show´s every Server with a little more informations");
             eb.AddField("/list", "Show´s the server list");
             eb.AddField("/status", "Show´s status from a singel server");
             eb.AddField("/statistics", "Show´s the playerstatistics from a singel server");
@@ -63,65 +58,82 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <param name="ic">The ic.</param>
         /// <returns>A Task.</returns>
         [SlashCommand("42", "Show´s every Server with their informations", true)]
-        public static async Task ShowAllAsync(InteractionContext ic)
+        public static async Task ShowServerStatusAsync(InteractionContext ic, [ChoiceProvider(typeof(FourtytwoTypeChoiceProvider))][Option("Type", "Type")] string type)
         {
-            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
-            
-            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
-
-            foreach (var item in lstlive)
-            {
-                DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
-                string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
-
-                eb.Title = item.Name;
-                eb.Url = item.LF_Uri.AbsoluteUri;
-                eb.AddField("Ip address", $"{item.Address}:{item.Port}", true);
-                eb.AddField("Status", $"{onoff}", false);
-                eb.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
-                eb.WithTimestamp(item.Last_check);
-
-                if (item.LF_HeaderImgURi != null)
-                    eb.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
-
-                eb.Color = DiscordColor.Green;
-                if (onoff == "Offline")
-                    eb.Color = DiscordColor.Red;
-
-                await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
-            }
-
-            await ic.DeleteResponseAsync();
-        }
-
-        /// <summary>
-        /// Show´s every Server with their informations
-        /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
-        [SlashCommand("42s", "Show´s every servers player statistics", true)]
-        public static async Task ShowStatsAsync(InteractionContext ic)
-        {
-            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
+            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
+            var choiceProvider = new FourtytwoTypeChoiceProvider();
+            var choices = await choiceProvider.Provider();
 
-            DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
-
-            if (lstlive != null)
+            if ("FULL" == choices.First(c => c.Value.ToString() == type).Name)
             {
                 foreach (var item in lstlive)
                 {
                     string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
+                    DiscordEmbedBuilder eb = new DiscordEmbedBuilder
+                    {
+                        Title = item.Name,
+                        Url = item.LF_Uri.AbsoluteUri
+                    };
+                    eb.AddField("Ip address", $"{item.Address}:{item.Port}", true);
+                    eb.AddField("Status", $"{onoff}", false);
+                    eb.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
+                    eb.AddField("Version", $"{item.Version}", true);
+                    eb.AddField("Uptime", $"{item.Uptime}%", true);
+                    eb.WithTimestamp(item.Last_check);
 
-                    eb.Title = item.Name;
-                    eb.Url = item.LF_Uri.AbsoluteUri;
+                    if (item.LF_HeaderImgURi != null)
+                        eb.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
 
-                    eb.Description = $"Player Statistics for {item.Name}";
+                    eb.Color = DiscordColor.Green;
+                    if (onoff == "Offline")
+                        eb.Color = DiscordColor.Red;
+
+                    await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
+                }
+            }
+            else if ("MINIMAL" == choices.First(c => c.Value.ToString() == type).Name)
+            {
+                foreach (var item in lstlive)
+                {
+                    string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
+                    DiscordEmbedBuilder eb = new DiscordEmbedBuilder
+                    {
+                        Title = item.Name,
+                        Url = item.LF_Uri.AbsoluteUri
+                    };
+                    eb.AddField("Ip address", $"{item.Address}:{item.Port}", true);
+                    eb.AddField("Status", $"{onoff}", false);
+                    eb.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
+                    eb.WithTimestamp(item.Last_check);
+
+                    if (item.LF_HeaderImgURi != null)
+                        eb.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
+
+                    eb.Color = DiscordColor.Green;
+                    if (onoff == "Offline")
+                        eb.Color = DiscordColor.Red;
+
+                    await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
+                }
+            }
+            else if ("STATISTICS" == choices.First(c => c.Value.ToString() == type).Name)
+            {
+                foreach (var item in lstlive)
+                {
+                    string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
+                    DiscordEmbedBuilder eb = new DiscordEmbedBuilder
+                    {
+                        Title = item.Name,
+                        Url = item.LF_Uri.AbsoluteUri,
+                        Description = $"Player Statistics for {item.Name}"
+                    };
+
                     if (item.QC_StatUri != null)
                         eb.ImageUrl = item.QC_StatUri.AbsoluteUri;
                     else
-                        eb.Description = "Hm Broke no stats!";
+                        eb.Description = "Hm... Broke no stats!";
                     eb.WithTimestamp(item.Last_check);
 
                     eb.Color = DiscordColor.Green;
@@ -132,46 +144,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 }
             }
 
-            await ic.DeleteResponseAsync();
-        }
-
-        /// <summary>
-        /// Show´s every Server with a little more informations
-        /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
-        [SlashCommand("42big", "Show´s every Server with a little more informations", true)]
-        public static async Task ShowAllBigAsync(InteractionContext ic)
-        {
-            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
-
-            List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
-
-            foreach (var item in lstlive)
-            {
-                DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
-                string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
-
-                eb.Title = item.Name;
-                eb.Url = item.LF_Uri.AbsoluteUri;
-                eb.AddField("Ip address", $"{item.Address}:{item.Port}", true);
-                eb.AddField("Status", $"{onoff}", false);
-                eb.AddField("Players", $"{item.Players}/{item.Maxplayers}", true);
-                eb.AddField("Version", $"{item.Version}", true);
-                eb.AddField("Uptime", $"{item.Uptime}%", true);
-                eb.WithTimestamp(item.Last_check);
-
-                if (item.LF_HeaderImgURi != null)
-                    eb.ImageUrl = item.LF_HeaderImgURi.AbsoluteUri;
-
-                eb.Color = DiscordColor.Green;
-                if (onoff == "Offline")
-                    eb.Color = DiscordColor.Red;
-
-                await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
-            }
-
-            await ic.DeleteResponseAsync();
+            await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Finished!"));
         }
 
         /// <summary>
@@ -197,7 +170,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 Description = "This is the list for all registered servers",
                 Color = new DiscordColor(245, 107, 0)
             };
-            eb.AddField($"{servers}", "Server information from single server");
+            eb.AddField($"{servers}", "Server´s");
             eb.WithThumbnail("https://i.imgur.com/eb0RgjI.png");
             eb.WithAuthor("ListforgeNotify list");
             eb.WithFooter("(✿◠‿◠) thanks for using me");
@@ -224,7 +197,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
 
             foreach (var item in lstlive)
             {
-                if(item.Name.ToLower() == choices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
+                if (item.Name.ToLower() == choices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
                 {
                     string onoff = "Offline"; if (item.Is_online == true) onoff = "Online";
 
@@ -265,7 +238,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             var serverNameChoices = await serverNameChoiceProvider.Provider();
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
-
             foreach (var item in lstlive)
             {
                 if (item.Name.ToLower() == serverNameChoices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
@@ -298,23 +270,23 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <param name="gid">The gid.</param>
         /// <returns>A Task.</returns>
         [SlashCommand("add", "Adds you to an subscription for a server")]
-        public static async Task AddAboAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "adding")] string servers, [ChoiceProvider(typeof(AboStateChoiceProvider))][Option("Add", "State")] string aboState)
+        public static async Task AddAboAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "adding")] string servers, [ChoiceProvider(typeof(AboTypeChoiceProvider))][Option("Type", "Type")] string type)
         {
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder();
-            bool lowKeyState = false;
+            bool abotype = false;
 
             var serverNameChoiceProvider = new ServerNameChoiceProvider();
             var serverNameChoices = await serverNameChoiceProvider.Provider();
 
-            var aboStateChoiceProvider = new AboStateChoiceProvider();
+            var aboStateChoiceProvider = new AboTypeChoiceProvider();
             var aboStateChoices = await aboStateChoiceProvider.Provider();
 
-            if ("LOWKEY".ToLower() == aboStateChoices.First(c => c.Value.ToString().ToLower() == aboState).Name.ToLower())
-                lowKeyState = true;
+            if ("MINIMAL" == aboStateChoices.First(c => c.Value.ToString() == type).Name)
+                abotype = true;
 
-            eb = ChangeSubscriptionCommand(serverNameChoices.First(d => d.Value.ToString().ToLower() == servers).Name, ctx, true, lowKeyState);
+            eb = ChangeSubscriptionCommand(serverNameChoices.First(d => d.Value.ToString().ToLower() == servers).Name, ctx, true, abotype);
 
             await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(eb.Build()));
         }
@@ -327,7 +299,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         [SlashCommand("addall", "Adds you to every serversubscription", true)]
         public static async Task AddAllAsync(InteractionContext ic)
         {
-            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
+            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
 
@@ -338,7 +310,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
             }
 
-            await ic.DeleteResponseAsync();
+            await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Finished!"));
         }
 
         /// <summary>
@@ -371,18 +343,25 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         [SlashCommand("delall", "Deletes you from every serversubscription", true)]
         public static async Task DelAllAsync(InteractionContext ic)
         {
-            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("loading servers"));
+            await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
+            var lstud = DB_DC_Userdata.ReadAll();
 
             foreach (var item in lstlive)
             {
-                DiscordEmbedBuilder eb = ChangeSubscriptionCommand(item.Name, ic, false, false);
+                foreach (var ud in lstud)
+                {
+                    if(ud.ServerId == item.Id && ud.Abo || ud.ServerId == item.Id && ud.MinimalAbo)
+                    {
+                        DiscordEmbedBuilder eb = ChangeSubscriptionCommand(item.Name, ic, false, false);
 
-                await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
+                        await ic.FollowUpAsync(new DiscordFollowupMessageBuilder().AddEmbed(eb.Build()));
+                    }
+                }
             }
 
-            await ic.DeleteResponseAsync();
+            await ic.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Finished!"));
         }
 
         /// <summary>
@@ -419,7 +398,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     Author = ctx.Member.DisplayName,
                     ServerId = serverid,
                     Abo = abo,
-                    LowKeyAbo = lowKeyAbo
+                    MinimalAbo = lowKeyAbo
                 };
                 DC_Userdata.Add(ud, false);
             }
@@ -432,7 +411,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                     Author = ctx.Member.DisplayName,
                     ServerId = serverid,
                     Abo = abo,
-                    LowKeyAbo = lowKeyAbo
+                    MinimalAbo = lowKeyAbo
                 };
                 DC_Userdata.Change(ud, false);
             }
@@ -444,6 +423,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             eb.Title = $"You will not get notified for {servername} anymore!";
             if (abo)
                 eb.Title = $"You will get notifications for {servername}!";
+
             eb.WithDescription("Who?:" + "<@" + ctx.Member.Id.ToString() + ">\n" + "Where?:" + "<#" + ctx.Channel.Id.ToString() + ">");
             eb.WithThumbnail("https://i.imgur.com/eb0RgjI.png");
             eb.WithAuthor($"ListforgeNotify {servername.ToUpper()}");
@@ -468,8 +448,8 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             bool sub2nothing = true;
             var differentchannel = new List<ulong>();
             string servers = "";
-            var lstDC_Abo = new List<DC_Abo>();
-            var lstDC_Abo_sort = new List<DC_Abo>();
+            var lstDC_Abo = new List<DC_Userdata>();
+            var lstDC_Abo_sort = new List<DC_Userdata>();
 
             DiscordEmbedBuilder eb = new DiscordEmbedBuilder
             {
@@ -488,7 +468,16 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 {
                     if (ud.Abo && ud.ServerId == ld.Id && Convert.ToUInt64(ud.AuthorId) == ic.Member.Id)
                     {
-                        DC_Abo dcabo = new DC_Abo(Convert.ToUInt64(ud.ChannelId), Convert.ToUInt64(ud.AuthorId), ld.Name);
+                        DC_Userdata dcabo = new DC_Userdata
+                        {
+                            AuthorId = Convert.ToUInt64(ud.AuthorId),
+                            ChannelId = Convert.ToUInt64(ud.ChannelId),
+                            Author = ud.Author,
+                            ServerId = ud.ServerId,
+                            ServerName = ld.Name,
+                            Abo = ud.Abo,
+                            MinimalAbo = ud.MinimalAbo
+                        };
 
                         if (!differentchannel.Contains(Convert.ToUInt64(ud.ChannelId)) && Convert.ToUInt64(ud.AuthorId) == ic.Member.Id)
                             differentchannel.Add(Convert.ToUInt64(ud.ChannelId));
@@ -524,14 +513,21 @@ namespace BotDLL.Model.BotCom.DiscordCommands
                 if (lastchn == 0)
                     lastchn = item.ChannelId;
 
-                if (!servers.Contains(item.Server))
-                    servers += "/" + item.Server + "\n";
+                if (!servers.Contains(item.ServerName))
+                {
+                    string aboType = "";
+                    if (item.MinimalAbo)
+                        aboType = "MINIMAL";
+                    else if (item.Abo)
+                        aboType = "FULL";
+                    servers += item.ServerName + " " + aboType + "\n";
+                }
 
                 if (lastchn != item.ChannelId)
                 {
                     eb.AddField(servers, "<#" + lastchn.ToString() + ">");
                     servers = "";
-                    servers += "/" + item.Server + "\n";
+                    servers += item.ServerName + "\n";
                     lastchn = item.ChannelId;
                 }
 
@@ -550,27 +546,27 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <param name="ic">The ic.</param>
         /// <returns>A Task.</returns>
         [SlashCommand("test", "Test´s the functionality of the DCChange [player, status, version]", true)]
-        public static async Task TestAsync(InteractionContext ic, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "testserver")] string servers, [ChoiceProvider(typeof(TestFunctionChoiceProvider))][Option("test", "function")] string functions)
+        public static async Task TestAsync(InteractionContext ic, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "testserver")] string servers, [ChoiceProvider(typeof(TestFunctionsChoiceProvider))][Option("test", "function")] string functions)
         {
             await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
             var ecp = new ServerNameChoiceProvider();
             var choices = await ecp.Provider();
 
-            var testFunctionChoiceProvider = new TestFunctionChoiceProvider();
+            var testFunctionChoiceProvider = new TestFunctionsChoiceProvider();
             var testFunctionChoices = await testFunctionChoiceProvider.Provider();
 
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
-           
+
             foreach (var item in lstlive)
             {
                 if (item.Name.ToLower() == choices.First(d => d.Value.ToString().ToLower() == servers).Name.ToLower())
                 {
-                    if("Player count changed".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
+                    if ("PLAYERCOUNT".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
                         DiscordBot.DCChange(item, "player");
-                    else if ("Status changed".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
+                    else if ("ONLINESTATE".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
                         DiscordBot.DCChange(item, "status");
-                    else if ("Version changed".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
+                    else if ("VERSIONCHANGE".ToLower() == testFunctionChoices.First(c => c.Value.ToString().ToLower() == functions).Name.ToLower())
                         DiscordBot.DCChange(item, "version");
                 }
             }

@@ -105,7 +105,7 @@ namespace BotDLL
                 }
                 catch (Exception ex)
                 {
-                    DebugLog.Log("ERROR: LF_Fetcher.Fetch " + ex.Message);
+                    DebugLog.WriteLog("ERROR: LF_Fetcher.Fetch " + ex.Message);
                 }
             }
         }

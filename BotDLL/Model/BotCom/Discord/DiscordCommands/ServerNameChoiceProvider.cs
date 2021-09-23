@@ -1,15 +1,12 @@
 ﻿using DisCatSharp.ApplicationCommands;
 using DisCatSharp.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BotDLL.Model.BotCom.DiscordCommands
 {
     /// <summary>
-    /// The experiment choice provider.
+    /// The Servername choice provider.
     /// </summary>
     public class ServerNameChoiceProvider : IChoiceProvider
     {
@@ -17,6 +14,10 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// This is the Database Table name.
         /// </summary>
         private const string db = "LF_ServerInfoLive";
+        /// <summary>
+        /// Providers the choices.
+        /// </summary>
+        /// <returns>choices</returns>
         public async Task<IEnumerable<DiscordApplicationCommandOptionChoice>> Provider()
         {
             List<LF_ServerInfo> lstlive = LF_ServerInfo.ReadAll(db);
@@ -26,8 +27,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
             {
                 servers += item.Name.ToLower() + ";";
             }
-            servers = servers.Trim(';');
-            string[] arrServers = servers.Split(';');
+            string[] arrServers = servers.Trim(';').Split(';');
 
             DiscordApplicationCommandOptionChoice[] choices = new DiscordApplicationCommandOptionChoice[arrServers.Length];
 

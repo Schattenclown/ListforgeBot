@@ -11,7 +11,7 @@ namespace BotDLL
     {
         public static List<DC_Userdata> ReadAll()
         {
-            String sql = "SELECT * FROM DC_Userdata";
+            string sql = "SELECT * FROM DC_Userdata";
             List<DC_Userdata> lst = new List<DC_Userdata>();
             MySqlConnection connection = DB_Connection.OpenDB();
             MySqlDataReader dataReader = DB_Connection.ExecuteReader(sql, connection);
@@ -27,7 +27,7 @@ namespace BotDLL
                     Author = dataReader.GetString("Author"),
                     ServerId = dataReader.GetInt32("ServerId"),
                     Abo = dataReader.GetBoolean("Abo"),
-                    LowKeyAbo = dataReader.GetBoolean("LowKeyAbo")
+                    MinimalAbo = dataReader.GetBoolean("MinimalAbo")
                 };
 
                 lst.Add(ud);
@@ -36,18 +36,18 @@ namespace BotDLL
             DB_Connection.CloseDB(connection);
             return lst;
         }
-        public static void Add(DC_Userdata ud, bool notification)
+        public static void Add(DC_Userdata ud, bool showMessageBox)
         {
-            String sql = $"INSERT INTO DC_Userdata (AuthorId, ChannelId, Author, ServerId, Abo, LowKeyAbo)" +
-                         $"VALUES ('{ud.AuthorId}', '{ud.ChannelId}', '{ud.Author}', {ud.ServerId}, {ud.Abo}, {ud.LowKeyAbo})";
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            String sql = $"INSERT INTO DC_Userdata (AuthorId, ChannelId, Author, ServerId, Abo, MinimalAbo)" +
+                         $"VALUES ('{ud.AuthorId}', '{ud.ChannelId}', '{ud.Author}', {ud.ServerId}, {ud.Abo}, {ud.MinimalAbo})";
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
-        public static void Change(DC_Userdata ud, bool notification)
+        public static void Change(DC_Userdata ud, bool showMessageBox)
         {
-            String sql = $"UPDATE DC_Userdata SET Abo={ud.Abo}, LowKeyAbo={ud.LowKeyAbo}, Author='{ud.Author}' WHERE AuthorId={ud.AuthorId} AND ChannelId={ud.ChannelId} AND ServerId={ud.ServerId}";
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            String sql = $"UPDATE DC_Userdata SET Abo={ud.Abo}, MinimalAbo={ud.MinimalAbo}, Author='{ud.Author}' WHERE AuthorId={ud.AuthorId} AND ChannelId={ud.ChannelId} AND ServerId={ud.ServerId}";
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
-        public static void CreateTable_Userdata(bool notification)
+        public static void CreateTable_Userdata(bool showMessageBox)
         {
             CSV_Connections cSV_Connections = new CSV_Connections();
             Connections cons = new Connections();
@@ -67,10 +67,10 @@ namespace BotDLL
                             "`Author` varchar(50) DEFAULT NULL," +
                             "`ServerId` int(11) DEFAULT NULL," +
                             "`Abo` int(11) DEFAULT NULL," +
-                            "`LowKeyAbo` int(11) DEFAULT NULL" +
+                            "`MinimalAbo` int(11) DEFAULT NULL" +
                             ") ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;";
 
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
         public static string RemoveTillWord(string input, string word, int removewordint)
         {

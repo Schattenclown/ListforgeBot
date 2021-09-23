@@ -9,7 +9,7 @@ namespace BotDLL
 {
     public class DB_LF_ServerInfo
     {
-        public static bool InserInto(string db, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string Key, string LF_Uri, string LF_StatUri, string QC_StatUri, Uri LF_HeaderImgUri, bool notification)
+        public static bool InserInto(string db, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string Key, string LF_Uri, string LF_StatUri, string QC_StatUri, Uri LF_HeaderImgUri, bool showMessageBox)
         {
             if (Id == null)
                 return false;
@@ -22,32 +22,32 @@ namespace BotDLL
                 {
                     string sql = $"INSERT INTO {db} (Id, Name, Address, Port, Hostname, Map, Is_online, Players, Maxplayers, Version, Uptime, Last_check, Last_online, LF_Uri)" +
                                 $"VALUES ({Id}, '{Name}', '{Address}', {Port}, '{Hostname}', '{Map}', {Is_online}, {Players}, {Maxplayers}, '{Versions.Replace("theforestDS ", "")}', {Uptime}, '{Last_check:yyyyy-MM-dd HH-mm}', '{Last_online:yyyyy-MM-dd HH-mm}', '{LF_Uri}')";
-                    DB_Connection.ExecuteNonQuery(sql, notification);
-                    UpdateSmoll(db, Id, LF_StatUri, QC_StatUri, LF_HeaderImgUri, notification);
+                    DB_Connection.ExecuteNonQuery(sql, showMessageBox);
+                    UpdateSmoll(db, Id, LF_StatUri, QC_StatUri, LF_HeaderImgUri, showMessageBox);
                 }
                 else
-                    Update(db, Id, Name, Address, Port, Hostname, Map, Is_online, Players, Maxplayers, Versions, Uptime, Last_check, Last_online, Key, LF_Uri, LF_StatUri, QC_StatUri, LF_HeaderImgUri, notification);
+                    Update(db, Id, Name, Address, Port, Hostname, Map, Is_online, Players, Maxplayers, Versions, Uptime, Last_check, Last_online, Key, LF_Uri, LF_StatUri, QC_StatUri, LF_HeaderImgUri, showMessageBox);
             }
             catch (Exception ex)
             {
-                DebugLog.Log("ERROR: DB_LF_ServerInfo.InserInto:" + ex.Message);
+                DebugLog.WriteLog("ERROR: DB_LF_ServerInfo.InserInto:" + ex.Message);
                 return false;
             }
             return true;
         }
-        public static void Update(string swhatdb, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string LF_Uri, string Key, string LF_StatUri, string QC_StatUri, Uri LF_HeaderImgUri, bool notification)
+        public static void Update(string swhatdb, string Id, string Name, string Address, string Port, string Hostname, string Map, string Is_online, string Players, string Maxplayers, string Versions, string Uptime, DateTime Last_check, DateTime Last_online, string LF_Uri, string Key, string LF_StatUri, string QC_StatUri, Uri LF_HeaderImgUri, bool showMessageBox)
         {
             string sql1 = $"UPDATE {swhatdb} SET Id={Id}, Name='{Name}', Address='{Address}', Port={Port}, Hostname='{Hostname}', Map='{Map}', Is_online={Is_online}, Players={Players}, Maxplayers={Maxplayers}, Version='{Versions.Replace("theforestDS ", "")}', " +
                             $"Uptime={Uptime}, Last_check='{Last_check:yyyyy-MM-dd HH-mm}', Last_online='{Last_online:yyyyy-MM-dd HH-mm}', LF_Uri='{LF_Uri}', `key`='{Key}' WHERE ID={Id}";
-            DB_Connection.ExecuteNonQuery(sql1, notification);
+            DB_Connection.ExecuteNonQuery(sql1, showMessageBox);
 
             string sql2 = $"UPDATE {swhatdb} SET LF_StatUri='{LF_StatUri}', QC_StatUri='{QC_StatUri}', LFHeaderImgUri='{LF_HeaderImgUri}' WHERE ID={Id}";
-            DB_Connection.ExecuteNonQuery(sql2, notification);
+            DB_Connection.ExecuteNonQuery(sql2, showMessageBox);
         }
-        public static void UpdateSmoll(string swhatdb, string Id, string LF_StatUri, string QC_StatUri, Uri LF_HeaderImgUri, bool notification)
+        public static void UpdateSmoll(string swhatdb, string Id, string LF_StatUri, string QC_StatUri, Uri LF_HeaderImgUri, bool showMessageBox)
         {
             string sql = $"UPDATE {swhatdb} SET LF_StatUri='{LF_StatUri}', QC_StatUri='{QC_StatUri}', LFHeaderImgUri='{LF_HeaderImgUri}' WHERE ID={Id}";
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
         public static bool IsThere(string swhatdb, int id)
         {
@@ -102,7 +102,7 @@ namespace BotDLL
                 }
                 catch (Exception)
                 {
-                    DebugLog.Log($"{obj.Address} LFHeaderImgUri was null Exception");
+                    DebugLog.WriteLog($"ERROR: {obj.Name} {obj.Address}:{obj.Port} LFHeaderImgUri was null Exception");
                 }
 
                 try
@@ -111,7 +111,7 @@ namespace BotDLL
                 }
                 catch (Exception)
                 {
-                    DebugLog.Log($"{obj.Address} QC_StatUri was null Exception");
+                    DebugLog.WriteLog($"ERROR: {obj.Name} {obj.Address}:{obj.Port} QC_StatUri was null Exception");
                 }
 
                 lst.Add(obj);
@@ -159,17 +159,17 @@ namespace BotDLL
                 liveInfo.QC_StatUri = null;
             }
         }
-        public static void DeleteAll(bool notification)
+        public static void DeleteAll(bool showMessageBox)
         {
             string sql = "DELETE FROM LF_ServerInfoLive";
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
-        public static void Delete(LF_API_Uri aPI_URL, bool notification)
+        public static void Delete(LF_API_Uri aPI_URL, bool showMessageBox)
         {
             string sql = $"DELETE FROM LF_ServerInfoLive WHERE `Key` = '{aPI_URL.Key}'";
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
-        public static void CreateTable_LF_ServerInfoLive(bool notification)
+        public static void CreateTable_LF_ServerInfoLive(bool showMessageBox)
         {
             CSV_Connections cSV_Connections = new CSV_Connections();
             Connections cons = new Connections();
@@ -207,7 +207,7 @@ namespace BotDLL
                             "KEY `Key` (`Key`)" +
                             ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
 
         public static string RemoveTillWord(string input, string word, int removewordint)

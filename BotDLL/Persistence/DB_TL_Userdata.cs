@@ -34,18 +34,18 @@ namespace BotDLL
             DB_Connection.CloseDB(connection);
             return lst;
         }
-        public static void Add(TL_Userdata ud, bool notification)
+        public static void Add(TL_Userdata ud, bool showMessageBox)
         {
             String sql = $"INSERT INTO TL_USerdata (UserNr, ChatId, Username, ServerId, Abo)" +
                          $"VALUES ({ud.UserNr}, {ud.ChatId}, '{ud.Username}', {ud.ServerId}, {ud.Abo})";
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
-        public static void Change(TL_Userdata ud, bool notification)
+        public static void Change(TL_Userdata ud, bool showMessageBox)
         {
             String sql = $"UPDATE TL_USerdata SET Abo={ud.Abo} WHERE ChatId={ud.ChatId} AND ServerId={ud.ServerId}";
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
-        public static void CreateTable_Userdata(bool notification)
+        public static void CreateTable_Userdata(bool showMessageBox)
         {
             CSV_Connections cSV_Connections = new CSV_Connections();
             Connections cons = new Connections();
@@ -68,7 +68,7 @@ namespace BotDLL
                             "PRIMARY KEY (`UserNr`)" +
                             ") ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;";
 
-            DB_Connection.ExecuteNonQuery(sql, notification);
+            DB_Connection.ExecuteNonQuery(sql, showMessageBox);
         }
 
         public static string RemoveTillWord(string input, string word, int removewordint)

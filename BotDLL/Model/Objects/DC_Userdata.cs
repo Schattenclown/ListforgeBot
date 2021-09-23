@@ -8,9 +8,10 @@ namespace BotDLL
         public ulong ChannelId { get; set; }
         public string Author { get; set; }
         public int ServerId { get; set; }
+        public string ServerName { get; set; }
         public bool Abo { get; set; }
-        public bool LowKeyAbo { get; set; }
-
+        public bool MinimalAbo { get; set; }
+        
         public static List<DC_Userdata> ReadAll()
         {
             return DB_DC_Userdata.ReadAll();
