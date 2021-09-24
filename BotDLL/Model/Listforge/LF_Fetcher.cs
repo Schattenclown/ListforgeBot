@@ -26,6 +26,11 @@ namespace BotDLL
                 try
                 {
                     string content = await client.GetStringAsync($"{item.Combined}");
+                    if(content.Contains("server key not found"))
+                    {
+                        DebugLog.WriteLog($"server key not found for {item.Combined}");
+                        return;
+                    }
 
                     while (achieved == false)
                     {

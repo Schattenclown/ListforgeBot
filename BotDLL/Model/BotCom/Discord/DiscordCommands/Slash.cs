@@ -546,7 +546,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <param name="ic">The ic.</param>
         /// <returns>A Task.</returns>
         [SlashCommand("test", "Test´s the functionality of the DCChange [player, status, version]", true)]
-        public static async Task TestAsync(InteractionContext ic, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "testserver")] string servers, [ChoiceProvider(typeof(TestFunctionsChoiceProvider))][Option("test", "function")] string functions)
+        public static async Task TestAsync(InteractionContext ic, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "testserver")] string servers, [ChoiceProvider(typeof(TestFunctionsChoiceProvider))][Option("Function", "function")] string functions)
         {
             await ic.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Loading..."));
 
