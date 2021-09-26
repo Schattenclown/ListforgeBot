@@ -325,9 +325,11 @@ namespace BotDLL.Model.BotCom
                 {
                     if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && !item2.MinimalAbo && item2.ServerId == obj.Id && !tags.Contains(item2.AuthorId.ToString()))
                         tags += "<@" + item2.AuthorId + ">" + "\n";
-                    else if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.MinimalAbo && item2.ServerId == obj.Id && obj.Players == 0 || obj.Players == 1 && !tags.Contains(item2.AuthorId.ToString()))
+                    else if (!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.MinimalAbo && item2.ServerId == obj.Id && obj.Players == 0 ||
+                             !tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.MinimalAbo && item2.ServerId == obj.Id && obj.Players == 1 )
                         tags += "<@" + item2.AuthorId + ">" + "\n";
-                    else if(!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && item2.MinimalAbo && item2.ServerId == obj.Id && whatchanged == "version" || whatchanged == "status" && !tags.Contains(item2.AuthorId.ToString()))
+                    else if(!tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && item2.MinimalAbo && item2.ServerId == obj.Id && whatchanged == "version" ||
+                            !tags.Contains(item2.AuthorId.ToString()) && item == Convert.ToUInt64(item2.ChannelId) && item2.Abo && item2.MinimalAbo && item2.ServerId == obj.Id && whatchanged == "status" )
                         tags += "<@" + item2.AuthorId + ">" + "\n";
                 }
                 
