@@ -94,7 +94,7 @@ namespace ListforgeBot
                     GC.Collect();
                     virgin++;
                     //1075 about 24h
-                    if (virgin == 2)
+                    if (virgin == 1075)
                     {
                         Program p = new Program();
                         p.RestartProgram();
