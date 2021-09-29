@@ -28,7 +28,7 @@ namespace ListforgeBot
         /// The db.
         /// </summary>
         private const string db = "LF_ServerInfoLive";
-        private static DiscordBot dbot;
+        private static DiscordBot dBot;
         #endregion
 
         /// <summary>
@@ -36,67 +36,78 @@ namespace ListforgeBot
         /// </summary>
         static async Task Main()
         {
-            DebugLog.Main();
-
             try
             {
-                Console.SetWindowSize(250, 49);
+                try
+                {
+                    Console.SetWindowSize(250, 49);
+                }
+                catch (Exception)
+                {
+                    Console.SetWindowSize(150, 30);
+                    DebugLog.WriteLog("ERROR: Screenresolution was to small for the Console");
+                }
+                int virgin = 0;
+                string compare1 = "LFServerInfocompare1";
+                string compare2 = "LFServerInfocompare2";
+
+                while (true)
+                {
+                    if (virgin == 0)
+                    {
+                        DebugLog.WriteLog("DEBUG: Entered virgin state");
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+                        Center(" ");
+                        Center(@"███████╗████████╗ █████╗ ██████╗ ████████╗     █████╗ ██╗   ██╗████████╗ ██████╗     ███╗   ██╗ ██████╗ ████████╗██╗███████╗██╗   ██╗");
+                        Center(@"██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗    ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝╚██╗ ██╔╝");
+                        Center(@"███████╗   ██║   ███████║██████╔╝   ██║       ███████║██║   ██║   ██║   ██║   ██║    ██╔██╗ ██║██║   ██║   ██║   ██║█████╗   ╚████╔╝ ");
+                        Center(@"╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██║██║   ██║   ██║   ██║   ██║    ██║╚██╗██║██║   ██║   ██║   ██║██╔══╝    ╚██╔╝  ");
+                        Center(@"███████║   ██║   ██║  ██║██║  ██║   ██║       ██║  ██║╚██████╔╝   ██║   ╚██████╔╝    ██║ ╚████║╚██████╔╝   ██║   ██║██║        ██║   ");
+                        Center(@"╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝        ╚═╝   ");
+                        Center(" ");
+                        Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+                        dBot = new DiscordBot();
+                        await dBot.RunAsync();
+                        await TelegramBot.Init();
+                        LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
+                        lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
+                        CSV_LF_ServerInfo.WriteAll(compare1, lstlive); Thread.Sleep(MSTimeOutbt);
+                        CSV_LF_ServerInfo.WriteAll(compare2, lstlive); Thread.Sleep(MSTimeOutbt);
+                        lstcp1 = CSV_LF_ServerInfo.ReadALL(compare1); Thread.Sleep(MSTimeOut);
+                        virgin++;
+                    }
+                    Thread.Sleep(MSTimeOut);
+                    LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
+                    lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
+                    CSV_LF_ServerInfo.WriteAll(compare2, lstlive); Thread.Sleep(MSTimeOut);
+                    lstcp2 = CSV_LF_ServerInfo.ReadALL(compare2); Thread.Sleep(MSTimeOutbt);
+                    DidChangeQM(lstcp1, lstcp2);
+                    Console.ForegroundColor = ConsoleColor.Green; WriteList(lstlive); Thread.Sleep(MSTimeOut);
+                    LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
+                    lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
+                    CSV_LF_ServerInfo.WriteAll(compare1, lstlive); Thread.Sleep(MSTimeOut);
+                    lstcp1 = CSV_LF_ServerInfo.ReadALL(compare1); Thread.Sleep(MSTimeOutbt);
+                    DidChangeQM(lstcp1, lstcp2);
+                    Console.ForegroundColor = ConsoleColor.Red; WriteList(lstcp2);
+                    Thread.Sleep(MSTimeOut);
+                    GC.Collect();
+                    virgin++;
+                    //1075 about 24h
+                    if (virgin == 2)
+                    {
+                        Program p = new Program();
+                        p.RestartProgram();
+                    }
+                }
             }
             catch (Exception)
             {
-                Console.SetWindowSize(150, 30);
-                DebugLog.WriteLog("ERROR: Screenresolution was to small for the Console");
+                Program p = new Program();
+                p.RestartProgram();
             }
-            int virgin = 0;
-            string compare1 = "LFServerInfocompare1";
-            string compare2 = "LFServerInfocompare2";
+            DebugLog.Main();
 
-            while (true)
-            {
-                if (virgin == 0)
-                {
-                    DebugLog.WriteLog("DEBUG: Entered virgin state");
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                    Center(" ");
-                    Center(@"███████╗████████╗ █████╗ ██████╗ ████████╗     █████╗ ██╗   ██╗████████╗ ██████╗     ███╗   ██╗ ██████╗ ████████╗██╗███████╗██╗   ██╗");
-                    Center(@"██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗    ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝╚██╗ ██╔╝");
-                    Center(@"███████╗   ██║   ███████║██████╔╝   ██║       ███████║██║   ██║   ██║   ██║   ██║    ██╔██╗ ██║██║   ██║   ██║   ██║█████╗   ╚████╔╝ ");
-                    Center(@"╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██║██║   ██║   ██║   ██║   ██║    ██║╚██╗██║██║   ██║   ██║   ██║██╔══╝    ╚██╔╝  ");
-                    Center(@"███████║   ██║   ██║  ██║██║  ██║   ██║       ██║  ██║╚██████╔╝   ██║   ╚██████╔╝    ██║ ╚████║╚██████╔╝   ██║   ██║██║        ██║   ");
-                    Center(@"╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝        ╚═╝   ");
-                    Center(" ");
-                    Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                    dbot = new DiscordBot();
-                    await dbot.RunAsync();
-                    await TelegramBot.Init();
-                    LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
-                    lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
-                    CSV_LF_ServerInfo.WriteAll(compare1, lstlive); Thread.Sleep(MSTimeOutbt);
-                    CSV_LF_ServerInfo.WriteAll(compare2, lstlive); Thread.Sleep(MSTimeOutbt);
-                    lstcp1 = CSV_LF_ServerInfo.ReadALL(compare1); Thread.Sleep(MSTimeOut);
-                    virgin++;
-                }
-                Thread.Sleep(MSTimeOut);
-                LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
-                lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
-                CSV_LF_ServerInfo.WriteAll(compare2, lstlive); Thread.Sleep(MSTimeOut);
-                lstcp2 = CSV_LF_ServerInfo.ReadALL(compare2); Thread.Sleep(MSTimeOutbt);
-                DidChangeQM(lstcp1, lstcp2);
-                Console.ForegroundColor = ConsoleColor.Green; WriteList(lstlive); Thread.Sleep(MSTimeOut);
-                LF_Fetcher.Fetch(db); Thread.Sleep(MSTimeOut);
-                lstlive = LF_ServerInfo.ReadAll(db); Thread.Sleep(MSTimeOutbt);
-                CSV_LF_ServerInfo.WriteAll(compare1, lstlive); Thread.Sleep(MSTimeOut);
-                lstcp1 = CSV_LF_ServerInfo.ReadALL(compare1); Thread.Sleep(MSTimeOutbt);
-                DidChangeQM(lstcp1, lstcp2);
-                Console.ForegroundColor = ConsoleColor.Red; WriteList(lstcp2);
-                Thread.Sleep(MSTimeOut);
-                GC.Collect();
-                virgin++;
-                //1075 about 24h
-                if (virgin == 1075)
-                    RestartProgram();
-            }
         }
         /// <summary>
         /// Checks for changes.
@@ -169,7 +180,7 @@ namespace ListforgeBot
             try
             {
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-                Center($"{"Id",8} ██ {"Name",-15} ██ {"Address",20}:{"Port",-5} ██ {"Hostname",-22} ██ {"Map",-20} ██ {"Online",-5} ██ {"Pl",3}/{"MaxPl",-5} ██ {"Version",10} ██ {"UpT",-3}% ██  {"Last_check",-19}  ██  {"Last_online",-19}");
+                Center($"{"Id",8} ██ {"Name",-15} ██ {"Address",20}:{"Port",-5} ██ {"Hostname",-30} ██ {"Map",-20} ██ {"Online",-5} ██ {"Pl",3}/{"MaxPl",-5} ██ {"Version",10} ██ {"UpT",-3}% ██  {"Last_check",-19}  ██  {"Last_online",-19}");
                 Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
                 foreach (var item in lst)
                 {
@@ -199,7 +210,7 @@ namespace ListforgeBot
             }
             catch (Exception)
             {
-                s ="Console to smoll EXC";
+                s = "Console to smoll EXC";
                 Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                 Console.Write(s);
                 Console.SetCursorPosition((Console.WindowWidth - 4), Console.CursorTop);
@@ -235,11 +246,25 @@ namespace ListforgeBot
         /// <summary>
         /// Restarts the program.
         /// </summary>
-        private static void RestartProgram()
+        private async Task RestartProgram()
         {
-            dbot = new DiscordBot();
-            dbot.Dispose();
 
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+            Center(" ");
+            Center(@"██████╗ ███████╗███████╗████████╗ █████╗ ██████╗ ████████╗██╗███╗   ██╗ ██████╗ ");
+            Center(@"██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██║████╗  ██║██╔════╝ ");
+            Center(@"██████╔╝█████╗  ███████╗   ██║   ███████║██████╔╝   ██║   ██║██╔██╗ ██║██║  ███╗");
+            Center(@"██╔══██╗██╔══╝  ╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ██║██║╚██╗██║██║   ██║");
+            Center(@"██║  ██║███████╗███████║   ██║   ██║  ██║██║  ██║   ██║   ██║██║ ╚████║╚██████╔╝");
+            Center(@"╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ");
+            Center(" ");
+            Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+            Center("Restating in 10 secounds.");
+            Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+            await Task.Delay(1000 * 10);
+
+            dBot.Dispose();
             // Get file path of current process 
             var filePath = Assembly.GetExecutingAssembly().Location;
             //var filePath = Application.ExecutablePath;  // for WinForms

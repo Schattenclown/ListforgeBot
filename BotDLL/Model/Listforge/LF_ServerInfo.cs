@@ -42,7 +42,7 @@ namespace BotDLL
         }
         public override string ToString()
         {
-            return $"{Id,8} ██ {Name,-15} ██ {Address,20}:{Port,-5} ██ {Hostname,-22} ██ {Map,-20} ██ {Is_online,-6} ██ {Players,3}/{Maxplayers,-5} ██ {Version,10} ██ {Uptime,3}% ██  {Last_check,-19}  ██  {Last_online,-18}";
+            return $"{Id,8} ██ {Name,-15} ██ {Address,20}:{Port,-5} ██ {Hostname,-30} ██ {Map,-20} ██ {Is_online,-6} ██ {Players,3}/{Maxplayers,-5} ██ {Version,10} ██ {Uptime,3}% ██  {Last_check,-19}  ██  {Last_online,-18}";
         }
         public static void DeleteAll(bool notification)
         {
