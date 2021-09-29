@@ -116,7 +116,7 @@ namespace BotDLL
             Center(@"╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ");
             Center(" ");
             Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
-            Center("Restating in 10 secounds.");
+            Center("DB IS DEAD");
             Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
 
             // Get file path of current process 
@@ -134,7 +134,9 @@ namespace BotDLL
                 filePath = WordCutter.RemoveAfterWord(filePath, "Release", 0);
                 newFilepath = filePath + "Release\\ListforgeBot.exe";
             }
-
+            Console.WriteLine("Before 120 secound sleep");
+            Thread.Sleep(1000 * 60);
+            Console.WriteLine("After 120 secound sleep");
             // Start program
             Process.Start(newFilepath);
 
