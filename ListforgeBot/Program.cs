@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace ListforgeBot
 {
+    /// <summary>
+    /// The program.
+    /// </summary>
     public class Program
     {
         #region Variables
@@ -97,14 +100,14 @@ namespace ListforgeBot
                     if (virgin == 1075)
                     {
                         Program p = new Program();
-                        p.RestartProgram();
+                        await p.RestartProgram();
                     }
                 }
             }
             catch (Exception)
             {
                 Program p = new Program();
-                p.RestartProgram();
+                await p.RestartProgram();
             }
             DebugLog.Main();
 
