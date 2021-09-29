@@ -73,6 +73,9 @@ namespace BotDLL.Model.BotCom
     }
     #endregion
 
+    /// <summary>
+    /// The discord bot.
+    /// </summary>
     public class DiscordBot : IDisposable
     {   /* 
               möpse
@@ -85,12 +88,27 @@ namespace BotDLL.Model.BotCom
 
         private static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
         static List<DC_Userdata> lstud = new List<DC_Userdata>();
+        /// <summary>
+        /// The db.
+        /// </summary>
         public const string db = "LF_ServerInfoLive";
         public static string token = "";
         public static int virgin = 0;
+        /// <summary>
+        /// Gets the client.
+        /// </summary>
         public static DiscordClient Client { get; internal set; }
+        /// <summary>
+        /// Gets the application commands extension.
+        /// </summary>
         public static ApplicationCommandsExtension ApplicationCommands { get; internal set; }
+        /// <summary>
+        /// Gets the commands next extension.
+        /// </summary>
         public static CommandsNextExtension CNext { get; internal set; }
+        /// <summary>
+        /// Gets the interactivity extension.
+        /// </summary>
         public static InteractivityExtension INext { get; internal set; }
         public static CancellationTokenSource ShutdownRequest;
         public static readonly ulong testguild = 881868642600505354;
@@ -105,6 +123,9 @@ namespace BotDLL.Model.BotCom
             return Encoding.UTF8.GetString(data);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DiscordBot"/> class.
+        /// </summary>
         public DiscordBot()
         {
             if (virgin == 0)
@@ -175,6 +196,9 @@ namespace BotDLL.Model.BotCom
             RegisterCommands(CNext, ApplicationCommands);
 
         }
+        /// <summary>
+        /// Disposes the bot.
+        /// </summary>
         public void Dispose()
         {
             Client.Dispose();
@@ -184,6 +208,9 @@ namespace BotDLL.Model.BotCom
             ApplicationCommands = null;
         }
 
+        /// <summary>
+        /// Runs the bot.
+        /// </summary>
         public async Task RunAsync()
         {
             Console.BackgroundColor = ConsoleColor.Black;
@@ -344,6 +371,10 @@ namespace BotDLL.Model.BotCom
             }
         }
 
+        /// <summary>
+        /// Centers the text.
+        /// </summary>
+        /// <param name="s">The string.</param>
         private static void Center(string s)
         {
             try
@@ -361,6 +392,10 @@ namespace BotDLL.Model.BotCom
             }
         }
 
+        /// <summary>
+        /// Logs a string.
+        /// </summary>
+        /// <param name="msg">The message.</param>
         private static Task Log(string msg)
         {
             try

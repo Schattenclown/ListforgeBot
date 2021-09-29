@@ -6,11 +6,22 @@ using System.Threading.Tasks;
 
 namespace BotDLL
 {
+    /// <summary>
+    /// The quickchart uri generator.
+    /// </summary>
     public class QC_UriGenerator
     {
         private static string token = "";
         private static int virgin = 0;
+        /// <summary>
+        /// Gets or sets the quickchart stat uri.
+        /// </summary>
         public string QC_StatUri { get; set; }
+        /// <summary>
+        /// Creates the object.
+        /// </summary>
+        /// <param name="rawcontent">The rawcontent.</param>
+        /// <returns>A QC_UriGenerator.</returns>
         public static QC_UriGenerator CreateObj(string rawcontent)
         {
             if (virgin == 0)
@@ -114,10 +125,24 @@ namespace BotDLL
             obj.QC_StatUri = struri.Replace(" ", "%20");
             return obj;
         }
+        /// <summary>
+        /// Removes till word.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="word">The word.</param>
+        /// <param name="removewordint">The removewordint.</param>
+        /// <returns>A string.</returns>
         public static string RemoveTillWord(string input, string word, int removewordint)
         {
             return input.Substring(input.IndexOf(word) + removewordint);
         }
+        /// <summary>
+        /// Removes after word.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="word">The word.</param>
+        /// <param name="keepwordint">The keepwordint.</param>
+        /// <returns>A string.</returns>
         public static string RemoveAfterWord(string input, string word, int keepwordint)
         {
             int index = input.LastIndexOf(word);

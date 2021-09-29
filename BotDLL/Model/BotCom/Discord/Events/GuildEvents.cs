@@ -11,6 +11,11 @@ namespace BotDLL.Model.BotCom.Events
     /// </summary>
     internal class GuildEvents
     {
+        /// <summary>
+        /// Guild unavailable event.
+        /// </summary>
+        /// <param name="dcl">The discord client.</param>
+        /// <param name="e">The eventargs.</param>
         public static Task Client_GuildUnavailable(DiscordClient dcl, GuildDeleteEventArgs e)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -19,6 +24,11 @@ namespace BotDLL.Model.BotCom.Events
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Guild available event.
+        /// </summary>
+        /// <param name="dcl">The discord client.</param>
+        /// <param name="e">The eventargs.</param>
         public static Task Client_GuildAvailable(DiscordClient dcl, GuildCreateEventArgs e)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -26,6 +36,11 @@ namespace BotDLL.Model.BotCom.Events
             Console.ForegroundColor = ConsoleColor.Gray;
             return Task.CompletedTask;
         }
+        /// <summary>
+        /// Guild deleted event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The eventargs.</param>
         public static Task Client_GuildDeleted(DiscordClient sender, GuildDeleteEventArgs e)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -34,6 +49,11 @@ namespace BotDLL.Model.BotCom.Events
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Guild created event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The eventargs.</param>
         public static Task Client_GuildCreated(DiscordClient sender, GuildCreateEventArgs e)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;

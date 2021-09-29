@@ -55,8 +55,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Show´s every Server with their informations
         /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ic">The interaction context.</param>
         [SlashCommand("42", "Show´s every Server with their informations", true)]
         public static async Task ShowServerStatusAsync(InteractionContext ic, [ChoiceProvider(typeof(FourtytwoTypeChoiceProvider))][Option("Type", "Type")] string type)
         {
@@ -150,8 +149,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Show´s the server list
         /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ic">The interaction context.</param>
         [SlashCommand("list", "Show´s the server list", true)]
         public static async Task ListAsync(InteractionContext ic)
         {
@@ -184,7 +182,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// </summary>
         /// <param name="ctx">The ctx.</param>
         /// <param name="servers">The servers.</param>
-        /// <returns>A Task.</returns>
         [SlashCommand("status", "Show´s status from a singel server")]
         public static async Task StatusAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "status")] string servers)
         {
@@ -227,7 +224,6 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// </summary>
         /// <param name="ctx">The ctx.</param>
         /// <param name="servers">The servers.</param>
-        /// <returns>A Task.</returns>
         [SlashCommand("statistics", "Show´s the playerstatistics from a singel server")]
         public static async Task StatisticsAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "statistics")] string servers)
         {
@@ -265,10 +261,9 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Adds you to an subscription for a server
         /// </summary>
-        /// <param name="ctx">The ctx.</param>
-        /// <param name="experiment">The experiment.</param>
-        /// <param name="gid">The gid.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ctx">The interaction context.</param>
+        /// <param name="servers">The servers.</param>
+        /// <param name="type">The type of subscription.</param>
         [SlashCommand("add", "Adds you to an subscription for a server")]
         public static async Task AddAboAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "adding")] string servers, [ChoiceProvider(typeof(AboTypeChoiceProvider))][Option("Type", "Type")] string type)
         {
@@ -294,8 +289,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Adds you to every serversubscription
         /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ic">The interaction context.</param>
         [SlashCommand("addall", "Adds you to every serversubscription", true)]
         public static async Task AddAllAsync(InteractionContext ic)
         {
@@ -316,10 +310,8 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Delete´s you from an subscription for a server
         /// </summary>
-        /// <param name="ctx">The ctx.</param>
-        /// <param name="experiment">The experiment.</param>
-        /// <param name="gid">The gid.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ctx">The interaction context.</param>
+        /// <param name="servers">The servers.</param>
         [SlashCommand("del", "Delete´s you from an subscription for a server")]
         public static async Task DelAboAsync(InteractionContext ctx, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "deleting")] string servers)
         {
@@ -338,8 +330,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Delete´s you from an subscription for a server
         /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ic">The interaction context.</param>
         [SlashCommand("delall", "Deletes you from every serversubscription", true)]
         public static async Task DelAllAsync(InteractionContext ic)
         {
@@ -368,8 +359,9 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// ChangeSubscriptionCommand
         /// </summary>
         /// <param name="servername">The servername.</param>
-        /// <param name="ctx">The ctx.</param>
-        /// <returns>A DiscordEmbedBuilder.</returns>
+        /// <param name="ctx">The interaction context.</param>
+        /// <param name="abo">Whether to abo or not.</param>
+        /// <param name="abo">Whether to low key abo or not.</param>
         public static DiscordEmbedBuilder ChangeSubscriptionCommand(string servername, InteractionContext ctx, bool abo, bool lowKeyAbo)
         {
             bool found = false;
@@ -437,8 +429,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Show´s about what servers you will get notified
         /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ic">The interaction context.</param>
         [SlashCommand("abo", "Show´s about what servers you will get notified", true)]
         public static async Task ShowAboAsync(InteractionContext ic)
         {
@@ -543,8 +534,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Testst the functionality of the DCChange [player, status, version]
         /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ic">The interaction context.</param>
         [SlashCommand("test", "Test´s the functionality of the DCChange [player, status, version]", true)]
         public static async Task TestAsync(InteractionContext ic, [ChoiceProvider(typeof(ServerNameChoiceProvider))][Option("Server", "testserver")] string servers, [ChoiceProvider(typeof(TestFunctionsChoiceProvider))][Option("Function", "function")] string functions)
         {
@@ -598,8 +588,7 @@ namespace BotDLL.Model.BotCom.DiscordCommands
         /// <summary>
         /// Generates an Invite link.
         /// </summary>
-        /// <param name="ic">The ic.</param>
-        /// <returns>A Task.</returns>
+        /// <param name="ic">The interaction context.</param>
         [SlashCommand("invite", "Invite ListforgeNotify", true)]
         public static async Task InviteAsync(InteractionContext ic)
         {

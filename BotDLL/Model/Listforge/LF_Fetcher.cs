@@ -9,10 +9,17 @@ using System.Threading;
 
 namespace BotDLL
 {
+    /// <summary>
+    /// The listforge fetcher.
+    /// </summary>
     public class LF_Fetcher
     {
         private static Random Random = new Random();
         private static int IRandom;
+        /// <summary>
+        /// Fetches the data.
+        /// </summary>
+        /// <param name="db">The db.</param>
         public static async void Fetch(string db)
         {
             List<LF_API_Uri> lst = LF_API_Uri.ReadAll();
@@ -114,6 +121,12 @@ namespace BotDLL
                 }
             }
         }
+        /// <summary>
+        /// Builds the stat url.
+        /// </summary>
+        /// <param name="game">The game.</param>
+        /// <param name="id">The id.</param>
+        /// <returns>A string.</returns>
         static string BuildStatUrl(string game, string id)
         {
             string finishedUrl = "";
@@ -142,6 +155,13 @@ namespace BotDLL
             }
             return finishedUrl;
         }
+        /// <summary>
+        /// Builds the header img uri.
+        /// </summary>
+        /// <param name="game">The game.</param>
+        /// <param name="id">The id.</param>
+        /// <param name="map">The map.</param>
+        /// <returns>A string.</returns>
         static string BuildHeaderImgUri(string game, string id, string map)
         {
             string finishedUrl = "";
@@ -248,6 +268,11 @@ namespace BotDLL
             }
             return finishedUrl;
         }
+        /// <summary>
+        /// Build the datetime.
+        /// </summary>
+        /// <param name="datetime">The datetime.</param>
+        /// <returns>A DateTime.</returns>
         static DateTime Builddatetime(String datetime)
         {
             bool itspm = false;

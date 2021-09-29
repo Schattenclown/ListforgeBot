@@ -10,12 +10,18 @@ using Telegram.Bot.Types;
 
 namespace BotDLL.Model.BotCom
 {
+    /// <summary>
+    /// The telegram bot.
+    /// </summary>
     public class TelegramBot
     {
         static bool debug = false;
         static ITelegramBotClient botClient;
         static List<LF_ServerInfo> lstlive = new List<LF_ServerInfo>();
         static List<TL_Userdata> lstud = new List<TL_Userdata>();
+        /// <summary>
+        /// The db.
+        /// </summary>
         private const string db = "LF_ServerInfoLive";
         private static string token = "";
         private static int virgin = 0;
@@ -53,6 +59,11 @@ namespace BotDLL.Model.BotCom
                 InformME();
 
         }
+        /// <summary>
+        /// On message event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The event args.</param>
         private static async void Bot_OnMessage(object sender, MessageEventArgs e)
         {
             lstlive = LF_ServerInfo.ReadAll(db);
