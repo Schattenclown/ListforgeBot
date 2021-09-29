@@ -39,6 +39,8 @@ namespace ListforgeBot
         /// </summary>
         static async Task Main()
         {
+            DebugLog.Main();
+
             try
             {
                 try
@@ -104,13 +106,12 @@ namespace ListforgeBot
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                throw new Exception("something");
                 Program p = new Program();
                 await p.RestartProgram();
             }
-            DebugLog.Main();
-
         }
         /// <summary>
         /// Checks for changes.

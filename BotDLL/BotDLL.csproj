@@ -201,6 +201,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelpClasses\WordCutter.cs" />
     <Compile Include="Model\BotCom\Discord\DiscordCommands\FourtytwoTypeChoiceProvider.cs" />
     <Compile Include="Model\BotCom\Discord\DiscordCommands\TestFunctionsChoiceProvider.cs" />
     <Compile Include="Model\BotCom\Discord\DiscordCommands\AboTypeChoiceProvider.cs" />

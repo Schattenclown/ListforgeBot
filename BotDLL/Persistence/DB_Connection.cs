@@ -1,11 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using BotDLL.HelpClasses;
 
 namespace BotDLL
 {
@@ -50,7 +53,7 @@ namespace BotDLL
             MySqlConnection connection = OpenDB();
             MySqlCommand sqlCommand = new MySqlCommand(sql, connection);
             int ret = sqlCommand.ExecuteNonQuery();
-            if (ret != -1 && showMessageBox == true )
+            if (ret != -1 && showMessageBox == true)
                 MessageBox.Show("Worked!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             CloseDB(connection);
         }
@@ -62,11 +65,81 @@ namespace BotDLL
                 MySqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
                 return sqlDataReader;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.ToString(), "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
+                Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+                Center("DB IS DEAD");
+                Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+                RestartProgram();
+                throw new Exception("DB DeaD");
             }
+        }
+
+        /// <summary>
+        /// Centers the console.
+        /// </summary>
+        /// <param name="s">The text.</param>
+        static void Center(string s)
+        {
+            try
+            {
+                Console.Write("██");
+                Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                Console.Write(s);
+                Console.SetCursorPosition((Console.WindowWidth - 4), Console.CursorTop);
+                Console.WriteLine("██");
+            }
+            catch (Exception)
+            {
+                s = "Console to smoll EXC";
+                Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                Console.Write(s);
+                Console.SetCursorPosition((Console.WindowWidth - 4), Console.CursorTop);
+                Console.WriteLine("██");
+            }
+        }
+
+        /// <summary>
+        /// Restarts the program.
+        /// </summary>
+        private static void RestartProgram()
+        {
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+            Center(" ");
+            Center(@"██████╗ ███████╗███████╗████████╗ █████╗ ██████╗ ████████╗██╗███╗   ██╗ ██████╗ ");
+            Center(@"██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██║████╗  ██║██╔════╝ ");
+            Center(@"██████╔╝█████╗  ███████╗   ██║   ███████║██████╔╝   ██║   ██║██╔██╗ ██║██║  ███╗");
+            Center(@"██╔══██╗██╔══╝  ╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ██║██║╚██╗██║██║   ██║");
+            Center(@"██║  ██║███████╗███████║   ██║   ██║  ██║██║  ██║   ██║   ██║██║ ╚████║╚██████╔╝");
+            Center(@"╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ");
+            Center(" ");
+            Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+            Center("Restating in 10 secounds.");
+            Console.WriteLine($"{"".PadRight(Console.WindowWidth - 2, '█')}");
+
+            // Get file path of current process 
+            var filePath = Assembly.GetExecutingAssembly().Location;
+            var newFilepath = "";
+            //BotDLL.dll
+            
+            if (filePath.Contains("Debug"))
+            {
+                filePath = WordCutter.RemoveAfterWord(filePath, "Debug", 0);
+                newFilepath = filePath + "Debug\\ListforgeBot.exe";
+            }
+            else if (filePath.Contains("Release"))
+            {
+                filePath = WordCutter.RemoveAfterWord(filePath, "Release", 0);
+                newFilepath = filePath + "Release\\ListforgeBot.exe";
+            }
+
+            // Start program
+            Process.Start(newFilepath);
+
+            // For all Windows application but typically for Console app.
+            Environment.Exit(0);
         }
     }
 }
