@@ -36,6 +36,8 @@ namespace BotDLL
                     if(content.Contains("server key not found"))
                     {
                         DebugLog.WriteLog($"server key not found for {item.Combined}");
+                        DB_LF_ServerInfo.Delete(item, false);
+                        DB_LF_API_Uri.Delete(item, false);
                         return;
                     }
 
