@@ -49,7 +49,7 @@ namespace ListforgeBot
                 }
                 catch (Exception)
                 {
-                    Console.SetWindowSize(150, 30);
+                    Console.SetWindowSize(100, 10);
                     DebugLog.WriteLog("ERROR: Screenresolution was to small for the Console");
                 }
                 int virgin = 0;
