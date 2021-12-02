@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using BotDLL.Model.SourceQuery;
 
 namespace ListforgeBot
 {
@@ -40,6 +41,8 @@ namespace ListforgeBot
         static async Task Main()
         {
             DebugLog.Main();
+            SourceQuery sourceQuery = new SourceQuery();
+            sourceQuery.QueryConnection();
 
             try
             {
